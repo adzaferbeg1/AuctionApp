@@ -30,7 +30,7 @@ A web auction application project for [Atlantbh](https://www.atlantbh.com/) Inte
 - Navbar and footer
 - Login and registration page
 - Landing page
-- Category fitlering
+- Category filtering
 - Product overview
 - Bidding process
 - Deployment
