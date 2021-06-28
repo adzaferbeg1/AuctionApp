@@ -19,7 +19,17 @@ A web auction application project for [Atlantbh](https://www.atlantbh.com/) Inte
 <img align="left" width="100" height="100" src="https://www.postgresql.org/media/img/about/press/elephant.png">
 </p><br/><br/><br/><br/>  
 
+## Starting the app
+**Inside** the directory, you can run several commands:
 
+### **`yarn start`**
+Starts the development server. You can open http://localhost:3000/ in your browser after the command is run, to make and view edits just refresh the page. <br/>
+### **`yarn build`** 
+Bundles the app into static files for production. The app is ready to be deployed. <br/> 
+### **`yarn test`** 
+Starts the test runner. <br/> 
+### **`yarn eject`** 
+Removes this tool and copies build dependencies, configuration files and scripts into the app directory. If you do this, you can't go back!
 
 ## Development process
 
