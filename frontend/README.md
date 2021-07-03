@@ -11,6 +11,11 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+If you are missing npm-modules, run this to install them:
+
+### `npm install`
+
+Now you can try run the app again.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
