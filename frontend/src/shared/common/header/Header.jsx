@@ -30,7 +30,7 @@ function Header() {
             <a style={style3}  class="nav-link" >or</a>
             </li>
             <li class="nav-item">
-                <a style={style2} class="nav-link" href="#">Create an Account</a>
+                <a style={style2} class="nav-link" href="/register">Create an Account</a>
             </li>
         </ul>
         

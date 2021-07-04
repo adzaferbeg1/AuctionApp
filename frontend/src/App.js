@@ -7,6 +7,7 @@ import Terms from './pages/Terms/Terms';
 import Shop from './pages/Shop/Shop';
 import Home from './pages/Home/Home';
 import Account from './pages/Account/Account';
+import Register from './pages/Register/Register';
 import {Route} from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route exact path="/home" component={Home} />
       <Route exact path="/shop" component={Shop} />
       <Route exact path="/myaccount" component={Account} />
+      <Route exact path="/register" component={Register} />
       <Footer />
     </div>
   );
