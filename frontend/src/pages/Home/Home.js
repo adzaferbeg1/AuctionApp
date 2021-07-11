@@ -1,9 +1,10 @@
 import React from 'react';
+import LabelNavbar from '../../shared/common/navbar/LabelNavbar';
 
 function Home(){
     return(
         <>
-        <div>homepage</div>
+        <LabelNavbar label={"HOME"} />
         </>
     );
 }

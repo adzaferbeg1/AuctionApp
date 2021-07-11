@@ -1,12 +1,11 @@
 import React from 'react';
+import LabelNavbar from '../../shared/common/navbar/LabelNavbar';
 import './Privacy.css';
 
 function Privacy(){
     return(
         <>
-        <nav class="navbar navbar-light bg-light">
-  <span class="navbar-brand mb-0 h1" id="about-brand">PRIVACY AND POLICY</span>
-</nav>
+        <LabelNavbar label={"PRIVACY AND POLICY"} />
         <div className="privacy-container">
         <h1>Privacy and Policy</h1>
         <br />

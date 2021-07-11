@@ -24,10 +24,10 @@ function Header() {
        </Navbar.Brand>
        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a style={style2}  class="nav-link" href="#">Login</a>
+                <a style={style2}  class="nav-link" href="/login">Login</a>
             </li>
             <li class="nav-item">
-            <a style={style3}  class="nav-link" >or</a>
+            <a style={style3}  class="nav-link">or</a>
             </li>
             <li class="nav-item">
                 <a style={style2} class="nav-link" href="/register">Create an Account</a>

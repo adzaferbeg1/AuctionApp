@@ -1,26 +1,22 @@
-#register-form{
-    width: 500px;
-    margin: auto;
-    margin-top: 2%;
-    margin-bottom: 5%;
-    border: 2px solid #e3e3e3;
-}
-.register-h4{
-    padding: 5px;
-}
-#reg-input, .register-h4{
-    background-color: #fafafa;
-}
-#reg-label{
-    float: left;
-    margin-left: 25px;
-}
-#reg-input{
-    width: 450px;
-    margin: auto;
-    box-shadow: 1px 3px #e3e3e3;
-}
-#reg-button{
-    width:450px; margin:auto; background-color:white; color:black; border-color:#8367d8;
-    box-shadow: 2px 4px #8367d8; margin-top: 40px; 
-}
+
+    .register-form{
+        width: 500px;
+        margin: auto;
+        margin-top: 2%;
+        margin-bottom: 5%;
+        border: 2px solid #e3e3e3;
+    }
+    .register-h4{
+        padding: 5px;
+    }
+    .register-h4{
+        background-color: #fafafa;
+    }
+    .reg-label{
+        float: left;
+        margin-left: 25px;
+    }
+    #reg-button{
+        width:450px; margin:auto; background-color:white; color:black; border-color:#8367d8;
+        box-shadow: 2px 4px #8367d8; margin-top: 40px; 
+    }

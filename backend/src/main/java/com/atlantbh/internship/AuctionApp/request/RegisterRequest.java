@@ -1,19 +1,38 @@
 package com.atlantbh.internship.AuctionApp.request;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
+@Data
 public class RegisterRequest {
-    private final String name;
-    private final String surname;
-    private final String password;
-    private final String email;
+    @NotBlank
+    @Size(min = 3, max = 50)
+    private String name;
+
+    @NotBlank
+    @Size(min = 3, max = 50)
+    private String surname;
+
+    @NotBlank
+    @Size(min = 3, max = 50)
+    private String username;
+
+    @NotBlank
+    @Size(max = 60)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(min = 6, max = 40)
+    private String password;
+
+    private Set role;
 
 }

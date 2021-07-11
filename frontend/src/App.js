@@ -1,27 +1,17 @@
 import './App.css';
 import { Header } from './shared/common';
 import { Footer } from './shared/common';
-import About from './pages/About/About.js';
-import Privacy from './pages/Privacy/Privacy';
-import Terms from './pages/Terms/Terms';
-import Shop from './pages/Shop/Shop';
-import Home from './pages/Home/Home';
-import Account from './pages/Account/Account';
-import Register from './pages/Register/Register';
-import {Route} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AllRoutes from './routes/AllRoutes';
 
 function App() {
   return (
     <div className="App">
+      <Router>
       <Header />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/privacy" component={Privacy} />
-      <Route exact path="/terms" component={Terms} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/shop" component={Shop} />
-      <Route exact path="/myaccount" component={Account} />
-      <Route exact path="/register" component={Register} />
+      <AllRoutes />
       <Footer />
+      </Router>
     </div>
   );
 }
