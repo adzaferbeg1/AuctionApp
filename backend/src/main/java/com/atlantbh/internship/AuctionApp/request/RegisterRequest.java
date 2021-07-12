@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
 
 @AllArgsConstructor
@@ -32,7 +31,5 @@ public class RegisterRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
-
-    private Set role;
 
 }

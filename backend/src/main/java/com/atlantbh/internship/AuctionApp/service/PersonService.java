@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class PersonService implements UserDetailsService {
     @Autowired
-    PersonRepository personRepository;
+    private final PersonRepository  personRepository;
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username)

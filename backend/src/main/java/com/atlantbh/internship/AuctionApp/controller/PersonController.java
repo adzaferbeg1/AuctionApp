@@ -25,18 +25,18 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PersonController {
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    PersonRepository personRepository;
+    private PersonRepository personRepository;
 
     @Autowired
-    PersonService personService;
+    private PersonService personService;
     @Autowired
-    PasswordEncoder encoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    JwtProvider jwtProvider;
+    private JwtProvider jwtProvider;
 
     @PostMapping("/signin")
     public ResponseEntity authenticateUser(@RequestBody LogInRequest loginRequest) {
@@ -59,7 +59,7 @@ public class PersonController {
 
         // Creating user's account
         Person user = new Person(signUpRequest.getName(), signUpRequest.getSurname(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+                signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
 
 
         personRepository.save(user);
