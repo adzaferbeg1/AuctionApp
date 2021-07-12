@@ -7,10 +7,10 @@ import AuthenticationService from '../services/AuthenticationService'
 const PublicRoute = ({ component: Component, path: Path, ...rest }) => {
   return (
     <Route
-        path={Path}
-        render={() => !AuthenticationService.validateToken() ? <Component {...rest} /> : <Redirect push to={"/home"} />}
+      path={Path}
+      render={() => !AuthenticationService.validateToken() ? <Component {...rest} /> : <Redirect push to={"/home"} />}
     />
-)
+  )
 }
 
 export default PublicRoute;

@@ -1,10 +1,10 @@
 import React from 'react';
-import LabelNavbar from '../../shared/common/navbar/LabelNavbar';
+import { LabelNavbar } from '../../shared/common';
 
-function Shop(){
-    return(
+function Shop() {
+    return (
         <>
-        <LabelNavbar label={"SHOP"} />
+            <LabelNavbar label={"SHOP"} />
         </>
     );
 }

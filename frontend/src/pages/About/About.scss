@@ -1,39 +1,45 @@
-#about-row, .xl-about-img, .s-about-img{
+.about-row,
+.xl-about-img,
+.s-about-img {
     margin: 0;
 }
-#about-row, #img-col, #s-about-col{
+
+.about-row,
+.img-col {
     border: 0;
 }
-#about-row{
+
+.about-row {
     width: 95%;
     overflow: hidden;
 }
-.h3-about{
+
+.heading-about {
     text-align: left;
     margin-left: 30%;
     margin-top: 20px;
 }
-#img-col, #s-about-col{
+
+.img-col {
     padding: 0;
     text-align: left;
 }
-.xl-about-img{
+
+.xl-about-img {
     width: 450px;
     margin-top: 60px;
     margin-bottom: 10px;
 }
-.s-about-img{
+
+.s-about-img {
     width: 225px;
     height: 150px;
 }
-#s-about-row{
-    width: 450px;
-    margin-left: 2px;
-    margin-bottom: 5%
-}
-#img-col{
+
+.img-col {
     margin-left: 30px;
 }
-#about-brand{
+
+#common-nav-brand {
     margin-left: 14%;
 }

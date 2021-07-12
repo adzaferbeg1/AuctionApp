@@ -1,12 +1,12 @@
 import React from 'react';
-import LabelNavbar from '../../shared/common/navbar/LabelNavbar';
+import { LabelNavbar } from '../../shared/common';
 
-function Account(){
-    return(
+function Account() {
+    return (
         <>
-        <LabelNavbar label={"MY ACCOUNT"} />
+            <LabelNavbar label={"MY ACCOUNT"} />
         </>
-        
+
     );
 }
 

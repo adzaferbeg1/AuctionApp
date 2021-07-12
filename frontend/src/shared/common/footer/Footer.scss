@@ -1,35 +1,44 @@
-footer{
+footer {
     background-color: #252525;
     position: static;
     left: 0;
     right: 0;
     bottom: 0;
 }
-.footer-title{
+
+.footer-title {
     font-weight: lighter;
 }
-.footer{
+
+.footer {
     padding-top: 2%;
     padding-bottom: 7%;
 }
-.footer-col{
+
+.footer-col {
     text-align: left;
 }
-.footer-link, .footer-paragraph{
+
+.footer-link,
+.footer-paragraph {
     color: white;
     font-size: 11pt;
 }
-.footer-paragraph{
+
+.footer-paragraph {
     margin-bottom: 2%;
 }
-#email-input{
+
+#email-input {
     width: 175px;
     background-color: #3b3b3b;
     border: none;
 }
-#go-btn{
+
+#go-btn {
     background-color: black;
 }
+
 .footer-dot {
     height: 30px;
     width: 30px;
@@ -37,8 +46,8 @@ footer{
     border-radius: 50%;
     display: inline-block;
     margin-right: 4%;
-  }
-  Link{
-      color: white;
+}
 
-  }
+Link {
+    color: white;
+}

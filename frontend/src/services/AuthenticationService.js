@@ -4,24 +4,24 @@ import { decode } from 'jsonwebtoken'
 
 class AuthenticationService {
   signin = (email, password) => {
-      return axios.post("http://localhost:8080/auth/signin", {email, password})
-        .then(response => {
-          if (response.data.token) {
-            localStorage.setItem("user", JSON.stringify(response.data));
-          }
-          return response.data;
-        })
-        .catch(err => {
-          console.log(err);
-          throw err;
-        });
+    return axios.post("http://localhost:8080/auth/signin", { email, password })
+      .then(response => {
+        if (response.data.token) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        return response.data;
+      })
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
   }
 
   signOut() {
     localStorage.removeItem("user");
   }
 
-  register = async(name, surname, username, email, password) => {
+  register = async (name, surname, username, email, password) => {
     return axios.post("http://localhost:8080/auth/signup", {
       name,
       surname,
@@ -36,19 +36,19 @@ class AuthenticationService {
   }
 
   validateToken = () => {
-    try{
+    try {
       const token = this.getCurrentUser().token;
-      
-        if (token === null)
+
+      if (token === null)
         return false;
-    const exp = decode(token, { complete: true }).payload.exp;
-    console.log(token);
-    return Date.now() < exp * 1000;
-    }catch(nullError){
+      const exp = decode(token, { complete: true }).payload.exp;
+      console.log(token);
+      return Date.now() < exp * 1000;
+    } catch (nullError) {
       return false;
     }
-    
-}
+
+  }
 
   /*
 
