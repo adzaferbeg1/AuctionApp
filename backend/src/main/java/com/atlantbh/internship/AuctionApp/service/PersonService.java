@@ -30,7 +30,8 @@ public class PersonService implements UserDetailsService {
     }
     public Person signin(LogInRequest loginRequest) {
         Person person = personRepository.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new IllegalStateException("Wrong email or password"));
+                .orElseThrow(() -> new IllegalStateException("Wrong email"));
+
         return person;
     }
 
