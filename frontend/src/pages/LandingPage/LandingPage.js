@@ -1,37 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ListGroup, Carousel } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import CategoryService from '../../services/CategoryService';
+import ItemService from '../../services/ItemService';
 import './LandingPage.scss';
 
-function LandingPage() {
+const LandingPage = () => {
 
+  const [clicked, setClicked] = useState(0);
+  const [newLastItems, setNewLastItems] = useState([]);
+  const [categories, setCategories] = useState([]);
   const history = useHistory();
 
-  const getCategories = async () => {
+  useEffect(() => {
+    const fetchItems = async () => {
 
-    CategoryService.getAllCategories().then(
-      (response) => {
-        console.log(response);
-        for (let i = 0; i < response.length; i++) {
+      try {
 
-          var listItem = document.createElement("div");
-          listItem.setAttribute("class", "category-item list-group-item");
-          listItem.textContent = response[i];
-          listItem.onclick = () => history.push('/shop');
-          document.getElementById("my-categories").appendChild(listItem);
+        const categories = await CategoryService.getAllCategories();
+        setCategories(categories);
+        const newArrival = await ItemService.getNewArrival();
+        const lastChance = await ItemService.getLastChance();
+        setNewLastItems([newArrival, lastChance]);
+      } catch (e) { }
+    }
 
-        }
-      },
-      error => {
-
-      }
-    );
-  }
-
-  window.onload = function () {
-    getCategories();
-  };
+    fetchItems();
+  }, [])
 
   return (
     <>
@@ -40,11 +35,36 @@ function LandingPage() {
         <div className="col category-menu">
           <ListGroup className="categories-list" id="my-categories">
             <ListGroup.Item className="category-item-title">CATEGORIES</ListGroup.Item>
+            {categories.map(category => (
+              <div className="category-item list-group-item" onClick={() => history.push('/shop')}>
+                {category}
+              </div>
+            ))}
           </ListGroup>
         </div>
         <div className="col big-item">
-          
+
         </div>
+      </div>
+      <div className="row card-container">
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <button style={clicked === 0 ? { borderBottom: '3px solid #8367d8' } : null} className="nav-link" onClick={() => { setClicked(0); }} >New Arrivals</button>
+          </li>
+          <li className="nav-item">
+            <button style={clicked === 1 ? { borderBottom: '3px solid #8367d8' } : null} className="nav-link" onClick={() => { setClicked(1); }}>Last Chance</button>
+          </li>
+        </ul>
+      </div>
+      <div className="row card-container" id="parent-container">
+        {newLastItems.length !== 0 ? newLastItems[clicked].map(item => (
+          <div className="single-card card">
+            <div className="card-body">
+              <h5 className="card-title">{item.name}</h5>
+              <p className="card-text">Start from ${item.startPrice}</p>
+            </div>
+          </div>
+        )) : null}
       </div>
     </>
 

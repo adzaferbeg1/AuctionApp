@@ -10,7 +10,6 @@ class CategoryService {
             return categories;
 
         } catch (err) {
-            console.log("CAT SERVICE ->>>>>>>>>>> " + err);
         }
     }
 

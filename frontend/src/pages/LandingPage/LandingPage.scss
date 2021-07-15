@@ -32,3 +32,34 @@
     margin: 0;
     width: 100px;
 }
+
+.card-container {
+
+    display: flex;
+    justify-content: flex-start;
+    padding-right: 15%;
+    padding-left: 15%;
+
+}
+
+.single-card {
+
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 230px;
+    height: 230px;
+
+}
+
+.nav-link {
+
+    color: black;
+
+}
+
+.nav-link {
+
+    background-color: transparent;
+
+}

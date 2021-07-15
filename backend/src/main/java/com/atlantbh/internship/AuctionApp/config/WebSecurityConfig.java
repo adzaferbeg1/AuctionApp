@@ -26,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] routes = {
-      "/auth/**", "/category/**",
+      "/auth/**", "/category/**", "/item/**",
     };
 
     @Autowired
