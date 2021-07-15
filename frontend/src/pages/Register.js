@@ -28,7 +28,7 @@ function Register() {
       <LabelNavbar label={"REGISTER"} />
 
       <Form className="register-form" onSubmit={submitButton}>
-        <h4 class="register-heading">REGISTER</h4>
+        <h4 className="register-heading">REGISTER</h4>
         <Form.Group >
           <Form.Label className="reg-label">First Name</Form.Label>
           <Form.Control style={registerInput} type="text" value={name} onChange={e => setName(e.target.value)} name="name" />

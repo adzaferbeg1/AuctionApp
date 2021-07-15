@@ -12,3 +12,5 @@ export const loginButtonStyle = { width: "450px", margin: "auto", backgroundColo
 export const aboutDivCol = { border: "0", padding: "0", textAlign: "left" };
 export const aboutDivRow = { width: "450px", marginLeft: "2px", marginBottom: "5%" };
 export const footerSocialIcon = { color: "black", fontSize: "1.2em", marginBottom: "2%", marginLeft: "4pt" };
+export const purpleColor = { color: '#8367d8' };
+export const landingPageButton = { backgroundColor: 'white', border: '3px solid #8367d8', width: '150px', height: '50px' };

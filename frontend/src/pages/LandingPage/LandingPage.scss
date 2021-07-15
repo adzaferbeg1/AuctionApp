@@ -22,44 +22,47 @@
     text-align: left;
 }
 
-.big-item {
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
 .d-block {
     margin: 0;
     width: 100px;
 }
 
 .card-container {
-
     display: flex;
     justify-content: flex-start;
     padding-right: 15%;
     padding-left: 15%;
-
 }
 
 .single-card {
-
     margin-bottom: 10px;
     margin-top: 10px;
     margin-right: 10px;
     width: 230px;
     height: 230px;
-
 }
 
 .nav-link {
-
     color: black;
-
 }
 
 .nav-link {
-
     background-color: transparent;
+}
 
+.highlighted-item {
+    margin: auto;
+}
+
+.highlighted-img {
+    width: 400px;
+    height: 400px;
+}
+
+.item-specs {
+    width: 400px;
+    position: relative;
+    right: 200px;
+    bottom: 300px;
+    z-index: 9;
 }

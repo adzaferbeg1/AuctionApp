@@ -34,7 +34,7 @@ function Login() {
       <LabelNavbar label={"LOGIN"} />
 
       <Form className="register-form" onSubmit={loginButton}>
-        <h4 class="register-heading">LOGIN</h4>
+        <h4 className="register-heading">LOGIN</h4>
 
         <Form.Group >
           <Form.Label className="reg-label">Enter Email</Form.Label>
@@ -46,7 +46,7 @@ function Login() {
           <Form.Control style={loginInput} type="password" value={password} onChange={e => setPassword(e.target.value)} name="password" />
 
         </Form.Group>
-        <Form.Check type="checkbox" label="Remember me" className="reg-label" style={{ marginBottom: "20px" }} checked />
+        <Form.Check type="checkbox" label="Remember me" className="reg-label" style={{ marginBottom: "20px" }} defaultChecked />
         <Button style={loginButtonStyle} type="submit" variant="primary" size="lg" block>
           LOGIN
         </Button>
