@@ -1,5 +1,9 @@
 import AuthenticationService from '../../services/AuthenticationService'
 
+/**
+ * @jest-environment node
+ */
+
 it('Register API testing', async function () {
     const response = await AuthenticationService.register("New", "User", "newUser", "new@user.com", "123aaa");
     console.warn(response);
