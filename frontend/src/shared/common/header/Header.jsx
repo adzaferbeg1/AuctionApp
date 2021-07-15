@@ -51,7 +51,7 @@ function Header() {
         </div>
         <div className="col">
           <section className="row">
-            <a className="nav-link links" href="/home" style={footerText}>HOME</a>
+            <a className="nav-link links" href="/" style={footerText}>HOME</a>
             <a className="nav-link links" href="/shop" style={footerText}>SHOP</a>
             <a className="nav-link links" href="/myaccount" style={footerText}>MY ACCOUNT</a>
           </section>

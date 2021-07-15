@@ -8,7 +8,6 @@ import com.atlantbh.internship.AuctionApp.response.JwtResponse;
 import com.atlantbh.internship.AuctionApp.security.jwt.JwtProvider;
 import com.atlantbh.internship.AuctionApp.service.PersonService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "/auth")
-@NoArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class PersonController {
 
@@ -35,6 +33,7 @@ public class PersonController {
     @Autowired
     private JwtProvider jwtProvider;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signin")
     public ResponseEntity authenticateUser(@RequestBody LogInRequest loginRequest) {
         final Person person = personService.signin(loginRequest);
@@ -44,6 +43,7 @@ public class PersonController {
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signup")
     public ResponseEntity registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
         if(personRepository.existsByUsername(signUpRequest.getUsername())) {
