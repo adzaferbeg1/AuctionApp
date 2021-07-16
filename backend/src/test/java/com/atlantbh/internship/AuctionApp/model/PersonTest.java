@@ -3,12 +3,15 @@ package com.atlantbh.internship.AuctionApp.model;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class PersonTest {
 
-    private Person person = new Person("Ajla", "Ajlic", "ajladz", "ajladz@email.com", "123456");
-
+    private Person person = new Person(
+            "Ajla",
+            "Ajlic",
+            "ajladz",
+            "ajladz@email.com",
+            "123456");
 
     @Test
     void setName() {
@@ -75,15 +78,5 @@ class PersonTest {
     @Test
     void getPassword() {
         assertEquals("123456", person.getPassword());
-    }
-
-    @Test
-    void getAddress() {
-        assertNull( person.getAddress());
-    }
-
-    @Test
-    void getPhoneNumber() {
-        assertNull( person.getPhoneNumber());
     }
 }

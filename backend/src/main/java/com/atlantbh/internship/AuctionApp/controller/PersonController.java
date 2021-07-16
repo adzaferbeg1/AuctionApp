@@ -7,7 +7,6 @@ import com.atlantbh.internship.AuctionApp.request.RegisterRequest;
 import com.atlantbh.internship.AuctionApp.response.JwtResponse;
 import com.atlantbh.internship.AuctionApp.security.jwt.JwtProvider;
 import com.atlantbh.internship.AuctionApp.service.PersonService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@AllArgsConstructor
+
 @RestController
 @RequestMapping(path = "/auth")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -27,11 +26,19 @@ public class PersonController {
 
     @Autowired
     private PersonService personService;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtProvider jwtProvider;
+
+    public PersonController(PersonRepository personRepository, PersonService personService, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
+        this.personRepository = personRepository;
+        this.personService = personService;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtProvider = jwtProvider;
+    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signin")
@@ -57,8 +64,12 @@ public class PersonController {
         }
 
         // Creating user's account
-        Person user = new Person(signUpRequest.getName(), signUpRequest.getSurname(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
+        Person user = new Person(
+                signUpRequest.getName(),
+                signUpRequest.getSurname(),
+                signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                passwordEncoder.encode(signUpRequest.getPassword()));
 
 
         personRepository.save(user);

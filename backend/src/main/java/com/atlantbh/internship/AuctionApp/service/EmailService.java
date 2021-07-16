@@ -31,7 +31,7 @@ public class EmailService implements EmailSender {
             helper.setFrom("not-useable@auction.com");
             javaMailSender.send(mimeMessage);
 
-        }catch (MessagingException e){
+        } catch (MessagingException e){
             LOGGER.error("Failed to send email", e);
             throw new IllegalStateException("Failed to send");
         }

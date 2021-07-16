@@ -3,7 +3,6 @@ package com.atlantbh.internship.AuctionApp.service;
 import com.atlantbh.internship.AuctionApp.model.Person;
 import com.atlantbh.internship.AuctionApp.repository.PersonRepository;
 import com.atlantbh.internship.AuctionApp.request.LogInRequest;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,10 +11,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
 public class PersonService implements UserDetailsService {
+    
     @Autowired
     private final PersonRepository  personRepository;
+
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username)
@@ -28,6 +32,7 @@ public class PersonService implements UserDetailsService {
 
         return PersonPrinciple.build(user);
     }
+
     public Person signin(LogInRequest loginRequest) {
         Person person = personRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new IllegalStateException("Wrong email"));

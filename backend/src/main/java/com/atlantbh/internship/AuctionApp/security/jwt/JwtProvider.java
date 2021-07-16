@@ -28,12 +28,10 @@ public class JwtProvider implements Serializable {
     }
 
     public String generateJwtToken(String personEmail) {
-
-
         return Jwts.builder()
                 .setSubject((personEmail))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpiration*1000))
+                .setExpiration(new Date((new Date()).getTime() + jwtExpiration * 1000))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
