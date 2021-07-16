@@ -50,6 +50,3 @@ it('SignIn with wrong email', async function () {
     expect(reqFailed).toEqual(true);
 
 });
-
-
-

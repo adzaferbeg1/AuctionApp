@@ -51,7 +51,7 @@ const LandingPage = () => {
               <img className="highlighted-img" src='https://www.pngkey.com/png/full/631-6310803_clothes-dress-aesthetic-pink-tumblr-summer-png-pink.png' alt='sunglasses'></img>
               <div className="item-specs">
                 <h1>{highlightItem[0].name}</h1>
-                <h3 style={purpleColor}>Start from - ${highlightItem[0].startPrice}</h3>
+                <h4 style={purpleColor}>Start from - ${highlightItem[0].startPrice}</h4>
                 <p>{highlightItem[0].description}</p>
                 <button style={landingPageButton}>BID NOW</button>
               </div>
