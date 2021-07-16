@@ -55,7 +55,6 @@ const LandingPage = () => {
                 <p>{highlightItem[0].description}</p>
                 <button style={landingPageButton}>BID NOW</button>
               </div>
-
             </div> : null
 
           }

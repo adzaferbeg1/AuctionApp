@@ -6,7 +6,6 @@ import AuthenticationService from '../../services/AuthenticationService'
 
 it('Register API testing', async function () {
     const response = await AuthenticationService.register("New", "User", "newUser", "new@user.com", "123aaa");
-    console.warn(response);
     expect('User registered successfully!').toEqual(response.data);
 });
 
