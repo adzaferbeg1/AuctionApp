@@ -3,7 +3,6 @@ package com.atlantbh.internship.AuctionApp.request;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LogInRequestTest {
 
@@ -20,15 +19,5 @@ class LogInRequestTest {
 
         logInRequest.setPassword("7777");
         assertEquals("7777", logInRequest.getPassword());
-    }
-
-    @Test
-    void getEmail() {
-        assertNull(logInRequest.getEmail());
-    }
-
-    @Test
-    void getPassword() {
-        assertNull(logInRequest.getPassword());
     }
 }
