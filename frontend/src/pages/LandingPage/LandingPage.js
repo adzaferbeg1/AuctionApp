@@ -4,6 +4,7 @@ import { ListGroup } from 'react-bootstrap';
 import CategoryService from '../../services/CategoryService';
 import ItemService from '../../services/ItemService';
 import { landingPageButton, purpleColor } from '../../shared/styles/PageStyles';
+import { GridView } from '../../shared/common';
 import './LandingPage.scss';
 
 const LandingPage = () => {
@@ -72,12 +73,7 @@ const LandingPage = () => {
       </div>
       <div className="row card-container" id="parent-container">
         {newLastItems.length !== 0 ? newLastItems[clicked].map(item => (
-          <div className="single-card card" key={item.id}>
-            <div className="card-body">
-              <h5 className="card-title">{item.name}</h5>
-              <p className="card-text">Start From ${item.startPrice}</p>
-            </div>
-          </div>
+          <GridView id={item.id} name={item.name} startPrice={item.startPrice} />
         )) : null}
       </div>
     </>
