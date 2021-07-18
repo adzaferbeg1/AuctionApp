@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import CategoryService from '../../services/CategoryService';
 import ItemService from '../../services/ItemService';
 import { LabelNavbar } from '../../shared/common';
@@ -13,6 +14,7 @@ const ProductList = (props) => {
     const [itemsFromLanding, setItemsFromLanding] = useState([]);
     const [allCategories, setAllCategories] = useState([]);
     const [allFilteredItems, setAllFilteredItems] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -53,7 +55,11 @@ const ProductList = (props) => {
                     {allFilteredItems.length !== 0 && !fromLandingPage ? allFilteredItems[categoryId - 1].map(item => (
                         <GridView id={item.id} name={item.name} startPrice={item.startPrice} />
                     )) : itemsFromLanding.map(item => (
-                        <GridView id={item.id} name={item.name} startPrice={item.startPrice} />
+                        <GridView id={item.id} name={item.name} startPrice={item.startPrice} onClick={
+                            () => history.push({
+                                pathname: '/shop',
+                                state: { item: item }
+                            })} />
                     ))}
                 </div>
 

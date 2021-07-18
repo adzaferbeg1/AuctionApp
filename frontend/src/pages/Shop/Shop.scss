@@ -1,0 +1,52 @@
+.item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    padding-right: 14em;
+
+    img {
+        margin-right: 1.7em;
+        height: 400px;
+        width: 550px;
+    }
+
+    .item-info {
+        text-align: left;
+        .bid-container {
+            text-align: left;
+            margin-top: 2.5em;
+            input {
+                border: 1px solid #b8b7b7;
+                background-color: #e3e3e3;
+                height: 50px;
+                width: 150px;
+                margin-right: 1em;
+            }
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        p,
+        h6 {
+            color: #b8b7b7;
+        }
+
+        h6:first-of-type {
+            margin-top: 3em;
+        }
+
+        .thin-line {
+            width: 100%;
+            border-bottom: 3px solid #e3e3e3;
+        }
+
+        .item-desc {
+            color: black;
+            text-align: left;
+        }
+    }
+}

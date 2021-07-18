@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
+import { RiArrowRightSLine } from "react-icons/ri";
 import CategoryService from '../../services/CategoryService';
 import ItemService from '../../services/ItemService';
 import { landingPageButton, purpleColor } from '../../shared/styles/PageStyles';
@@ -59,7 +60,7 @@ const LandingPage = () => {
                 <h1>{highlightItem[0].name}</h1>
                 <h4 style={purpleColor}>Start from - ${highlightItem[0].startPrice}</h4>
                 <p>{highlightItem[0].description}</p>
-                <button style={landingPageButton}>BID NOW</button>
+                <button style={landingPageButton}>BID NOW <RiArrowRightSLine /></button>
               </div>
             </div> : null
 
@@ -78,7 +79,11 @@ const LandingPage = () => {
       </div>
       <div className="row card-container">
         {newLastItems.length !== 0 ? newLastItems[clicked].map(item => (
-          <GridView id={item.id} name={item.name} startPrice={item.startPrice} />
+          <GridView id={item.id} name={item.name} startPrice={item.startPrice} onClick={
+            () => history.push({
+              pathname: '/shop',
+              state: { item: item }
+            })} />
         )) : null}
       </div>
     </>
