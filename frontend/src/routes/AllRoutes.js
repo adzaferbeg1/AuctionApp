@@ -11,6 +11,7 @@ import Account from '../pages/Account/Account';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import LandingPage from '../pages/LandingPage/LandingPage';
+import ProductList from '../pages/ProductList/ProductList';
 
 const AllRoutes = () => {
     return (
@@ -20,6 +21,7 @@ const AllRoutes = () => {
             <Route exact path="/privacy" component={Privacy} />
             <Route exact path="/terms" component={Terms} />
             <Route exact path="/shop" component={Shop} />
+            <Route exact path="/products" component={ProductList} />
             <PublicRoute exact path="/register" component={Register} />
             <PublicRoute exact path="/login" component={Login} />
             <PrivateRoute path="/myaccount" component={Account} />

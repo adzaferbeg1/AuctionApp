@@ -20,6 +20,15 @@ class ItemService {
         }
     }
 
+    getFilteredByCategory = async (id) => {
+        try {
+            const response = await axios.get("http://localhost:8080/item/category?id=" + id);
+            return response.data;
+
+        } catch (err) {
+        }
+    }
+
 }
 
 export default new ItemService();

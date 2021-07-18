@@ -40,8 +40,13 @@ const LandingPage = () => {
           <ListGroup className="categories-list" id="my-categories">
             <ListGroup.Item className="category-item-title" key={'category'}>CATEGORIES</ListGroup.Item>
             {categories.map(category => (
-              <div className="category-item list-group-item" onClick={() => history.push('/shop')} key={category}>
-                {category}
+              <div className="category-item list-group-item" onClick={
+                () => history.push({
+                  pathname: '/products',
+                  state: { categoryId: category.id, fromLandingPage: true }
+                })}
+                key={category.title}>
+                {category.title}
               </div>
             ))}
           </ListGroup>
@@ -71,7 +76,7 @@ const LandingPage = () => {
           </li>
         </ul>
       </div>
-      <div className="row card-container" id="parent-container">
+      <div className="row card-container">
         {newLastItems.length !== 0 ? newLastItems[clicked].map(item => (
           <GridView id={item.id} name={item.name} startPrice={item.startPrice} />
         )) : null}
