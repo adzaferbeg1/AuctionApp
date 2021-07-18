@@ -14,4 +14,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "SELECT * FROM ITEM ORDER BY end_date ASC", nativeQuery = true)
     List<Item> findLastChances();
+
+    @Query(value="SELECT * FROM ITEM WHERE category_id= ?1", nativeQuery = true)
+    List<Item> findByCategoryId(Long categoryId);
 }

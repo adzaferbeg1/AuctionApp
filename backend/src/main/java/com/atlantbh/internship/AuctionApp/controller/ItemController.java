@@ -3,10 +3,7 @@ package com.atlantbh.internship.AuctionApp.controller;
 import com.atlantbh.internship.AuctionApp.model.Item;
 import com.atlantbh.internship.AuctionApp.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +28,11 @@ public class ItemController {
     @GetMapping("/lastchance")
     public List<Item> getLastChance(){
         return itemRepository.findLastChances();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/category")
+    public List<Item> getItemsByCategory(@RequestParam Long id){
+        return itemRepository.findByCategoryId(id);
     }
 }
