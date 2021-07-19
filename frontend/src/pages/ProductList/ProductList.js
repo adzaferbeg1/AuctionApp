@@ -38,7 +38,7 @@ const ProductList = (props) => {
         }
 
         fetchItems();
-    }, [])
+    }, [categoryId])
 
     return (
         <>

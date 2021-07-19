@@ -50,3 +50,25 @@
         }
     }
 }
+
+.bidder-container {
+    margin: auto;
+    width: 950px;
+
+    table {
+        margin-top: 7em;
+        margin-bottom: 10em;
+        text-align: left;
+        border: 2px solid #ececec;
+
+        th {
+            background-color: #ececec;
+            width: 150px;
+            padding-left: 2em;
+        }
+
+        td {
+            padding-left: 2em;
+        }
+    }
+}
