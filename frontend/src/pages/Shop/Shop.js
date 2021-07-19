@@ -42,8 +42,9 @@ function Shop(props) {
                     <h6>Highest bid: ${selectedItem.currentPrice}</h6>
                     <h6>No bids:</h6>
                     <h6>Time left: {timeLeft} days</h6>
-                    <h5>Details</h5>
+                    <h5 className='details-heading'>Details</h5>
                     <div className='thin-line'></div>
+                    <p className='item-desc'>{selectedItem.description}</p>
                 </div>
             </div>
             <div className='bidder-container'>
