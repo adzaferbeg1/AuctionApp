@@ -5,6 +5,8 @@ import AuthenticationService from '../../services/AuthenticationService';
 import { LabelNavbar } from '../../shared/common';
 import { purpleColor, landingPageButton } from '../../shared/styles/PageStyles';
 import './Shop.scss'
+
+
 function Shop(props) {
 
     const [selectedItem] = useState(props.location.state.item);
@@ -14,7 +16,6 @@ function Shop(props) {
     useEffect(() => {
 
         var loggedIn = AuthenticationService.validateToken();
-        console.log(loggedIn);
         setUserLoggedIn(loggedIn);
         var endDate = selectedItem.endDate;
         var todaysDate = (new Date(Date.now())).toISOString();
