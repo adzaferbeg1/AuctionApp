@@ -12,34 +12,4 @@ const PrivateRoute = ({ component: Component, path: Path, ...rest }) => {
     )
 }
 
-/*
-const PrivateRoute = ({ component: Component, path: Path, ...rest }) => {
-
-    const [auth, setAuth] = useState();
-    const _isMounted = useRef(true);
-
-    useEffect( () => {
-
-      const validationFunction = async () => {
-          return await AuthenticationService.validateToken();
-      };
-
-      validationFunction().then( response => {
-          console.log("OVO JE RESPONSEEEE " + response);
-          setAuth(response)
-        }
-          ).catch( error => setAuth(false)).then(setIsTokenValidated(true));
-      }, [auth])
-      
-    
-    return (
-        <div>
-            { isTokenValidated && <PrivateRouteChild path={Path} component={Component} auth={auth} />}
-        </div>
-        
-
-    );
-}
-*/
-
 export default PrivateRoute;
