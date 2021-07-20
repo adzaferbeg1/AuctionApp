@@ -58,7 +58,7 @@ const LandingPage = () => {
               <img className="highlighted-img" src='https://www.pngkey.com/png/full/631-6310803_clothes-dress-aesthetic-pink-tumblr-summer-png-pink.png' alt='sunglasses'></img>
               <div className="item-specs">
                 <h1>{highlightItem[0].name}</h1>
-                <h4 style={purpleColor}>Start from - ${highlightItem[0].startPrice}</h4>
+                <h4 style={purpleColor}>Start from - ${highlightItem[0].currentPrice}</h4>
                 <p>{highlightItem[0].description}</p>
                 <button style={landingPageButton}>BID NOW <RiArrowRightSLine /></button>
               </div>
@@ -79,7 +79,7 @@ const LandingPage = () => {
       </div>
       <div className="row card-container">
         {newLastItems.length !== 0 ? newLastItems[clicked].map(item => (
-          <GridView id={item.id} name={item.name} startPrice={item.startPrice} onClick={
+          <GridView id={item.id} name={item.name} startPrice={item.currentPrice} onClick={
             () => history.push({
               pathname: '/shop',
               state: { item: item }

@@ -54,7 +54,7 @@ function Shop(props) {
 
     }
 
-    window.onload = async() => {
+    window.onload = async () => {
         const updatedItem = await ItemService.getItemById(selectedItem.id);
         setSelectedItem(updatedItem);
         setCurrentPrice(updatedItem.currentPrice);
