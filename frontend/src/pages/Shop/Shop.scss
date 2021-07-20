@@ -79,3 +79,20 @@
         }
     }
 }
+
+#highest-bid,
+#low-bid {
+    padding-left: 14%;
+}
+
+#highest-bid {
+    background-color: #e3f7cd;
+    color: #447e36;
+    display: none;
+}
+
+#low-bid {
+    background-color: #f7e8c7;
+    color: #ab944e;
+    display: none;
+}

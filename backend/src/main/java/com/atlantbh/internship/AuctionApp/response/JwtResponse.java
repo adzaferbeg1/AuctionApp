@@ -1,11 +1,14 @@
 package com.atlantbh.internship.AuctionApp.response;
 
 public class JwtResponse {
+    private long personId;
     private String token;
     private String type = "Bearer";
 
-    public JwtResponse(String token) {
+    public JwtResponse(String token, long id) {
+
         this.token = token;
+        this.personId = id;
     }
 
     public String getToken() {
@@ -22,5 +25,13 @@ public class JwtResponse {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(long personId) {
+        this.personId = personId;
     }
 }

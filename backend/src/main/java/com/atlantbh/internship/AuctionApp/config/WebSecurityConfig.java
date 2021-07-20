@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/auth/**",
             "/category/**",
             "/item/**",
+            "/bid/**",
     };
 
     @Autowired

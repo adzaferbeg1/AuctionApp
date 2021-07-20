@@ -47,7 +47,7 @@ public class PersonController {
         if (!passwordEncoder.matches(loginRequest.getPassword(), person.getPassword()))
             return ResponseEntity.status(500).body("Wrong password");
         final String jwt = jwtProvider.generateJwtToken(person.getEmail());
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        return ResponseEntity.ok(new JwtResponse(jwt, person.getId()));
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -76,30 +76,4 @@ public class PersonController {
 
         return ResponseEntity.ok().body("User registered successfully!");
     }
-    /*
-    @GetMapping("/verify")
-    public ResponseEntity verifyToken(HttpServletRequest request){
-        String jwt = "";
-        String authHeader = request.getHeader("Authorization");
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            jwt = authHeader.replace("Bearer ","");
-        }
-        try {
-            if(jwtProvider.validateJwtToken(jwt)) {
-                String subjectEmail = jwtProvider.getUserNameFromJwtToken(jwt);
-                String refreshedToken = jwtProvider.generateJwtToken(subjectEmail);
-                return ResponseEntity.ok(new JwtResponse(refreshedToken));
-            }
-        }catch (Error e){
-            System.out.print("Invalid token");
-            return ResponseEntity.badRequest().body("Invalid token");
-        }
-        System.out.print("Token expired");
-        return ResponseEntity.status(401).body("Token expired");
-    }
-
-     */
-
 }
-
-

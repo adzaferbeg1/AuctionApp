@@ -29,6 +29,22 @@ class ItemService {
         }
     }
 
+    placeBid = async (bid, itemId) => {
+        return axios.post("http://localhost:8080/item/placebid", {
+          itemId,
+          bid
+        });
+      }
+
+      getItemById = async (id) => {
+        try {
+            const response = await axios.get("http://localhost:8080/item/singleitem?id=" + id);
+            return response.data;
+
+        } catch (err) {
+        }
+    }
+
 }
 
 export default new ItemService();
