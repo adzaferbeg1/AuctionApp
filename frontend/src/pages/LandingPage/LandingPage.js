@@ -60,7 +60,11 @@ const LandingPage = () => {
                 <h1>{highlightItem[0].name}</h1>
                 <h4 style={purpleColor}>Start from - ${highlightItem[0].currentPrice}</h4>
                 <p>{highlightItem[0].description}</p>
-                <button style={landingPageButton}>BID NOW <RiArrowRightSLine /></button>
+                <button style={landingPageButton} onClick={
+                  () => history.push({
+                    pathname: '/shop',
+                    state: { item: highlightItem[0] }
+                  })}>BID NOW <RiArrowRightSLine /></button>
               </div>
             </div> : null
 
@@ -79,7 +83,7 @@ const LandingPage = () => {
       </div>
       <div className="row card-container">
         {newLastItems.length !== 0 ? newLastItems[clicked].map(item => (
-          <GridView id={item.id} name={item.name} startPrice={item.currentPrice} onClick={
+          <GridView key={item.id} name={item.name} startPrice={item.currentPrice} onClick={
             () => history.push({
               pathname: '/shop',
               state: { item: item }

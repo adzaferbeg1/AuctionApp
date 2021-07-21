@@ -48,6 +48,15 @@ class AuthenticationService {
     }
 
   }
+
+  getUserById = async (id) => {
+    try {
+      const response = await axios.get("http://localhost:8080/auth/singleuser?id=" + id);
+      return response.data;
+
+    } catch (err) {
+    }
+  }
 }
 
 export default new AuthenticationService();

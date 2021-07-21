@@ -12,16 +12,37 @@ import './Shop.scss'
 
 function Shop(props) {
 
+    const [itemId] = useState(props.location.state.item.id);
     const [selectedItem, setSelectedItem] = useState([]);
     const [currentPrice, setCurrentPrice] = useState();
     const [timeLeft, setTimeLeft] = useState(0);
     const [userLoggedIn, setUserLoggedIn] = useState();
     const [bid, setBid] = useState('');
+    const [bidders, setBidders] = useState([]);
+    const [bidderNames, setBidderNames] = useState([]);
 
     useEffect(() => {
 
         setSelectedItem(props.location.state.item);
         setCurrentPrice(props.location.state.item.currentPrice);
+
+        const fetchItems = async () => {
+            var itemBidders = await BidService.getAllBidders(itemId);
+            var names = [];
+            itemBidders.forEach(async bidder => {
+
+
+                var singleBidder = await AuthenticationService.getUserById(bidder.bidderId);
+                names.push(singleBidder.name + ' ' + singleBidder.surname);
+
+            });
+            setBidders(itemBidders);
+            setBidderNames(names);
+        }
+
+
+        fetchItems();
+
         var loggedIn = AuthenticationService.validateToken();
         setUserLoggedIn(loggedIn);
         var endDate = selectedItem.endDate;
@@ -33,7 +54,7 @@ function Shop(props) {
             }
         }
 
-    }, [selectedItem.endDate, props.location.state.item])
+    }, [selectedItem.endDate, props.location.state.item, itemId])
 
     const placeItemBid = async (e) => {
         if (selectedItem.currentPrice < bid) {
@@ -104,21 +125,14 @@ function Shop(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colSpan='2'>Ajla</td>
-                            <td>13-11-2020</td>
-                            <td>$100</td>
-                        </tr>
-                        <tr>
-                            <td colSpan='2'>Ajla</td>
-                            <td>13-11-2020</td>
-                            <td>$100</td>
-                        </tr>
-                        <tr>
-                            <td colSpan='2'>Ajla</td>
-                            <td>13-11-2020</td>
-                            <td>$100</td>
-                        </tr>
+                        {bidders.length !== 0 && bidderNames.length !== 0 ? bidders.map((bidder, index) => (
+                            <tr key={bidder.bid}>
+                                <td colSpan='2'>{bidderNames[index]}</td>
+                                <td>{(bidder.date).substring(0, 10)}</td>
+                                <td>${bidder.bid}</td>
+                            </tr>
+
+                        )) : null}
                     </tbody>
 
                 </Table>

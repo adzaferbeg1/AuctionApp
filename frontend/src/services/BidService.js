@@ -10,6 +10,15 @@ class BidService {
         });
     }
 
+    getAllBidders = async (id) => {
+        try {
+            const response = await axios.get("http://localhost:8080/bid/bidders?id=" + id);
+            return response.data;
+
+        } catch (err) {
+        }
+    }
+
 }
 
 export default new BidService();
