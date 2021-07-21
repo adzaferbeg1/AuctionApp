@@ -2,6 +2,7 @@ package com.atlantbh.internship.AuctionApp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -23,6 +24,12 @@ public class Bid {
     @Column(name="bid")
     private double bid;
 
+    @Column(name="date")
+    private LocalDateTime date;
+
+    public Bid() {
+    }
+
     public Bid(
             final long itemId,
             final long bidderId,
@@ -31,6 +38,7 @@ public class Bid {
         this.itemId = itemId;
         this.bidderId = bidderId;
         this.bid = bid;
+        this.date = LocalDateTime.now();
     }
 
     public long getId() {
@@ -63,5 +71,13 @@ public class Bid {
 
     public void setBid(double bid) {
         this.bid = bid;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }

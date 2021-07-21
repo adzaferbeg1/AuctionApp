@@ -76,4 +76,10 @@ public class PersonController {
 
         return ResponseEntity.ok().body("User registered successfully!");
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/singleuser")
+    public Person getUserById(@RequestParam Long id){
+        return personRepository.finsUserById(id);
+    }
 }

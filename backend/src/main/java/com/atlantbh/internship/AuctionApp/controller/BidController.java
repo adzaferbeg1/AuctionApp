@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/bid")
@@ -29,4 +30,11 @@ public class BidController {
 
         return ResponseEntity.ok().body("Bid placed successfully!");
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/bidders")
+    public List<Bid> getAllBiddersForItem(@RequestParam Long id){
+        return bidRepository.getAllBiddersForItem(id);
+    }
+
 }
