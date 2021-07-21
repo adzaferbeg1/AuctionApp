@@ -132,7 +132,9 @@ function Shop(props) {
                                 <td>${bidder.bid}</td>
                             </tr>
 
-                        )) : null}
+                        )) : <tr key={'no-bids'}>
+                            <td colSpan='2'>No bids to show</td>
+                        </tr>}
                     </tbody>
 
                 </Table>

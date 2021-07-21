@@ -38,7 +38,7 @@ function Header() {
       </Navbar>
       <section className="row">
         <div className="col">
-          <img src='\images\auction_logo.PNG' alt="Auction logo" />
+          <img src='\images\auction_logo.PNG' alt="Auction logo"/>
         </div>
         <div className="col">
           <div className="input-group rounded">

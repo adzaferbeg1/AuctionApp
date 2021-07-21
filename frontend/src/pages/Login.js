@@ -33,7 +33,7 @@ function Login() {
 
       <LabelNavbar label={"LOGIN"} />
 
-      <Form className="register-form" onSubmit={loginButton}>
+      <Form className="register-form" onSubmit={loginButton} val>
         <h4 className="register-heading">LOGIN</h4>
 
         <Form.Group >
