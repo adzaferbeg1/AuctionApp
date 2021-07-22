@@ -10,7 +10,7 @@ spring:
     password: "0000"
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -35,5 +35,6 @@ spring:
           timeout: 3000
           writetimeout: 5000
 app:
+  url: http://localhost:8080
   jwtSecret: secret-key
   jwtExpiration: 180
