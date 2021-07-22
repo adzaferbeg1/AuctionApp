@@ -3,7 +3,7 @@ import axios from "axios";
 class BidService {
 
     placeBid = async (itemId, bidderId, bid) => {
-        return axios.post("http://localhost:8080/bid/placebid", {
+        return axios.post("/bid/placebid", {
             itemId,
             bidderId,
             bid
@@ -12,7 +12,7 @@ class BidService {
 
     getAllBidders = async (id) => {
         try {
-            const response = await axios.get("http://localhost:8080/bid/bidders?id=" + id);
+            const response = await axios.get("bid/bidders?id=" + id);
             return response.data;
 
         } catch (err) {

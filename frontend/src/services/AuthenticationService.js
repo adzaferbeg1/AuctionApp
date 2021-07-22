@@ -4,7 +4,7 @@ import { decode } from 'jsonwebtoken'
 
 class AuthenticationService {
   signin = (email, password) => {
-    return axios.post("http://localhost:8080/auth/signin", { email, password })
+    return axios.post("auth/signin", { email, password })
       .then(response => {
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
@@ -22,7 +22,7 @@ class AuthenticationService {
   }
 
   register = async (name, surname, username, email, password) => {
-    return axios.post("http://localhost:8080/auth/signup", {
+    return axios.post("auth/signup", {
       name,
       surname,
       username,
@@ -51,7 +51,7 @@ class AuthenticationService {
 
   getUserById = async (id) => {
     try {
-      const response = await axios.get("http://localhost:8080/auth/singleuser?id=" + id);
+      const response = await axios.get("auth/singleuser?id=" + id);
       return response.data;
 
     } catch (err) {

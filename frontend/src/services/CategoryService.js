@@ -4,7 +4,7 @@ class CategoryService {
 
     getAllCategories = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/category/all");
+            const response = await axios.get("category/all");
             return response.data;
 
         } catch (err) {
