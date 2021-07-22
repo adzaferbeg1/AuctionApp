@@ -5,11 +5,13 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/user-event": "^12.1.10",
+    "app": "^0.1.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.14.1",
+    "polyfill": "^0.1.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
@@ -46,5 +48,6 @@
     "@testing-library/react": "^11.2.7",
     "jest-dom": "^4.0.0",
     "react-test-renderer": "^17.0.2"
-  }
+  },
+  "proxy": "https://atlantbh-auction-app.herokuapp.com/"
 }
