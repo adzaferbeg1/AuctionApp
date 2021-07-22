@@ -25,6 +25,16 @@ function Shop(props) {
 
         setSelectedItem(props.location.state.item);
         setCurrentPrice(props.location.state.item.currentPrice);
+        var loggedIn = AuthenticationService.validateToken();
+        setUserLoggedIn(loggedIn);
+        var endDate = selectedItem.endDate;
+        var todaysDate = (new Date(Date.now())).toISOString();
+        if (parseInt(endDate) >= parseInt(todaysDate)) {
+            if (parseInt(endDate.substring(5, 7)) >= parseInt(todaysDate.substring(5, 7))) {
+                if (parseInt(endDate.substring(8, 10)) >= parseInt(todaysDate.substring(8, 10)))
+                    setTimeLeft(parseInt(endDate.substring(8, 10)) - parseInt(todaysDate.substring(8, 10)));
+            }
+        }
 
         const fetchItems = async () => {
             var itemBidders = await BidService.getAllBidders(itemId);
@@ -38,21 +48,11 @@ function Shop(props) {
             });
             setBidders(itemBidders);
             setBidderNames(names);
+            console.log(itemBidders);
         }
 
 
         fetchItems();
-
-        var loggedIn = AuthenticationService.validateToken();
-        setUserLoggedIn(loggedIn);
-        var endDate = selectedItem.endDate;
-        var todaysDate = (new Date(Date.now())).toISOString();
-        if (parseInt(endDate) >= parseInt(todaysDate)) {
-            if (parseInt(endDate.substring(5, 7)) >= parseInt(todaysDate.substring(5, 7))) {
-                if (parseInt(endDate.substring(8, 10)) >= parseInt(todaysDate.substring(8, 10)))
-                    setTimeLeft(parseInt(endDate.substring(8, 10)) - parseInt(todaysDate.substring(8, 10)));
-            }
-        }
 
     }, [selectedItem.endDate, props.location.state.item, itemId])
 
@@ -97,7 +97,7 @@ function Shop(props) {
             </nav>
             <div className='item-container'>
                 <div>
-                    <img src='/images/baby.jpg' alt='item-img'></img>
+                    <img src={selectedItem.imgUrl} alt='item-img'></img>
                 </div>
                 <div className='item-info'>
                     <h1>{selectedItem.name}</h1>

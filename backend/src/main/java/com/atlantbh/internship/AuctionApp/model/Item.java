@@ -39,6 +39,9 @@ public class Item {
     @Column(name="end_date", nullable = false)
     private LocalDateTime endDate;
 
+    @Column(name="img_url")
+    private String imgUrl;
+
     public Item() {
     }
 
@@ -51,7 +54,8 @@ public class Item {
             final double startPrice,
             final double currentPrice,
             final LocalDateTime startDate,
-            final LocalDateTime endDate) {
+            final LocalDateTime endDate,
+            final String imgUrl) {
 
         this.sellerId = sellerId;
         this.categoryId = categoryId;
@@ -61,6 +65,7 @@ public class Item {
         this.currentPrice = currentPrice;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imgUrl = imgUrl;
     }
 
     public long getId() {
@@ -133,5 +138,13 @@ public class Item {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
