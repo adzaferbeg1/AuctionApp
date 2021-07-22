@@ -53,9 +53,9 @@ const ProductList = (props) => {
 
                 <div className='col-md-8'>
                     {allFilteredItems.length !== 0 && !fromLandingPage ? allFilteredItems[categoryId - 1].map(item => (
-                        <GridView id={item.id} name={item.name} startPrice={item.startPrice} />
+                        <GridView id={item.id} name={item.name} startPrice={item.startPrice} imgUrl={item.imgUrl} />
                     )) : itemsFromLanding.map(item => (
-                        <GridView id={item.id} name={item.name} startPrice={item.startPrice} onClick={
+                        <GridView id={item.id} name={item.name} imgUrl={item.imgUrl} startPrice={item.startPrice} onClick={
                             () => history.push({
                                 pathname: '/shop',
                                 state: { item: item }

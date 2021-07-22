@@ -27,7 +27,13 @@
     .col-md-8 {
         .single-card {
             display: inline-flex;
-            width: 175px;
+            width: 180px;
+
+            .grid-item-img {
+                width: 140px;
+                margin: auto;
+                margin-bottom: 1em;
+            }
         }
     }
 }
