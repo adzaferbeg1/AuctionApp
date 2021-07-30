@@ -31,7 +31,7 @@ public class PersonPrinciple implements UserDetails {
     private Collection authorities;
 
     public PersonPrinciple(Long id, String name, String surname,
-                         String username, String email, String password) {
+                           String username, String email, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;

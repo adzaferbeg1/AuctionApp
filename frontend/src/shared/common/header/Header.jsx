@@ -10,9 +10,9 @@ import { headerSocialIcon, headerLoginReg, headerPlainText, footerText } from '.
 import './Header.scss';
 
 
-function Header() {
+export default function Header() {
   return (
-    <>
+    <div className='main-header'>
       <Navbar collapseOnSelect expand="xl" variant="dark" className="navbar-black">
 
         <Navbar.Brand className="upper-navbar top">
@@ -38,7 +38,7 @@ function Header() {
       </Navbar>
       <section className="row">
         <div className="col">
-          <img src='\images\auction_logo.PNG' alt="Auction logo"/>
+          <img src='\images\auction_logo.PNG' alt="Auction logo" />
         </div>
         <div className="col">
           <div className="input-group rounded">
@@ -57,8 +57,6 @@ function Header() {
           </section>
         </div>
       </section>
-    </>
+    </div>
   )
 }
-
-export default Header;

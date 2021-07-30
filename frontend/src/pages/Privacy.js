@@ -3,7 +3,7 @@ import { LabelNavbar } from '../shared/common';
 import { privacyAndTerms } from '../shared/styles/PageStyles';
 
 
-function Privacy() {
+export default function Privacy() {
     return (
         <>
             <LabelNavbar label={"PRIVACY AND POLICY"} />
@@ -20,5 +20,3 @@ function Privacy() {
     );
 
 }
-
-export default Privacy;

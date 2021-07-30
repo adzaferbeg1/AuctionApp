@@ -30,7 +30,12 @@ public class RegisterRequest {
     public RegisterRequest() {
     }
 
-    public RegisterRequest(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String surname, @NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Size(max = 60) @Email String email, @NotBlank @Size(min = 6, max = 40) String password) {
+    public RegisterRequest(
+            @NotBlank @Size(min = 3, max = 50) String name,
+            @NotBlank @Size(min = 3, max = 50) String surname,
+            @NotBlank @Size(min = 3, max = 50) String username,
+            @NotBlank @Size(max = 60) @Email String email,
+            @NotBlank @Size(min = 6, max = 40) String password) {
         this.name = name;
         this.surname = surname;
         this.username = username;

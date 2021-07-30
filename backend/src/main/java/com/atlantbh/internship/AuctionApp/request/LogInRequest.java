@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class LogInRequest {
     @NotBlank
-    @Size(min=3, max = 60)
+    @Size(min = 3, max = 60)
     private String email;
 
     @NotBlank
@@ -16,7 +16,9 @@ public class LogInRequest {
     public LogInRequest() {
     }
 
-    public LogInRequest(@NotBlank @Size(min = 3, max = 60) String email, @NotBlank @Size(min = 6, max = 40) String password) {
+    public LogInRequest(
+            @NotBlank @Size(min = 3, max = 60) String email,
+            @NotBlank @Size(min = 6, max = 40) String password) {
         this.email = email;
         this.password = password;
     }

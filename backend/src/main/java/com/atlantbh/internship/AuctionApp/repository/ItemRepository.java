@@ -16,13 +16,13 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "SELECT * FROM ITEM ORDER BY end_date ASC", nativeQuery = true)
     List<Item> findLastChances();
 
-    @Query(value="SELECT * FROM ITEM WHERE category_id= ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM ITEM WHERE category_id= ?1", nativeQuery = true)
     List<Item> findByCategoryId(Long categoryId);
 
     @Modifying(flushAutomatically = true)
-    @Query(value="UPDATE item SET current_price= ?1 WHERE id= ?2", nativeQuery = true)
+    @Query(value = "UPDATE item SET current_price= ?1 WHERE id= ?2", nativeQuery = true)
     void updateCurrentPrice(double bid, long id);
 
-    @Query(value="SELECT * FROM item WHERE id= ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM item WHERE id= ?1", nativeQuery = true)
     Item findItemById(long id);
 }

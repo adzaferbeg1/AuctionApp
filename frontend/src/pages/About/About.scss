@@ -1,57 +1,55 @@
-.about-row,
-.xl-about-img,
-.s-about-img {
-    margin: 0;
-}
+.about-page {
+    .about-row,
+    .xl-about-img,
+    .s-about-img {
+        margin: 0;
+    }
 
-.about-row,
-.img-col {
-    border: 0;
-}
+    .about-row,
+    .img-col {
+        border: 0;
+    }
 
-.about-row {
-    width: 95%;
-    overflow: hidden;
-}
+    .about-row {
+        width: 95%;
+        overflow: hidden;
+    }
 
-.heading-about {
-    text-align: left;
-    margin-left: 30%;
-    margin-top: 20px;
-}
+    .heading-about {
+        text-align: left;
+        margin-left: 30%;
+        margin-top: 20px;
+    }
 
-.img-col {
-    padding: 0;
-    text-align: left;
-}
+    .img-col {
+        padding: 0;
+        text-align: left;
+    }
 
-.xl-about-img {
-    width: 450px;
-    margin-top: 60px;
-    margin-bottom: 10px;
-}
+    .xl-about-img {
+        width: 450px;
+        margin-top: 60px;
+        margin-bottom: 10px;
+    }
 
-.s-about-img {
-    width: 225px;
-    height: 150px;
-}
+    .s-about-img {
+        width: 225px;
+        height: 150px;
+    }
 
-.img-col {
-    margin-left: 30px;
+    .img-col {
+        margin-left: 30px;
+    }
+
+    #common-nav-brand:hover {
+        color: #8367d8;
+    }
+
+    #drop-down-icon {
+        visibility: hidden;
+    }
 }
 
 #common-nav-brand {
     margin-left: 14%;
-}
-
-#common-nav-brand:hover {
-
-    color: #8367d8;
-
-}
-
-#drop-down-icon {
-
-    visibility: hidden;
-
 }

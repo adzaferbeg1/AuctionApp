@@ -1,77 +1,79 @@
-.category-menu {
-    margin-bottom: 5%;
-}
+.landing-page {
+    .category-menu {
+        margin-bottom: 5%;
+    }
 
-.landing-page-xl {
-    background-color: #fafafa;
-}
+    .landing-page-xl {
+        background-color: #fafafa;
+    }
 
-.categories-list {
-    width: 40%;
-    margin: auto;
-    box-shadow: 3px 3px 0 0 #d3d3d3;
-}
+    .categories-list {
+        width: 40%;
+        margin: auto;
+        box-shadow: 3px 3px 0 0 #d3d3d3;
+    }
 
-.category-item-title,
-.category-item:hover {
-    color: #8367d8;
-}
+    .category-item-title,
+    .category-item:hover {
+        color: #8367d8;
+    }
 
-.category-item,
-.category-item-title {
-    text-align: left;
-}
+    .category-item,
+    .category-item-title {
+        text-align: left;
+    }
 
-.d-block {
-    margin: 0;
-    width: 100px;
-}
+    .d-block {
+        margin: 0;
+        width: 100px;
+    }
 
-.card-container {
-    display: flex;
-    justify-content: flex-start;
-    padding-right: 15%;
-    padding-left: 15%;
-}
+    .card-container {
+        display: flex;
+        justify-content: flex-start;
+        padding-right: 15%;
+        padding-left: 15%;
+    }
 
-.single-card {
-    margin-bottom: 10px;
-    margin-top: 10px;
-    margin-right: 10px;
-    width: 300px;
-    height: 300px;
-}
+    .single-card {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-right: 10px;
+        width: 300px;
+        height: 300px;
+    }
 
-.nav-link {
-    color: black;
-}
+    .nav-link {
+        color: black;
+    }
 
-.nav-link {
-    background-color: transparent;
-}
+    .nav-link {
+        background-color: transparent;
+    }
 
-.highlighted-item {
-    margin: auto;
-}
+    .highlighted-item {
+        margin: auto;
+    }
 
-.highlighted-img {
-    margin-top: 2em;
-    width: 400px;
-    height: 400px;
-}
+    .highlighted-img {
+        margin-top: 2em;
+        width: 400px;
+        height: 400px;
+    }
 
-.item-specs {
-    width: 400px;
-    position: relative;
-    right: 200px;
-    bottom: 300px;
-    z-index: 9;
-}
+    .item-specs {
+        width: 400px;
+        position: relative;
+        right: 200px;
+        bottom: 300px;
+        z-index: 9;
+    }
 
-.grid-item-img {
-    width: 170px;
-    height: 170px;
-    margin: auto;
-    margin-bottom: 1em;
-    background-color: #f0f0f0;
+    .grid-item-img {
+        width: 170px;
+        height: 170px;
+        margin: auto;
+        margin-bottom: 1em;
+        background-color: #f0f0f0;
+    }
 }

@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PersonService implements UserDetailsService {
-    
+
     @Autowired
-    private final PersonRepository  personRepository;
+    private final PersonRepository personRepository;
 
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -33,11 +33,10 @@ public class PersonService implements UserDetailsService {
         return PersonPrinciple.build(user);
     }
 
-    public Person signin(LogInRequest loginRequest) {
-        Person person = personRepository.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new IllegalStateException("Wrong email"));
+    public Person signIn(LogInRequest loginRequest) {
 
-        return person;
+        return personRepository.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new IllegalStateException("Wrong email"));
     }
 
     /*

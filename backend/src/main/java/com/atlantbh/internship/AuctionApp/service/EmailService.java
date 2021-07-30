@@ -22,7 +22,7 @@ public class EmailService implements EmailSender {
     @Override
     @Async
     public void send(String to, String email) {
-        try{
+        try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
@@ -31,7 +31,7 @@ public class EmailService implements EmailSender {
             helper.setFrom("not-useable@auction.com");
             javaMailSender.send(mimeMessage);
 
-        } catch (MessagingException e){
+        } catch (MessagingException e) {
             LOGGER.error("Failed to send email", e);
             throw new IllegalStateException("Failed to send");
         }

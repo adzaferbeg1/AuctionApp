@@ -13,39 +13,39 @@ import javax.validation.constraints.Size;
 public class Person {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
-    @Column(name="name")
+    @Column(name = "name")
     @Size(min = 2, max = 200)
     private String name;
 
     @NotBlank
-    @Column(name="surname")
+    @Column(name = "surname")
     @Size(min = 2, max = 200)
     private String surname;
 
-    @Column(name="username")
+    @Column(name = "username")
     @Size(max = 100)
     private String username;
 
     @NotBlank
-    @Column(name="email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     @Size(max = 50)
     private String email;
 
     @NotBlank
-    @Column(name="password", nullable = false)
+    @Column(name = "password", nullable = false)
     @Size(min = 4, max = 100)
     private String password;
 
-    @Column(name="address")
+    @Column(name = "address")
     @Size(max = 300)
     private String address;
 
-    @Column(name="phone_no")
+    @Column(name = "phone_no")
     @Size(max = 100)
     private String phoneNumber;
 

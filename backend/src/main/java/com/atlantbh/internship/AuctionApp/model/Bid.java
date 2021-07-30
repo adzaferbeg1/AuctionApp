@@ -9,22 +9,22 @@ import java.time.LocalDateTime;
 public class Bid {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
-    @Column(name="item_id")
+    @Column(name = "item_id")
     private long itemId;
 
     @NotNull
-    @Column(name="bidder_id")
+    @Column(name = "bidder_id")
     private long bidderId;
 
-    @Column(name="bid")
+    @Column(name = "bid")
     private double bid;
 
-    @Column(name="date")
+    @Column(name = "date")
     private LocalDateTime date;
 
     public Bid() {

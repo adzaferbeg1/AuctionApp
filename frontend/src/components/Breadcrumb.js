@@ -1,7 +1,5 @@
 import React from 'react';
 
-function Breadcrumb(props) {
+export default function Breadcrumb(props) {
   // TODO implement breadcrumb
 }
-
-export default Breadcrumb;

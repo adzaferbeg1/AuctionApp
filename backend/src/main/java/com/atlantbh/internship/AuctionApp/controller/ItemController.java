@@ -23,19 +23,19 @@ public class ItemController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/newarrival")
-    public List<Item> getNewArrival(){
+    public List<Item> getNewArrival() {
         return itemRepository.findNewArrivals();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/lastchance")
-    public List<Item> getLastChance(){
+    public List<Item> getLastChance() {
         return itemRepository.findLastChances();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/category")
-    public List<Item> getItemsByCategory(@RequestParam Long id){
+    public List<Item> getItemsByCategory(@RequestParam Long id) {
         return itemRepository.findByCategoryId(id);
     }
 
@@ -51,7 +51,7 @@ public class ItemController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/singleitem")
-    public Item getItemById(@RequestParam Long id){
+    public Item getItemById(@RequestParam Long id) {
         return itemRepository.findItemById(id);
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { LabelNavbar } from '../../shared/common';
 
-function Account() {
+export default function Account() {
     return (
         <>
             <LabelNavbar label={"MY ACCOUNT"} />
@@ -9,5 +9,3 @@ function Account() {
 
     );
 }
-
-export default Account;

@@ -8,38 +8,38 @@ import java.time.LocalDateTime;
 public class Item {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
-    @Column(name="seller_id", nullable = false)
+    @Column(name = "seller_id", nullable = false)
     private long sellerId;
 
     @NotBlank
-    @Column(name="category_id", nullable = false)
+    @Column(name = "category_id", nullable = false)
     private long categoryId;
 
     @NotBlank
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name="start_price",  nullable = false)
+    @Column(name = "start_price", nullable = false)
     private double startPrice;
 
-    @Column(name="current_price",  nullable = false)
+    @Column(name = "current_price", nullable = false)
     private double currentPrice;
 
-    @Column(name="start_date", nullable = false)
+    @Column(name = "start_date", nullable = false)
     private LocalDateTime startDate;
 
-    @Column(name="end_date", nullable = false)
+    @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
-    @Column(name="img_url")
+    @Column(name = "img_url")
     private String imgUrl;
 
     public Item() {

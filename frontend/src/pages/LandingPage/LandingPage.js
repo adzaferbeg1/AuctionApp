@@ -34,7 +34,7 @@ const LandingPage = () => {
   }, [])
 
   return (
-    <>
+    <div className='landing-page'>
       <div className="row landing-page-xl">
 
         <div className="col category-menu">
@@ -90,7 +90,7 @@ const LandingPage = () => {
             })} />
         )) : null}
       </div>
-    </>
+    </div>
 
   );
 }

@@ -10,7 +10,7 @@ import { purpleColor, landingPageButton } from '../../shared/styles/PageStyles';
 import './Shop.scss'
 
 
-function Shop(props) {
+export default function Shop(props) {
 
     const [itemId] = useState(props.location.state.item.id);
     const [selectedItem, setSelectedItem] = useState([]);
@@ -57,7 +57,7 @@ function Shop(props) {
     }, [selectedItem.endDate, props.location.state.item, itemId])
 
     const placeItemBid = async (e) => {
-        if (selectedItem.currentPrice < bid) {
+        if (selectedItem.currentPrice <= bid) {
             document.getElementById("highest-bid").style.display = 'flex';
             document.getElementById("low-bid").style.display = 'none';
             setCurrentPrice(bid);
@@ -67,7 +67,7 @@ function Shop(props) {
             setSelectedItem(updatedItem);
             setCurrentPrice(updatedItem.currentPrice);
 
-        } else if (selectedItem.currentPrice >= bid) {
+        } else if (selectedItem.currentPrice > bid) {
 
             document.getElementById("highest-bid").style.display = 'none';
             document.getElementById("low-bid").style.display = 'flex';
@@ -83,7 +83,7 @@ function Shop(props) {
 
 
     return (
-        <>
+        <div className='shop-page'>
             <LabelNavbar label={"SINGLE PRODUCT"} />
             <nav className="navbar" id="low-bid">
                 <span className="navbar-brand mb-0 h1">There are higher bids than yours! Give it another try!
@@ -140,8 +140,6 @@ function Shop(props) {
                 </Table>
 
             </div>
-        </>
+        </div>
     );
 }
-
-export default Shop;

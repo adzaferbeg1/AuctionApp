@@ -3,7 +3,7 @@ import React from 'react';
 import { LabelNavbar } from '../shared/common';
 import { privacyAndTerms } from '../shared/styles/PageStyles';
 
-function Terms() {
+export default function Terms() {
         return (
                 <>
                         <LabelNavbar label={"TERMS AND CONDITIONS"} />
@@ -30,5 +30,3 @@ function Terms() {
         );
 
 }
-
-export default Terms;

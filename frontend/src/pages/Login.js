@@ -8,7 +8,7 @@ import { loginInput, loginButtonStyle } from '../shared/styles/PageStyles';
 
 import '../shared/styles/RegisterLogin.scss';
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
@@ -23,13 +23,13 @@ function Login() {
           history.push('/myaccount');
         },
         error => {
-          console.log("Login fail: error = { " + error.toString() + " }");
+          alert('Invalid email or password! Try again');
         }
       );
   }
 
   return (
-    <>
+    <div className='reg-login'>
 
       <LabelNavbar label={"LOGIN"} />
 
@@ -52,9 +52,7 @@ function Login() {
         </Button>
 
       </Form>
-    </>
+    </div>
   );
 
 }
-
-export default Login;

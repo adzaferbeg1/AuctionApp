@@ -13,6 +13,7 @@
     "node-sass": "^4.14.1",
     "polyfill": "^0.1.0",
     "react": "^17.0.2",
+    "react-alert": "^7.0.3",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
@@ -49,5 +50,5 @@
     "jest-dom": "^4.0.0",
     "react-test-renderer": "^17.0.2"
   },
-  "proxy": "https://atlantbh-auction-app.herokuapp.com/"
+  "proxy": "http://localhost:8080"
 }

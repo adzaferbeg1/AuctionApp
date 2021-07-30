@@ -43,7 +43,7 @@ public class PersonController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signin")
     public ResponseEntity authenticateUser(@RequestBody LogInRequest loginRequest) {
-        final Person person = personService.signin(loginRequest);
+        final Person person = personService.signIn(loginRequest);
         if (!passwordEncoder.matches(loginRequest.getPassword(), person.getPassword()))
             return ResponseEntity.status(500).body("Wrong password");
         final String jwt = jwtProvider.generateJwtToken(person.getEmail());
@@ -53,12 +53,12 @@ public class PersonController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signup")
     public ResponseEntity registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
-        if(personRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (personRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity("Fail -> Username is already taken!",
                     HttpStatus.BAD_REQUEST);
         }
 
-        if(personRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (personRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
@@ -79,7 +79,7 @@ public class PersonController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/singleuser")
-    public Person getUserById(@RequestParam Long id){
+    public Person getUserById(@RequestParam Long id) {
         return personRepository.finsUserById(id);
     }
 }

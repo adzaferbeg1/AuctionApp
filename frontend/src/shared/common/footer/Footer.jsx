@@ -9,9 +9,9 @@ import { footerSocialIcon } from '../../styles/PageStyles';
 
 import './Footer.scss';
 
-function Footer() {
+export default function Footer() {
   return (
-    <footer className="text-center text-white" >
+    <footer className="text-center text-white footer" >
       <div className="row footer">
         <div className="col"></div>
         <div className="col footer-col">
@@ -53,5 +53,3 @@ function Footer() {
     </footer>
   )
 }
-
-export default Footer;

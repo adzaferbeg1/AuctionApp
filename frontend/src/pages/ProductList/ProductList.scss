@@ -25,12 +25,20 @@
     }
 
     .col-md-8 {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
         .single-card {
-            display: inline-flex;
             width: 180px;
+            height: 300px;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            margin-right: 0.5em;
 
             .grid-item-img {
                 width: 140px;
+                height: 140px;
                 margin: auto;
                 margin-bottom: 1em;
             }

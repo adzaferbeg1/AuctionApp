@@ -5,10 +5,10 @@ import { aboutDivCol, aboutDivRow } from '../../shared/styles/PageStyles';
 
 import './About.scss';
 
-function About() {
+export default function About() {
 
     return (
-        <>
+        <div className='about-page'>
             <LabelNavbar label={"ABOUT"} />
 
             <div className="row about-row" >
@@ -41,9 +41,7 @@ function About() {
 
 
 
-        </>
+        </div>
     )
 
 }
-
-export default About;

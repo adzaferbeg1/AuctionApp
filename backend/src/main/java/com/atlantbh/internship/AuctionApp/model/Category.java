@@ -8,16 +8,16 @@ import javax.validation.constraints.Size;
 public class Category {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
-    @Column(name="title", unique = true)
+    @Column(name = "title", unique = true)
     @Size(min = 2, max = 50)
     private String title;
 
-    @Column(name="supercategory_id")
+    @Column(name = "supercategory_id")
     private long supercategory;
 
     public Category() {
