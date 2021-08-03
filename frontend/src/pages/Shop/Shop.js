@@ -48,7 +48,6 @@ export default function Shop(props) {
             });
             setBidders(itemBidders);
             setBidderNames(names);
-            console.log(itemBidders);
         }
 
 

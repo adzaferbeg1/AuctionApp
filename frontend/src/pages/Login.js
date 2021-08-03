@@ -23,6 +23,7 @@ export default function Login() {
           history.push('/myaccount');
         },
         error => {
+          console.error(error);
           alert('Invalid email or password! Try again');
         }
       );

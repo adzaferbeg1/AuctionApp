@@ -8,6 +8,7 @@ class CategoryService {
             return response.data;
 
         } catch (err) {
+            console.error(err);
         }
     }
 

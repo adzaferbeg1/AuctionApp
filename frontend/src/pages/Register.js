@@ -27,6 +27,7 @@ export default function Register() {
           history.push('/');
         },
         error => {
+          console.error(error);
           const invalidMessage = validateInput(name, surname, email, password);
           alert(invalidMessage);
         }

@@ -33,7 +33,7 @@ const ProductList = (props) => {
                 console.log(filteredItems);
 
             } catch (e) {
-                console.log("Could not identify category id");
+                console.error(e);
             }
         }
 

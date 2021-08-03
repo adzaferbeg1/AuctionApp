@@ -12,7 +12,7 @@ class AuthenticationService {
         return response.data;
       })
       .catch(err => {
-        //console.log(err);
+        console.error(err);
         throw err;
       });
   }
@@ -44,6 +44,8 @@ class AuthenticationService {
       const exp = decode(token, { complete: true }).payload.exp;
       return Date.now() < exp * 1000;
     } catch (nullError) {
+
+      console.error(nullError);
       return false;
     }
 
@@ -55,6 +57,8 @@ class AuthenticationService {
       return response.data;
 
     } catch (err) {
+
+      console.error(err);
     }
   }
 }

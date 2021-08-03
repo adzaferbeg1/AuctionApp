@@ -8,6 +8,7 @@ class ItemService {
             return response.data;
 
         } catch (err) {
+            console.error(err);
         }
     }
 
@@ -17,6 +18,7 @@ class ItemService {
             return response.data;
 
         } catch (err) {
+            console.error(err);
         }
     }
 
@@ -26,6 +28,7 @@ class ItemService {
             return response.data;
 
         } catch (err) {
+            console.error(err);
         }
     }
 
@@ -42,6 +45,7 @@ class ItemService {
             return response.data;
 
         } catch (err) {
+            console.error(err);
         }
     }
 
