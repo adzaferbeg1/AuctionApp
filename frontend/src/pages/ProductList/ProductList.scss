@@ -1,0 +1,47 @@
+.product-container {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15%;
+    margin-right: 15%;
+
+    .col-sm-4 {
+        border: 2px solid #e3e3e3;
+        text-align: left;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        h6 {
+            margin-top: 20px;
+        }
+
+        p {
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        p:hover {
+            color: #8367d8;
+        }
+    }
+
+    .col-md-8 {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .single-card {
+            width: 180px;
+            height: 300px;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            margin-right: 0.5em;
+
+            .grid-item-img {
+                width: 140px;
+                height: 140px;
+                margin: auto;
+                margin-bottom: 1em;
+            }
+        }
+    }
+}
