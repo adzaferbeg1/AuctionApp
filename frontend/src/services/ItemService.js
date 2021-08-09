@@ -1,54 +1,48 @@
 import axios from "axios";
 
 class ItemService {
+	getLastChance = async () => {
+		try {
+			const response = await axios.get("item/lastchance");
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
-    getLastChance = async () => {
-        try {
-            const response = await axios.get("item/lastchance");
-            return response.data;
+	getNewArrival = async () => {
+		try {
+			const response = await axios.get("item/newarrival");
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
-        } catch (err) {
-            console.error(err);
-        }
-    }
+	getFilteredByCategory = async (id) => {
+		try {
+			const response = await axios.get("item/category?id=" + id);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
-    getNewArrival = async () => {
-        try {
-            const response = await axios.get("item/newarrival");
-            return response.data;
+	placeBid = async (bid, itemId) => {
+		return axios.post("/item/placebid", {
+			itemId,
+			bid,
+		});
+	};
 
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    getFilteredByCategory = async (id) => {
-        try {
-            const response = await axios.get("item/category?id=" + id);
-            return response.data;
-
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    placeBid = async (bid, itemId) => {
-        return axios.post("/item/placebid", {
-            itemId,
-            bid
-        });
-    }
-
-    getItemById = async (id) => {
-        try {
-            const response = await axios.get("item/singleitem?id=" + id);
-            return response.data;
-
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
+	getItemById = async (id) => {
+		try {
+			const response = await axios.get("item/singleitem?id=" + id);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new ItemService();

@@ -6,11 +6,13 @@ export const UserContext = createContext({});
 export const useUserContext = () => useContext(UserContext);
 
 export const Provider = ({ children }) => {
-    const [loggedIn, setLoggedIn] = useState(AuthenticationService.validateToken());
+	const [loggedIn, setLoggedIn] = useState(
+		AuthenticationService.validateToken()
+	);
 
-    return (
-        <UserContext.Provider value={{ loggedIn, setLoggedIn }}>
-            {children}
-        </UserContext.Provider>
-    );
+	return (
+		<UserContext.Provider value={{ loggedIn, setLoggedIn }}>
+			{children}
+		</UserContext.Provider>
+	);
 };
