@@ -39,8 +39,14 @@ public class BidController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/bidders")
-    public List<Bid> getAllBiddersForItem(@RequestParam Long id){
+    public List<Bid> getAllBiddersForItem(@RequestParam Long id) {
         return bidRepository.getAllBiddersForItem(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/bidsno")
+    public Integer getNumberOfBidsForItem(@RequestParam Long id) {
+        return bidRepository.getNumberOfBids(id);
     }
 
 }

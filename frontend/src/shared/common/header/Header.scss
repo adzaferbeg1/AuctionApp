@@ -1,66 +1,70 @@
 .main-header {
-    .navbar-black {
-        background-color: black;
-        margin-bottom: 0.5%;
-    }
+	.navbar-black {
+		background-color: black;
+		margin-bottom: 0.5%;
+	}
 
-    .dot {
-        height: 30px;
-        width: 30px;
-        background-color: #9b9b9b;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 7%;
-    }
+	.dot {
+		height: 30px;
+		width: 30px;
+		background-color: #9b9b9b;
+		border-radius: 50%;
+		display: inline-block;
+		margin-right: 7%;
+	}
 
-    ul {
-        padding-right: 15%;
-    }
+	ul {
+		padding-right: 15%;
+	}
 
-    .upper-navbar {
-        padding-left: 15%;
-        background-color: black;
-    }
+	.upper-navbar {
+		padding-left: 15%;
+		background-color: black;
+	}
 
-    .top {
-        position: absolute;
-    }
+	.top {
+		position: absolute;
+	}
 
-    section {
-        background-color: white;
-        height: 60px;
-        width: 100%;
-    }
+	section {
+		background-color: white;
+		height: 60px;
+		width: 100%;
+	}
 
-    div {
-        text-align: center;
-    }
+	div {
+		text-align: center;
+	}
 
-    .links {
-        margin-top: 1.5%;
-        text-align: left;
-        color: black;
-    }
+	.links {
+		margin-top: 1.5%;
+		text-align: left;
+		color: black;
+	}
 
-    .header-input {
-        margin-top: 1%;
-        box-shadow: 4px 4px #dbd9d9;
-        visibility: hidden;
-    }
+	.header-input {
+		margin-top: 1%;
+		box-shadow: 4px 4px #dbd9d9;
+		visibility: hidden;
+	}
 
-    img {
-        margin-left: 150px;
-    }
+	img {
+		margin-left: 150px;
+	}
 
-    .search-icon {
-        margin-top: 30%;
-        color: black;
-        visibility: hidden;
-    }
+	.search-icon {
+		margin-top: 30%;
+		color: black;
+		visibility: hidden;
+	}
 
-    #search-addon,
-    .input-group-text,
-    .search-icon {
-        background-color: white;
-    }
+	#search-addon,
+	.input-group-text,
+	.search-icon {
+		background-color: white;
+	}
+
+	#log-out-btn {
+		color: #8367d7;
+	}
 }

@@ -85,6 +85,6 @@ public class PersonController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/singleuser")
     public Person getUserById(@RequestParam Long id) {
-        return personRepository.finsUserById(id);
+        return personRepository.findUserById(id);
     }
 }

@@ -24,6 +24,7 @@ yarn-error.log*
 
 # idea
 
+.idea/*
 .idea/workspace.xml
 .idea/dbnavigator.xml
 .idea/vcs.xml

@@ -1,102 +1,102 @@
 .shop-page {
-    .item-container {
-        overflow-x: hidden;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-bottom: 2em;
-        margin-top: 2em;
-        padding-right: 14em;
+	.item-container {
+		overflow-x: hidden;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		margin-bottom: 2em;
+		margin-top: 2em;
+		padding-right: 14em;
 
-        img {
-            margin-right: 1.7em;
-            height: 450px;
-            width: 550px;
-            background-color: #f0f0f0;
-        }
+		img {
+			margin-right: 1.7em;
+			height: 450px;
+			width: 550px;
+			background-color: #f0f0f0;
+		}
 
-        .item-info {
-            text-align: left;
-            .bid-container {
-                text-align: left;
-                margin-top: 2.5em;
-                input {
-                    border: 1px solid #b8b7b7;
-                    background-color: #e3e3e3;
-                    height: 50px;
-                    width: 150px;
-                    margin-right: 1em;
-                }
-            }
+		.item-info {
+			text-align: left;
+			.bid-container {
+				text-align: left;
+				margin-top: 2.5em;
+				input {
+					border: 1px solid #b8b7b7;
+					background-color: #e3e3e3;
+					height: 50px;
+					width: 150px;
+					margin-right: 1em;
+				}
+			}
 
-            p {
-                font-size: 14px;
-            }
+			p {
+				font-size: 14px;
+			}
 
-            p,
-            h6 {
-                color: #b8b7b7;
-            }
+			p,
+			h6 {
+				color: #b8b7b7;
+			}
 
-            h6:first-of-type {
-                margin-top: 3em;
-            }
+			h6:first-of-type {
+				margin-top: 3em;
+			}
 
-            .details-heading {
-                margin-top: 2em;
-            }
+			.details-heading {
+				margin-top: 2em;
+			}
 
-            .thin-line {
-                width: 100%;
-                border-bottom: 3px solid #e3e3e3;
-            }
+			.thin-line {
+				width: 100%;
+				border-bottom: 3px solid #e3e3e3;
+			}
 
-            .item-desc {
-                width: 300px;
-                display: flex;
-                flex-direction: column;
-                color: black;
-                text-align: left;
-            }
-        }
-    }
+			.item-desc {
+				width: 300px;
+				display: flex;
+				flex-direction: column;
+				color: black;
+				text-align: left;
+			}
+		}
+	}
 
-    .bidder-container {
-        margin: auto;
-        width: 950px;
+	.bidder-container {
+		margin: auto;
+		width: 950px;
 
-        table {
-            margin-top: 7em;
-            margin-bottom: 10em;
-            text-align: left;
-            border: 2px solid #ececec;
+		table {
+			margin-top: 7em;
+			margin-bottom: 10em;
+			text-align: left;
+			border: 2px solid #ececec;
 
-            th {
-                background-color: #ececec;
-                width: 150px;
-            }
+			th {
+				background-color: #ececec;
+				width: 150px;
+			}
 
-            td,
-            th {
-                padding-left: 2em;
-            }
-        }
-    }
+			td,
+			th {
+				padding-left: 2em;
+			}
+		}
+	}
 
-    #highest-bid,
-    #low-bid {
-        padding-left: 14%;
-    }
+	#highest-bid,
+	#low-bid {
+		padding-left: 14%;
+	}
 
-    #highest-bid {
-        background-color: #e3f7cd;
-        color: #447e36;
-        display: none;
-    }
+	#highest-bid {
+		background-color: #e3f7cd;
+		color: #447e36;
+		display: none;
+	}
 
-    #low-bid {
-        background-color: #f7e8c7;
-        color: #ab944e;
-        display: none;
-    }
+	#low-bid {
+		background-color: #f7e8c7;
+		color: #ab944e;
+		display: none;
+	}
 }
