@@ -24,7 +24,8 @@ export default function Register() {
       .register(name, surname, name + surname, email, password)
       .then(
         () => {
-          history.push('/');
+          history.push('/login');
+          alert('Registration successful');
         },
         error => {
           console.error(error);

@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 import { LabelNavbar } from '../shared/common';
 import Authentication from '../services/AuthenticationService'
 import { loginInput, loginButtonStyle } from '../shared/styles/PageStyles';
+import { useUserContext } from '.././AppContext';
 
 import '../shared/styles/RegisterLogin.scss';
 
@@ -12,6 +13,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  const { setLoggedIn } = useUserContext();
 
   const loginButton = async (event) => {
     event.preventDefault();
@@ -20,6 +22,7 @@ export default function Login() {
       .signin(email, password)
       .then(
         () => {
+          setLoggedIn(true);
           history.push('/myaccount');
         },
         error => {

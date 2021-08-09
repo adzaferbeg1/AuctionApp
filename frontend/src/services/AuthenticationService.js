@@ -36,16 +36,22 @@ class AuthenticationService {
   }
 
   validateToken = () => {
-    try {
-      const token = this.getCurrentUser().token;
+    if (this.getCurrentUser() !== null) {
 
-      if (token === null)
+      try {
+        const token = this.getCurrentUser().token;
+
+        if (token === null)
+          return false;
+        const exp = decode(token, { complete: true }).payload.exp;
+        return Date.now() < exp * 1000;
+      } catch (nullError) {
+
+        console.error(nullError);
         return false;
-      const exp = decode(token, { complete: true }).payload.exp;
-      return Date.now() < exp * 1000;
-    } catch (nullError) {
+      }
 
-      console.error(nullError);
+    } else {
       return false;
     }
 

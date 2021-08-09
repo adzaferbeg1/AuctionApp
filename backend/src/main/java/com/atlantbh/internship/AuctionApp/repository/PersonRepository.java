@@ -17,6 +17,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Boolean existsByEmail(String email);
 
     @Query(value = "SELECT * FROM person WHERE id= ?1", nativeQuery = true)
-    Person finsUserById(long id);
+    Person findUserById(long id);
 
 }

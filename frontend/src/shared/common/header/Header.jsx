@@ -3,14 +3,27 @@ import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { FaSearch, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { TiSocialInstagram, TiSocialGooglePlus } from "react-icons/ti";
+import { useHistory } from 'react-router-dom';
 
+import AuthenticationService from '../../../services/AuthenticationService';
 import { headerSocialIcon, headerLoginReg, headerPlainText, footerText } from '../../styles/PageStyles';
-
+import { useUserContext } from '../../../AppContext';
 
 import './Header.scss';
 
 
 export default function Header() {
+
+  const history = useHistory();
+  const { loggedIn, setLoggedIn } = useUserContext();
+
+  const singOut = () => {
+    AuthenticationService.signOut();
+    setLoggedIn(false);
+    history.push('/login');
+
+  }
+
   return (
     <div className='main-header'>
       <Navbar collapseOnSelect expand="xl" variant="dark" className="navbar-black">
@@ -54,6 +67,10 @@ export default function Header() {
             <a className="nav-link links" href="/" style={footerText}>HOME</a>
             <a className="nav-link links" href="/shop" style={footerText}>SHOP</a>
             <a className="nav-link links" href="/myaccount" style={footerText}>MY ACCOUNT</a>
+            {loggedIn ?
+              <a id='log-out-btn' className="nav-link links" href="/login" onClick={singOut}>LOG OUT</a>
+              : null}
+
           </section>
         </div>
       </section>

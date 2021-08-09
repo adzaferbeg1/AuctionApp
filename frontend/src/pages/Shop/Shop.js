@@ -20,6 +20,18 @@ export default function Shop(props) {
     const [bid, setBid] = useState('');
     const [bidders, setBidders] = useState([]);
     const [bidderNames, setBidderNames] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [noOfBids, setNoOfBids] = useState(0);
+
+    const alertSuccess = (display) => {
+
+        document.getElementById("highest-bid").style.display = display;
+    }
+
+    const alertWarning = (display) => {
+
+        document.getElementById("low-bid").style.display = display;
+    }
 
     useEffect(() => {
 
@@ -37,6 +49,8 @@ export default function Shop(props) {
         }
 
         const fetchItems = async () => {
+
+
             var itemBidders = await BidService.getAllBidders(itemId);
             var names = [];
             itemBidders.forEach(async bidder => {
@@ -48,28 +62,39 @@ export default function Shop(props) {
             });
             setBidders(itemBidders);
             setBidderNames(names);
+            console.log(names);
         }
 
 
         fetchItems();
+        setIsLoading(false);
 
     }, [selectedItem.endDate, props.location.state.item, itemId])
 
+    useEffect(() => {
+        const fetchData = async () => {
+
+            var numberOfBids = await BidService.getNoOfBids(itemId);
+            setNoOfBids(numberOfBids);
+        }
+        fetchData();
+    }, [itemId]);
+
     const placeItemBid = async (e) => {
         if (selectedItem.currentPrice <= bid) {
-            document.getElementById("highest-bid").style.display = 'flex';
-            document.getElementById("low-bid").style.display = 'none';
+            alertSuccess('flex');
+            alertWarning('none');
             setCurrentPrice(bid);
             await BidService.placeBid(selectedItem.id, AuthenticationService.getCurrentUser().personId, bid);
             await ItemService.placeBid(bid, selectedItem.id);
             const updatedItem = await ItemService.getItemById(selectedItem.id);
             setSelectedItem(updatedItem);
             setCurrentPrice(updatedItem.currentPrice);
+            setNoOfBids(noOfBids + 1);
 
         } else if (selectedItem.currentPrice > bid) {
-
-            document.getElementById("highest-bid").style.display = 'none';
-            document.getElementById("low-bid").style.display = 'flex';
+            alertSuccess('none');
+            alertWarning('flex');
         }
 
     }
@@ -80,8 +105,13 @@ export default function Shop(props) {
         setCurrentPrice(updatedItem.currentPrice);
     }
 
+    if (isLoading) {
+        return null;
+    }
+
 
     return (
+
         <div className='shop-page'>
             <LabelNavbar label={"SINGLE PRODUCT"} />
             <nav className="navbar" id="low-bid">
@@ -107,7 +137,7 @@ export default function Shop(props) {
                     </div>
                     <p>Enter ${currentPrice} or more</p>
                     <h6>Highest bid: ${currentPrice}</h6>
-                    <h6>No bids:</h6>
+                    <h6>No bids: {noOfBids}</h6>
                     <h6>Time left: {timeLeft} days</h6>
                     <h5 className='details-heading'>Details</h5>
                     <div className='thin-line'></div>
@@ -118,13 +148,13 @@ export default function Shop(props) {
                 <Table variant="gray-transparent" responsive>
                     <thead>
                         <tr className="product-table-header">
-                            <th colSpan='2'>Bider</th>
+                            <th colSpan='2'>Bidder</th>
                             <th>Date</th>
                             <th>Bid</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {bidders.length !== 0 && bidderNames.length !== 0 ? bidders.map((bidder, index) => (
+                        {bidderNames.length !== 0 && bidders.length !== 0 ? bidders.map((bidder, index) => (
                             <tr key={bidder.bid}>
                                 <td colSpan='2'>{bidderNames[index]}</td>
                                 <td>{(bidder.date).substring(0, 10)}</td>
