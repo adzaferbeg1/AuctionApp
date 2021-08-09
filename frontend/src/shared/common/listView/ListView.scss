@@ -1,0 +1,21 @@
+.list-view {
+	display: flex;
+	flex-direction: column;
+	width: 94%;
+	margin-top: 0.7em;
+	margin-bottom: 0.7em;
+	text-align: left;
+	.list-item-img {
+		width: 250px;
+		height: 270px;
+		float: left;
+		margin-right: 1em;
+	}
+	.card-text {
+		color: #8367d8;
+		font-size: 18pt;
+	}
+	.card-desc {
+		color: gray;
+	}
+}
