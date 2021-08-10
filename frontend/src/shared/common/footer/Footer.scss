@@ -1,53 +1,53 @@
 footer {
-    background-color: #252525;
-    position: static;
-    left: 0;
-    right: 0;
-    bottom: 0;
+	background-color: #252525;
+	position: static;
+	left: 0;
+	right: 0;
+	bottom: 0;
 
-    .footer-title {
-        font-weight: lighter;
-    }
+	.footer-title {
+		font-weight: lighter;
+	}
 
-    .footer {
-        padding-top: 2%;
-        padding-bottom: 7%;
-    }
+	.footer {
+		padding-top: 2%;
+		padding-bottom: 7%;
+	}
 
-    .footer-col {
-        text-align: left;
-    }
+	.footer-col {
+		text-align: left;
+	}
 
-    .footer-link,
-    .footer-paragraph {
-        color: white;
-        font-size: 11pt;
-    }
+	.footer-link,
+	.footer-paragraph {
+		color: white;
+		font-size: 11pt;
+	}
 
-    .footer-paragraph {
-        margin-bottom: 2%;
-    }
+	.footer-paragraph {
+		margin-bottom: 2%;
+	}
 
-    #email-input {
-        width: 175px;
-        background-color: #3b3b3b;
-        border: none;
-    }
+	#email-input {
+		width: 175px;
+		background-color: #3b3b3b;
+		border: none;
+	}
 
-    #go-btn {
-        background-color: black;
-    }
+	#go-btn {
+		background-color: black;
+	}
 
-    .footer-dot {
-        height: 30px;
-        width: 30px;
-        background-color: #9b9b9b;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 4%;
-    }
+	.footer-dot {
+		height: 30px;
+		width: 30px;
+		background-color: #9b9b9b;
+		border-radius: 50%;
+		display: inline-block;
+		margin-right: 4%;
+	}
 
-    Link {
-        color: white;
-    }
+	Link {
+		color: white;
+	}
 }

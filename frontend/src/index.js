@@ -6,8 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from './AppContext';
 
-
-import './index.scss';
+import "./index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
