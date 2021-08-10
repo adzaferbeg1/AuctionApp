@@ -51,7 +51,7 @@ export default function Shop(props) {
 					);
 			}
 		}
-
+		/*
 		const fetchItems = async () => {
 			var itemBidders = await BidService.getAllBidders(itemId);
 			var names = [];
@@ -63,9 +63,11 @@ export default function Shop(props) {
 			});
 			setBidders(itemBidders);
 			setBidderNames(names);
+			console.log(names);
 		};
 
 		fetchItems();
+		*/
 		setIsLoading(false);
 	}, [selectedItem.endDate, props.location.state.item, itemId]);
 

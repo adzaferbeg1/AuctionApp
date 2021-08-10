@@ -19,7 +19,7 @@ class AuthenticationService {
 
 	signOut() {
 		localStorage.removeItem("user");
-	}
+	};
 
 	register = async (name, surname, username, email, password) => {
 		return axios.post("auth/signup", {
@@ -33,7 +33,7 @@ class AuthenticationService {
 
 	getCurrentUser() {
 		return JSON.parse(localStorage.getItem("user"));
-	}
+	};
 
 	validateToken = () => {
 		if (this.getCurrentUser() !== null) {
@@ -49,15 +49,6 @@ class AuthenticationService {
 			}
 		} else {
 			return false;
-		}
-	};
-
-	getUserById = async (id) => {
-		try {
-			const response = await axios.get("auth/singleuser?id=" + id);
-			return response.data;
-		} catch (err) {
-			console.error(err);
 		}
 	};
 }

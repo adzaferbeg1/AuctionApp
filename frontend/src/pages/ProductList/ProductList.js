@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { FaThList } from "react-icons/fa";
 import CategoryService from "../../services/CategoryService";
 import ItemService from "../../services/ItemService";
 import { LabelNavbar } from "../../shared/common";
 import { GridView } from "../../shared/common";
+import { ListView } from "../../shared/common";
 import { purpleColor } from "../../shared/styles/PageStyles";
 import "./ProductList.scss";
 
@@ -15,6 +18,7 @@ const ProductList = (props) => {
 	const [itemsFromLanding, setItemsFromLanding] = useState([]);
 	const [allCategories, setAllCategories] = useState([]);
 	const [allFilteredItems, setAllFilteredItems] = useState([]);
+	const [gridView, setGridView] = useState(true);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -44,6 +48,25 @@ const ProductList = (props) => {
 	return (
 		<>
 			<LabelNavbar label={"ITEMS"} />
+			<div className="grid-list-btn">
+				<button
+					autoFocus
+					onClick={() => {
+						setGridView(true);
+					}}
+				>
+					{" "}
+					<BsFillGrid3X3GapFill /> Grid
+				</button>
+				<button
+					onClick={() => {
+						setGridView(false);
+					}}
+				>
+					{" "}
+					<FaThList /> List
+				</button>
+			</div>
 			<div className="product-container">
 				<div className="col-sm-4">
 					<h6 style={purpleColor}>PRODUCT CATEGORIES</h6>
@@ -60,21 +83,46 @@ const ProductList = (props) => {
 						  ))
 						: null}
 				</div>
-
 				<div className="col-md-8">
-					{allFilteredItems.length !== 0 && !fromLandingPage
+					{gridView
+						? allFilteredItems.length !== 0 && !fromLandingPage
+							? allFilteredItems[categoryId - 1].map((item) => (
+									<GridView
+										id={item.id}
+										name={item.name}
+										startPrice={item.currentPrice}
+										imgUrl={item.imgUrl}
+									/>
+							  ))
+							: itemsFromLanding.map((item) => (
+									<GridView
+										id={item.id}
+										name={item.name}
+										imgUrl={item.imgUrl}
+										startPrice={item.currentPrice}
+										onClick={() =>
+											history.push({
+												pathname: "/shop",
+												state: { item: item },
+											})
+										}
+									/>
+							  ))
+						: allFilteredItems.length !== 0 && !fromLandingPage
 						? allFilteredItems[categoryId - 1].map((item) => (
-								<GridView
+								<ListView
 									id={item.id}
 									name={item.name}
+									description={item.description}
 									startPrice={item.currentPrice}
 									imgUrl={item.imgUrl}
 								/>
 						  ))
 						: itemsFromLanding.map((item) => (
-								<GridView
+								<ListView
 									id={item.id}
 									name={item.name}
+									description={item.description}
 									imgUrl={item.imgUrl}
 									startPrice={item.currentPrice}
 									onClick={() =>

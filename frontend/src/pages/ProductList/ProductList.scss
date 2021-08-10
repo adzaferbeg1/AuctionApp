@@ -1,4 +1,21 @@
+.grid-list-btn {
+	float: right;
+	margin-right: 19%;
+	button {
+		border: 0;
+		background-color: white;
+		width: 100px;
+		height: 50px;
+	}
+
+	button:focus {
+		background-color: #8367d8;
+		color: white;
+	}
+}
+
 .product-container {
+	clear: right;
 	display: flex;
 	justify-content: space-between;
 	margin-left: 15%;

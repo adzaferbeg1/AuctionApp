@@ -18,14 +18,16 @@ class BidService {
 		}
 	};
 
-	getNoOfBids = async (id) => {
-		try {
-			const response = await axios.get("bid/bidsno?id=" + id);
-			return response.data;
-		} catch (err) {
-			console.error(err);
-		}
-	};
+    getNoOfBids = async (id) => {
+        try {
+            const response = await axios.get("bid/bidsno?id=" + id);
+            return response.data;
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 }
 
 export default new BidService();

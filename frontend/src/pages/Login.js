@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 
-import { LabelNavbar } from "../shared/common";
-import Authentication from "../services/AuthenticationService";
-import { loginInput, loginButtonStyle } from "../shared/styles/PageStyles";
-import { useUserContext } from ".././AppContext";
+import { LabelNavbar } from '../shared/common';
+import Authentication from '../services/AuthenticationService'
+import { loginInput, loginButtonStyle } from '../shared/styles/PageStyles';
+import { useUserContext } from '.././AppContext';
 
 import "../shared/styles/RegisterLogin.scss";
 
