@@ -1,6 +1,7 @@
 package com.atlantbh.internship.AuctionApp.controller;
 
 import com.atlantbh.internship.AuctionApp.model.Bid;
+import com.atlantbh.internship.AuctionApp.projection.BidProjection;
 import com.atlantbh.internship.AuctionApp.repository.BidRepository;
 import com.atlantbh.internship.AuctionApp.request.BidRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class BidController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/bidders")
-    public List<Bid> getAllBiddersForItem(@RequestParam Long id) {
+    public List<BidProjection> getAllBiddersForItem(@RequestParam Long id) {
         return bidRepository.getAllBiddersForItem(id);
     }
 

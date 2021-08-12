@@ -4,6 +4,7 @@ import { LabelNavbar } from "../shared/common";
 import { privacyAndTerms } from "../shared/styles/PageStyles";
 
 export default function Terms() {
+	window.scrollTo(0, 0);
 	return (
 		<>
 			<LabelNavbar label={"TERMS AND CONDITIONS"} />

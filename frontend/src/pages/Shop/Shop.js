@@ -17,7 +17,6 @@ export default function Shop(props) {
 	const [userLoggedIn, setUserLoggedIn] = useState();
 	const [bid, setBid] = useState("");
 	const [bidders, setBidders] = useState([]);
-	const [bidderNames, setBidderNames] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [noOfBids, setNoOfBids] = useState(0);
 
@@ -51,24 +50,6 @@ export default function Shop(props) {
 					);
 			}
 		}
-		/*
-		const fetchItems = async () => {
-			var itemBidders = await BidService.getAllBidders(itemId);
-			var names = [];
-			itemBidders.forEach(async (bidder) => {
-				var singleBidder = await AuthenticationService.getUserById(
-					bidder.bidderId
-				);
-				names.push(singleBidder.name + " " + singleBidder.surname);
-			});
-			setBidders(itemBidders);
-			setBidderNames(names);
-			console.log(names);
-		};
-
-		fetchItems();
-		*/
-		setIsLoading(false);
 	}, [selectedItem.endDate, props.location.state.item, itemId]);
 
 	useEffect(() => {
@@ -79,8 +60,21 @@ export default function Shop(props) {
 		fetchData();
 	}, [itemId]);
 
+	useEffect(() => {
+		const fetchItems = async () => {
+			var itemBidders = await BidService.getAllBidders(itemId);
+			setBidders(itemBidders);
+		};
+
+		fetchItems();
+		setIsLoading(false);
+	}, [currentPrice, itemId]);
+
 	const placeItemBid = async (e) => {
-		if (selectedItem.currentPrice <= bid) {
+		if (
+			selectedItem.currentPrice < bid ||
+			(selectedItem.currentPrice === bid && noOfBids < 1)
+		) {
 			alertSuccess("flex");
 			alertWarning("none");
 			setCurrentPrice(bid);
@@ -94,7 +88,7 @@ export default function Shop(props) {
 			setSelectedItem(updatedItem);
 			setCurrentPrice(updatedItem.currentPrice);
 			setNoOfBids(noOfBids + 1);
-		} else if (selectedItem.currentPrice > bid) {
+		} else {
 			alertSuccess("none");
 			alertWarning("flex");
 		}
@@ -165,10 +159,12 @@ export default function Shop(props) {
 						</tr>
 					</thead>
 					<tbody>
-						{bidderNames.length !== 0 && bidders.length !== 0 ? (
-							bidders.map((bidder, index) => (
+						{bidders.length !== 0 ? (
+							bidders.map((bidder) => (
 								<tr key={bidder.bid}>
-									<td colSpan="2">{bidderNames[index]}</td>
+									<td colSpan="2">
+										{bidder.name} {bidder.surname}
+									</td>
 									<td>{bidder.date.substring(0, 10)}</td>
 									<td>${bidder.bid}</td>
 								</tr>

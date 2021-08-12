@@ -36,7 +36,6 @@ const ProductList = (props) => {
 					filteredItems[category.id - 1] = filtered;
 				});
 				setAllFilteredItems(filteredItems);
-				console.log(filteredItems);
 			} catch (e) {
 				console.error(e);
 			}

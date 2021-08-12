@@ -3,6 +3,7 @@ import { LabelNavbar } from "../shared/common";
 import { privacyAndTerms } from "../shared/styles/PageStyles";
 
 export default function Privacy() {
+	window.scrollTo(0, 0);
 	return (
 		<>
 			<LabelNavbar label={"PRIVACY AND POLICY"} />
