@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 
 @RestController
 @RequestMapping(path = "/auth")
@@ -58,7 +56,7 @@ public class PersonController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signup")
-    public ResponseEntity registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
+    public ResponseEntity registerUser(@RequestBody RegisterRequest signUpRequest) {
         if (personRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity("Fail -> Username is already taken!",
                     HttpStatus.BAD_REQUEST);

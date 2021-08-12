@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 @EqualsAndHashCode
 @Entity
-@Table
+@Table(name="person")
 public class Person {
 
     @Id

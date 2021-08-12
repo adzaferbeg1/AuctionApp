@@ -63,9 +63,9 @@ export default function Header() {
 						</a>
 					</li>
 					<li className="nav-item">
-						<a style={headerPlainText} className="nav-link" href="/register">
+						<p style={headerPlainText} className="nav-link">
 							or
-						</a>
+						</p>
 					</li>
 					<li className="nav-item">
 						<a style={headerLoginReg} className="nav-link" href="/register">

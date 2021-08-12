@@ -6,6 +6,8 @@ import { aboutDivCol, aboutDivRow } from "../../shared/styles/PageStyles";
 import "./About.scss";
 
 export default function About() {
+	window.scrollTo(0, 0);
+
 	return (
 		<div className="about-page">
 			<LabelNavbar label={"ABOUT"} />

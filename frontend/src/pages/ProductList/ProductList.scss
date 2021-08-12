@@ -44,7 +44,7 @@
 	.col-md-8 {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
+		align-items: flex-start;
 
 		.single-card {
 			width: 180px;
@@ -58,6 +58,7 @@
 				height: 140px;
 				margin: auto;
 				margin-bottom: 1em;
+				background-color: #f0f0f0;
 			}
 		}
 	}
