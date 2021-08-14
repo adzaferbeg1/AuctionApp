@@ -24,6 +24,9 @@ public class Item {
     @Column(name = "category_id", nullable = false)
     private long categoryId;
 
+    @Column(name = "subcategory_id")
+    private Integer subcategoryId;
+
     @NotBlank
     @Column(name = "name")
     private String name;
@@ -53,6 +56,7 @@ public class Item {
     public Item(
             final long sellerId,
             final long categoryId,
+            final Integer subcategoryId,
             final String name,
             final String description,
             final double startPrice,
@@ -150,5 +154,13 @@ public class Item {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public long getSubcategoryId() {
+        return subcategoryId;
+    }
+
+    public void setSubcategoryId(Integer subcategoryId) {
+        this.subcategoryId = subcategoryId;
     }
 }

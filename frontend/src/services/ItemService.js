@@ -88,6 +88,44 @@ class ItemService {
 			console.error(err);
 		}
 	};
+
+	getMinPrice = async (categoryId) => {
+		try {
+			const response = await axios.get("item/minprice?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getMaxPrice = async (categoryId) => {
+		try {
+			const response = await axios.get("item/maxprice?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getAvgPrice = async (categoryId) => {
+		try {
+			const response = await axios.get("item/avgprice?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getSubcategoryItems = async (subcategoryId) => {
+		try {
+			const response = await axios.get(
+				"item/subcategoryitems?id=" + subcategoryId
+			);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new ItemService();

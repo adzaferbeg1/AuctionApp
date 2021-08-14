@@ -9,6 +9,15 @@ class CategoryService {
 			console.error(err);
 		}
 	};
+
+	getAllSubcategories = async () => {
+		try {
+			const response = await axios.get("category/subcategories");
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new CategoryService();

@@ -40,4 +40,16 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "SELECT * FROM item WHERE category_id= ?1 ORDER BY end_date ASC", nativeQuery = true)
     List<Item> sortByTimeLeft(long id);
+
+    @Query(value = "SELECT MAX(current_price) FROM item WHERE category_id= ?1", nativeQuery = true)
+    Integer findMaxPrice(long id);
+
+    @Query(value = "SELECT MIN(current_price) FROM item WHERE category_id= ?1", nativeQuery = true)
+    Integer findMinPrice(long id);
+
+    @Query(value = "SELECT AVG(current_price) FROM item WHERE category_id= ?1", nativeQuery = true)
+    Integer findAvgPrice(long id);
+
+    @Query(value = "SELECT * FROM item WHERE subcategory_id= ?1", nativeQuery = true)
+    List<Item> findSubcategoryItems(long id);
 }

@@ -91,4 +91,28 @@ public class ItemController {
         return itemRepository.sortByTimeLeft(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/maxprice")
+    public Integer getMaxPrice(@RequestParam Long id) {
+        return itemRepository.findMaxPrice(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/minprice")
+    public Integer getMinPrice(@RequestParam Long id) {
+        return itemRepository.findMinPrice(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/avgprice")
+    public Integer getAvgPrice(@RequestParam Long id) {
+        return itemRepository.findAvgPrice(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/subcategoryitems")
+    public List<Item> getSubcategoryItems(@RequestParam Long id) {
+        return itemRepository.findSubcategoryItems(id);
+    }
+
 }

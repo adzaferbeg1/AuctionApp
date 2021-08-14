@@ -2,19 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
+import { BiPlus, BiMinus } from "react-icons/bi";
+
 import CategoryService from "../../services/CategoryService";
 import ItemService from "../../services/ItemService";
-import { LabelNavbar } from "../../shared/common";
-import { GridView } from "../../shared/common";
-import { ListView } from "../../shared/common";
+import { GridView, ListView, LabelNavbar } from "../../shared/common";
 import { purpleColor } from "../../shared/styles/PageStyles";
+
 import "./ProductList.scss";
 
 const ProductList = (props) => {
 	const [categoryId, setCategoryId] = useState(props.location.state.categoryId);
 	const [allCategories, setAllCategories] = useState([]);
+	const [allSubcategories, setAllSubcategories] = useState([]);
 	const [gridView, setGridView] = useState(true);
 	const [chosenItems, setChosenItems] = useState([]);
+	const [minPrice, setMinPrice] = useState();
+	const [maxPrice, setMaxPrice] = useState();
+	const [avgPrice, setAvgPrice] = useState();
+	const [showSubcategories, setShowSubcategories] = useState(true);
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -33,13 +39,20 @@ const ProductList = (props) => {
 	};
 
 	const newToOldSorting = async () => {
-		const defaultSort = await ItemService.getNewToOldSort(categoryId);
-		setChosenItems(defaultSort);
+		const newToOld = await ItemService.getNewToOldSort(categoryId);
+		setChosenItems(newToOld);
 	};
 
 	const timeLeftSorting = async () => {
-		const defaultSort = await ItemService.getTimeLeftSort(categoryId);
-		setChosenItems(defaultSort);
+		const timeLeft = await ItemService.getTimeLeftSort(categoryId);
+		setChosenItems(timeLeft);
+	};
+
+	const findSubcategoryItems = async (subcategoryId) => {
+		const subcategoryItems = await ItemService.getSubcategoryItems(
+			subcategoryId
+		);
+		setChosenItems(subcategoryItems);
 	};
 
 	useEffect(() => {
@@ -47,8 +60,16 @@ const ProductList = (props) => {
 			try {
 				const allCategories = await CategoryService.getAllCategories();
 				setAllCategories(allCategories);
-				const chosenItems = await ItemService.getFilteredByCategory(categoryId);
+				const allSubcategories = await CategoryService.getAllSubcategories();
+				setAllSubcategories(allSubcategories);
+				const chosenItems = await ItemService.getDefaultSort(categoryId);
 				setChosenItems(chosenItems);
+				const minPrice = await ItemService.getMinPrice(categoryId);
+				setMinPrice(minPrice);
+				const maxPrice = await ItemService.getMaxPrice(categoryId);
+				setMaxPrice(maxPrice);
+				const avgPrice = await ItemService.getAvgPrice(categoryId);
+				setAvgPrice(avgPrice);
 			} catch (e) {
 				console.error(e);
 			}
@@ -115,26 +136,83 @@ const ProductList = (props) => {
 			</div>
 			<div className="product-container">
 				<div className="col-sm-4">
-					<h6 style={purpleColor}>PRODUCT CATEGORIES</h6>
-					{allCategories.length !== 0
-						? allCategories.map((category) => (
-								<p
-									onClick={() => {
-										setCategoryId(category.id);
-									}}
-								>
-									{category.title}
-								</p>
-						  ))
-						: null}
+					<div className="list-of-cats">
+						<h6 style={purpleColor}>PRODUCT CATEGORIES</h6>
+						{allCategories.length !== 0
+							? allCategories.map((category) => (
+									<>
+										<p
+											onClick={() => {
+												setCategoryId(category.id);
+											}}
+										>
+											{category.title}{" "}
+											{showSubcategories ? (
+												<BiMinus
+													onClick={() => {
+														setShowSubcategories(false);
+													}}
+												/>
+											) : (
+												<BiPlus
+													onClick={() => {
+														setShowSubcategories(true);
+													}}
+												/>
+											)}
+										</p>
+										{allSubcategories.length !== 0
+											? allSubcategories.map((subcategory) =>
+													subcategory.supercategory === category.id &&
+													showSubcategories ? (
+														<p
+															className="subcategory"
+															onClick={() => {
+																findSubcategoryItems(subcategory.id);
+															}}
+														>
+															{subcategory.title}
+														</p>
+													) : null
+											  )
+											: null}
+									</>
+							  ))
+							: null}
+					</div>
+					<div className="price-card">
+						<div className="price-card-title">FILTER BY PRICE</div>
+						<p>
+							${minPrice}-${maxPrice}
+						</p>
+						<p>The average price is ${avgPrice}</p>
+					</div>
 				</div>
 				<div className="col-md-8">
-					{gridView
-						? chosenItems.length !== 0
+					<div className="items-view">
+						{gridView
+							? chosenItems.length !== 0
+								? chosenItems.map((item) => (
+										<GridView
+											id={item.id}
+											name={item.name}
+											startPrice={item.currentPrice}
+											imgUrl={item.imgUrl}
+											onClick={() =>
+												history.push({
+													pathname: "/shop",
+													state: { item: item },
+												})
+											}
+										/>
+								  ))
+								: null
+							: chosenItems.length !== 0
 							? chosenItems.map((item) => (
-									<GridView
+									<ListView
 										id={item.id}
 										name={item.name}
+										description={item.description}
 										startPrice={item.currentPrice}
 										imgUrl={item.imgUrl}
 										onClick={() =>
@@ -145,24 +223,8 @@ const ProductList = (props) => {
 										}
 									/>
 							  ))
-							: null
-						: chosenItems.length !== 0
-						? chosenItems.map((item) => (
-								<ListView
-									id={item.id}
-									name={item.name}
-									description={item.description}
-									startPrice={item.currentPrice}
-									imgUrl={item.imgUrl}
-									onClick={() =>
-										history.push({
-											pathname: "/shop",
-											state: { item: item },
-										})
-									}
-								/>
-						  ))
-						: null}
+							: null}
+					</div>
 				</div>
 			</div>
 		</>

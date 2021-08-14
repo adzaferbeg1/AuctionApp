@@ -22,7 +22,13 @@ public class CategoryController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<Category> getAllSupercategories() {
+        return categoryRepository.getAllSupercategories();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/subcategories")
+    public List<Category> getAllSubcategories() {
+        return categoryRepository.getAllSubcategories();
     }
 }
