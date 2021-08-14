@@ -43,6 +43,51 @@ class ItemService {
 			console.error(err);
 		}
 	};
+
+	getLowPriceSort = async (categoryId) => {
+		try {
+			const response = await axios.get("item/sortpricelow?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getHighPriceSort = async (categoryId) => {
+		try {
+			const response = await axios.get("item/sortpricehigh?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getDefaultSort = async (categoryId) => {
+		try {
+			const response = await axios.get("item/sortdefault?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getTimeLeftSort = async (categoryId) => {
+		try {
+			const response = await axios.get("item/timeleft?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getNewToOldSort = async (categoryId) => {
+		try {
+			const response = await axios.get("item/newtoold?id=" + categoryId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new ItemService();

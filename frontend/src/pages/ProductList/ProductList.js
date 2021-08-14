@@ -12,30 +12,43 @@ import "./ProductList.scss";
 
 const ProductList = (props) => {
 	const [categoryId, setCategoryId] = useState(props.location.state.categoryId);
-	const [fromLandingPage, setFromLandingPage] = useState(
-		props.location.state.fromLandingPage
-	);
-	const [itemsFromLanding, setItemsFromLanding] = useState([]);
 	const [allCategories, setAllCategories] = useState([]);
-	const [allFilteredItems, setAllFilteredItems] = useState([]);
 	const [gridView, setGridView] = useState(true);
+	const [chosenItems, setChosenItems] = useState([]);
 	const history = useHistory();
+
+	const lowPriceSorting = async () => {
+		const lowPrice = await ItemService.getLowPriceSort(categoryId);
+		setChosenItems(lowPrice);
+	};
+
+	const highPriceSorting = async () => {
+		const highPrice = await ItemService.getHighPriceSort(categoryId);
+		setChosenItems(highPrice);
+	};
+
+	const defaultSorting = async () => {
+		const defaultSort = await ItemService.getDefaultSort(categoryId);
+		setChosenItems(defaultSort);
+	};
+
+	const newToOldSorting = async () => {
+		const defaultSort = await ItemService.getNewToOldSort(categoryId);
+		setChosenItems(defaultSort);
+	};
+
+	const timeLeftSorting = async () => {
+		const defaultSort = await ItemService.getTimeLeftSort(categoryId);
+		setChosenItems(defaultSort);
+	};
 
 	useEffect(() => {
 		const fetchItems = async () => {
 			try {
-				const allCat = await CategoryService.getAllCategories();
-				setAllCategories(allCat);
-				const itemsChosenFromLanding = await ItemService.getFilteredByCategory(
-					categoryId
-				);
-				setItemsFromLanding(itemsChosenFromLanding);
-				const filteredItems = [];
-				allCat.map(async (category) => {
-					const filtered = await ItemService.getFilteredByCategory(category.id);
-					filteredItems[category.id - 1] = filtered;
-				});
-				setAllFilteredItems(filteredItems);
+				const allCategories = await CategoryService.getAllCategories();
+				setAllCategories(allCategories);
+				const chosenItems = await ItemService.getFilteredByCategory(categoryId);
+				setChosenItems(chosenItems);
 			} catch (e) {
 				console.error(e);
 			}
@@ -44,10 +57,44 @@ const ProductList = (props) => {
 		fetchItems();
 	}, [categoryId]);
 
+	const sortItems = async (value) => {
+		switch (value) {
+			case "default":
+				await defaultSorting();
+				break;
+			case "low":
+				await lowPriceSorting();
+				break;
+			case "new":
+				newToOldSorting();
+				break;
+			case "old":
+				timeLeftSorting();
+				break;
+			case "high":
+				await highPriceSorting();
+				break;
+			default:
+				console.log(`Error`);
+		}
+	};
+
 	return (
 		<>
 			<LabelNavbar label={"ITEMS"} />
 			<div className="grid-list-btn">
+				<select
+					className="sorting-menu"
+					onChange={async (e) => {
+						await sortItems(e.target.value);
+					}}
+				>
+					<option value="default">Default sorting</option>
+					<option value="new">Added: New to Old</option>
+					<option value="old">Time left</option>
+					<option value="low">Price: Low to High</option>
+					<option value="high">Price: High to Low</option>
+				</select>
 				<button
 					autoFocus
 					onClick={() => {
@@ -74,7 +121,6 @@ const ProductList = (props) => {
 								<p
 									onClick={() => {
 										setCategoryId(category.id);
-										setFromLandingPage(false);
 									}}
 								>
 									{category.title}
@@ -84,21 +130,13 @@ const ProductList = (props) => {
 				</div>
 				<div className="col-md-8">
 					{gridView
-						? allFilteredItems.length !== 0 && !fromLandingPage
-							? allFilteredItems[categoryId - 1].map((item) => (
+						? chosenItems.length !== 0
+							? chosenItems.map((item) => (
 									<GridView
 										id={item.id}
 										name={item.name}
 										startPrice={item.currentPrice}
 										imgUrl={item.imgUrl}
-									/>
-							  ))
-							: itemsFromLanding.map((item) => (
-									<GridView
-										id={item.id}
-										name={item.name}
-										imgUrl={item.imgUrl}
-										startPrice={item.currentPrice}
 										onClick={() =>
 											history.push({
 												pathname: "/shop",
@@ -107,23 +145,15 @@ const ProductList = (props) => {
 										}
 									/>
 							  ))
-						: allFilteredItems.length !== 0 && !fromLandingPage
-						? allFilteredItems[categoryId - 1].map((item) => (
+							: null
+						: chosenItems.length !== 0
+						? chosenItems.map((item) => (
 								<ListView
 									id={item.id}
 									name={item.name}
 									description={item.description}
 									startPrice={item.currentPrice}
 									imgUrl={item.imgUrl}
-								/>
-						  ))
-						: itemsFromLanding.map((item) => (
-								<ListView
-									id={item.id}
-									name={item.name}
-									description={item.description}
-									imgUrl={item.imgUrl}
-									startPrice={item.currentPrice}
 									onClick={() =>
 										history.push({
 											pathname: "/shop",
@@ -131,7 +161,8 @@ const ProductList = (props) => {
 										})
 									}
 								/>
-						  ))}
+						  ))
+						: null}
 				</div>
 			</div>
 		</>

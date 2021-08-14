@@ -60,4 +60,35 @@ public class ItemController {
     public Item getItemById(@RequestParam Long id) {
         return itemRepository.findItemById(id);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/sortpricelow")
+    public List<Item> getLowPrice(@RequestParam Long id) {
+        return itemRepository.sortByLowPrice(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/sortpricehigh")
+    public List<Item> getHighPrice(@RequestParam Long id) {
+        return itemRepository.sortByHighPrice(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/sortdefault")
+    public List<Item> getDefault(@RequestParam Long id) {
+        return itemRepository.sortByDefault(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/newtoold")
+    public List<Item> getNewToOld(@RequestParam Long id) {
+        return itemRepository.sortByNewToOld(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/timeleft")
+    public List<Item> getTimeLeft(@RequestParam Long id) {
+        return itemRepository.sortByTimeLeft(id);
+    }
+
 }

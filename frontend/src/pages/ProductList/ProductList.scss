@@ -1,6 +1,20 @@
 .grid-list-btn {
 	float: right;
 	margin-right: 19%;
+
+	.sorting-menu {
+		width: 200px;
+		height: 40px;
+		margin-top: 0.5em;
+		margin-right: 10em;
+		padding-left: 0.5em;
+		font-weight: 500;
+	}
+
+	.sorting-menu:focus {
+		outline-color: #8367d8;
+	}
+
 	button {
 		border: 0;
 		background-color: white;
