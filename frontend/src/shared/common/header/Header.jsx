@@ -103,7 +103,7 @@ export default function Header() {
 						<Link
 							className="nav-link links"
 							style={footerText}
-							to={{ pathname: "/products", state: { categoryId: "1" }}}
+							to={{ pathname: "/products", state: { categoryId: "1" } }}
 						>
 							SHOP
 						</Link>
