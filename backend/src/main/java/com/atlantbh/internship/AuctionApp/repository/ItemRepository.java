@@ -25,4 +25,31 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "SELECT * FROM item WHERE id= ?1", nativeQuery = true)
     Item findItemById(long id);
+
+    @Query(value = "SELECT * FROM item WHERE category_id= ?1 ORDER BY current_price ASC", nativeQuery = true)
+    List<Item> sortByLowPrice(long id);
+
+    @Query(value = "SELECT * FROM item WHERE category_id= ?1 ORDER BY current_price DESC", nativeQuery = true)
+    List<Item> sortByHighPrice(long id);
+
+    @Query(value = "SELECT * FROM item WHERE category_id= ?1 ORDER BY name ASC", nativeQuery = true)
+    List<Item> sortByDefault(long id);
+
+    @Query(value = "SELECT * FROM item WHERE category_id= ?1 ORDER BY start_date DESC", nativeQuery = true)
+    List<Item> sortByNewToOld(long id);
+
+    @Query(value = "SELECT * FROM item WHERE category_id= ?1 ORDER BY end_date ASC", nativeQuery = true)
+    List<Item> sortByTimeLeft(long id);
+
+    @Query(value = "SELECT MAX(current_price) FROM item WHERE category_id= ?1", nativeQuery = true)
+    Integer findMaxPrice(long id);
+
+    @Query(value = "SELECT MIN(current_price) FROM item WHERE category_id= ?1", nativeQuery = true)
+    Integer findMinPrice(long id);
+
+    @Query(value = "SELECT AVG(current_price) FROM item WHERE category_id= ?1", nativeQuery = true)
+    Integer findAvgPrice(long id);
+
+    @Query(value = "SELECT * FROM item WHERE subcategory_id= ?1", nativeQuery = true)
+    List<Item> findSubcategoryItems(long id);
 }

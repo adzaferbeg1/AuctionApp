@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { FaSearch, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { TiSocialInstagram, TiSocialGooglePlus } from "react-icons/ti";
 import { useHistory } from "react-router-dom";
@@ -99,9 +100,13 @@ export default function Header() {
 						<a className="nav-link links" href="/" style={footerText}>
 							HOME
 						</a>
-						<a className="nav-link links" href="/shop" style={footerText}>
+						<Link
+							className="nav-link links"
+							style={footerText}
+							to={{ pathname: "/products", state: { categoryId: "1" } }}
+						>
 							SHOP
-						</a>
+						</Link>
 						<a className="nav-link links" href="/myaccount" style={footerText}>
 							MY ACCOUNT
 						</a>

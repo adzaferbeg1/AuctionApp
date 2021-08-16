@@ -5,11 +5,13 @@
 	margin-top: 0.7em;
 	margin-bottom: 0.7em;
 	text-align: left;
+
 	.list-item-img {
 		width: 250px;
 		height: 270px;
 		float: left;
 		margin-right: 1em;
+		background-color: #f0f0f0;
 	}
 	.card-text {
 		color: #8367d8;
@@ -17,5 +19,9 @@
 	}
 	.card-desc {
 		color: gray;
+	}
+
+	.card-title {
+		font-weight: bold;
 	}
 }

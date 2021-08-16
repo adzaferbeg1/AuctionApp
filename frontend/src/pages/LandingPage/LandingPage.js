@@ -44,7 +44,9 @@ const LandingPage = () => {
 								onClick={() =>
 									history.push({
 										pathname: "/products",
-										state: { categoryId: category.id, fromLandingPage: true },
+										state: {
+											categoryId: category.id,
+										},
 									})
 								}
 								key={category.title}
