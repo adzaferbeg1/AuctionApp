@@ -1,4 +1,5 @@
 import React from "react";
+import { ImHammer2 } from "react-icons/im";
 import "./ListView.scss";
 
 export const ListView = ({
@@ -16,6 +17,9 @@ export const ListView = ({
 					<h5 className="card-title">{name}</h5>
 					<p className="card-desc">{description}</p>
 					<p className="card-text">Start From ${startPrice}</p>
+					<button>
+						Bid <ImHammer2 />
+					</button>
 				</div>
 			</div>
 		</div>

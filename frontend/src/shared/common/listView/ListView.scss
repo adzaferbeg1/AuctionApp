@@ -6,22 +6,55 @@
 	margin-bottom: 0.7em;
 	text-align: left;
 
-	.list-item-img {
-		width: 250px;
-		height: 270px;
-		float: left;
-		margin-right: 1em;
-		background-color: #f0f0f0;
-	}
-	.card-text {
-		color: #8367d8;
-		font-size: 18pt;
-	}
-	.card-desc {
-		color: gray;
+	
+	button {
+		visibility: hidden;
+		border: none;
+		width: 100px;
+		height: 50px;
+		margin: auto;
+		visibility: hidden;
+		float: right;
+
+		svg {
+			margin-left: 0.5em;
+		}
 	}
 
-	.card-title {
-		font-weight: bold;
+	.card {
+
+		.list-item-img {
+			width: 250px;
+			height: 270px;
+			float: left;
+			margin-right: 1em;
+			background-color: #f0f0f0;
+		}
+		.card-text {
+			color: #8367d8;
+			font-size: 18pt;
+		}
+		.card-desc {
+			color: gray;
+		}
+
+		.card-title {
+			font-weight: bold;
+		}
+	}
+
+	.card:hover {
+		background: rgba(104, 65, 136, 0.3);
+
+		button {
+			visibility: visible;
+		}
+
+		.list-item-img,
+		.card-title,
+		.card-desc,
+		.card-text {
+			visibility: hidden;
+		}
 	}
 }
