@@ -20,7 +20,7 @@ const ProductList = (props) => {
 	const [minPrice, setMinPrice] = useState();
 	const [maxPrice, setMaxPrice] = useState();
 	const [avgPrice, setAvgPrice] = useState();
-	const [showSubcategories, setShowSubcategories] = useState(true);
+	const [showSubcategories, setShowSubcategories] = useState(false);
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {

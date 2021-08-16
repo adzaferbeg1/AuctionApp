@@ -106,6 +106,19 @@
 			margin-bottom: 1em;
 			margin-right: 0.5em;
 
+			button {
+				border: none;
+				width: 100px;
+				height: 30px;
+				position: relative;
+				bottom: 7em;
+				visibility: hidden;
+
+				svg {
+					margin-left: 0.5em;
+				}
+			}
+
 			.card-title {
 				font-weight: bold;
 			}
@@ -116,6 +129,20 @@
 				margin: auto;
 				margin-bottom: 1em;
 				background-color: #f0f0f0;
+			}
+		}
+
+		.single-card:hover {
+			background: rgba(104, 65, 136, 0.3);
+
+			button {
+				visibility: visible;
+			}
+
+			.grid-item-img,
+			.card-title,
+			.card-text {
+				visibility: hidden;
 			}
 		}
 	}
