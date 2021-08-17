@@ -77,7 +77,9 @@ export default function Header() {
 			</Navbar>
 			<section className="row">
 				<div className="col">
-					<img src="\images\auction_logo.PNG" alt="Auction logo" />
+					<a href="/">
+						<img src="\images\auction_logo.PNG" alt="Auction logo" />
+					</a>
 				</div>
 				<div className="col">
 					<div className="input-group rounded">
