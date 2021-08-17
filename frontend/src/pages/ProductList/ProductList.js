@@ -6,7 +6,12 @@ import { BiPlus, BiMinus } from "react-icons/bi";
 
 import CategoryService from "../../services/CategoryService";
 import ItemService from "../../services/ItemService";
-import { GridView, ListView, LabelNavbar } from "../../shared/common";
+import {
+	GridView,
+	ListView,
+	LabelNavbar,
+	FilterTag,
+} from "../../shared/common";
 import { purpleColor } from "../../shared/styles/PageStyles";
 
 import "./ProductList.scss";
@@ -21,6 +26,10 @@ const ProductList = (props) => {
 	const [maxPrice, setMaxPrice] = useState();
 	const [avgPrice, setAvgPrice] = useState();
 	const [showSubcategories, setShowSubcategories] = useState(false);
+	const [sortTag, setSortTag] = useState("Default sorting");
+	const [gridTag, setGridTag] = useState("Grid View");
+	const [showSortTag, setShowSortTag] = useState(true);
+	const [showGridTag, setShowGridTag] = useState(true);
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -55,6 +64,17 @@ const ProductList = (props) => {
 		setChosenItems(subcategoryItems);
 	};
 
+	const removeSortFilter = async () => {
+		setShowSortTag(false);
+		await defaultSorting();
+	};
+
+	const removeGridFilter = async () => {
+		setShowGridTag(false);
+		if (gridView) setGridView(false);
+		else setGridView(true);
+	};
+
 	useEffect(() => {
 		const fetchItems = async () => {
 			try {
@@ -80,19 +100,19 @@ const ProductList = (props) => {
 
 	const sortItems = async (value) => {
 		switch (value) {
-			case "default":
+			case "Default":
 				await defaultSorting();
 				break;
-			case "low":
+			case "Low Price":
 				await lowPriceSorting();
 				break;
-			case "new":
+			case "Newest":
 				newToOldSorting();
 				break;
-			case "old":
+			case "Oldest":
 				timeLeftSorting();
 				break;
-			case "high":
+			case "High Price":
 				await highPriceSorting();
 				break;
 			default:
@@ -101,25 +121,37 @@ const ProductList = (props) => {
 	};
 
 	return (
-		<>
+		<div className="product-list">
 			<LabelNavbar label={"ITEMS"} />
+			<div className="tags-container" id="filter-tag-container">
+				{showSortTag ? (
+					<FilterTag label={sortTag} onClick={removeSortFilter} />
+				) : null}
+				{showGridTag ? (
+					<FilterTag label={gridTag} onClick={removeGridFilter} />
+				) : null}
+			</div>
 			<div className="grid-list-btn">
 				<select
 					className="sorting-menu"
 					onChange={async (e) => {
 						await sortItems(e.target.value);
+						setSortTag(e.target.value);
+						setShowSortTag(true);
 					}}
 				>
-					<option value="default">Default sorting</option>
-					<option value="new">Added: New to Old</option>
-					<option value="old">Time left</option>
-					<option value="low">Price: Low to High</option>
-					<option value="high">Price: High to Low</option>
+					<option value="Default">Default sorting</option>
+					<option value="Newest">Added: New to Old</option>
+					<option value="Oldest">Time left</option>
+					<option value="Low Price">Price: Low to High</option>
+					<option value="High Price">Price: High to Low</option>
 				</select>
 				<button
 					autoFocus
 					onClick={() => {
 						setGridView(true);
+						setGridTag("Grid View");
+						setShowGridTag(true);
 					}}
 				>
 					{" "}
@@ -128,6 +160,8 @@ const ProductList = (props) => {
 				<button
 					onClick={() => {
 						setGridView(false);
+						setGridTag("List View");
+						setShowGridTag(true);
 					}}
 				>
 					{" "}
@@ -227,7 +261,7 @@ const ProductList = (props) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

@@ -1,0 +1,18 @@
+.filter-tag {
+	background-color: #8367d8;
+	width: 150px;
+	height: 40px;
+	border-radius: 25px;
+
+	p {
+		padding: 0.5em;
+		color: white;
+
+		svg {
+			color: white;
+			width: 20px;
+			height: 20px;
+			margin-bottom: 2px;
+		}
+	}
+}
