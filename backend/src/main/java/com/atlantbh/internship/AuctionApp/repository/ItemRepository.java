@@ -52,4 +52,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "SELECT * FROM item WHERE subcategory_id= ?1", nativeQuery = true)
     List<Item> findSubcategoryItems(long id);
+
+    List<Item> findByNameIgnoreCaseContaining(String name);
 }

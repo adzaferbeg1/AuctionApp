@@ -8,6 +8,7 @@ import CategoryService from "../../services/CategoryService";
 import ItemService from "../../services/ItemService";
 import { GridView, ListView, LabelNavbar } from "../../shared/common";
 import { purpleColor } from "../../shared/styles/PageStyles";
+import { useSearchContext } from "../../AppContext";
 
 import "./ProductList.scss";
 
@@ -21,6 +22,8 @@ const ProductList = (props) => {
 	const [maxPrice, setMaxPrice] = useState();
 	const [avgPrice, setAvgPrice] = useState();
 	const [showSubcategories, setShowSubcategories] = useState(false);
+	const [searchBarItems, setSearchBarItems] = useState([]);
+	const { searchWord, setFromSearchBar, fromSearchBar } = useSearchContext();
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -70,13 +73,15 @@ const ProductList = (props) => {
 				setMaxPrice(maxPrice);
 				const avgPrice = await ItemService.getAvgPrice(categoryId);
 				setAvgPrice(avgPrice);
+				const searchBarItems = await ItemService.getSearchBarItems(searchWord);
+				setSearchBarItems(searchBarItems);
 			} catch (e) {
 				console.error(e);
 			}
 		};
 
 		fetchItems();
-	}, [categoryId]);
+	}, [categoryId, searchWord]);
 
 	const sortItems = async (value) => {
 		switch (value) {
@@ -144,6 +149,7 @@ const ProductList = (props) => {
 										<p
 											onClick={() => {
 												setCategoryId(category.id);
+												setFromSearchBar(false);
 											}}
 										>
 											{category.title}{" "}
@@ -169,6 +175,7 @@ const ProductList = (props) => {
 															className="subcategory"
 															onClick={() => {
 																findSubcategoryItems(subcategory.id);
+																setFromSearchBar(false);
 															}}
 														>
 															{subcategory.title}
@@ -191,9 +198,10 @@ const ProductList = (props) => {
 				<div className="col-md-8">
 					<div className="items-view">
 						{gridView
-							? chosenItems.length !== 0
+							? chosenItems.length !== 0 && !fromSearchBar
 								? chosenItems.map((item) => (
 										<GridView
+											key={item.id + "grid"}
 											id={item.id}
 											name={item.name}
 											startPrice={item.currentPrice}
@@ -206,10 +214,25 @@ const ProductList = (props) => {
 											}
 										/>
 								  ))
-								: null
-							: chosenItems.length !== 0
+								: searchBarItems.map((item) => (
+										<GridView
+											key={item.name + "search"}
+											id={item.id}
+											name={item.name}
+											startPrice={item.currentPrice}
+											imgUrl={item.imgUrl}
+											onClick={() =>
+												history.push({
+													pathname: "/shop",
+													state: { item: item },
+												})
+											}
+										/>
+								  ))
+							: chosenItems.length !== 0 && !fromSearchBar
 							? chosenItems.map((item) => (
 									<ListView
+										key={item.id + "list"}
 										id={item.id}
 										name={item.name}
 										description={item.description}
@@ -223,7 +246,21 @@ const ProductList = (props) => {
 										}
 									/>
 							  ))
-							: null}
+							: searchBarItems.map((item) => (
+									<ListView
+										key={item.name + "search-list"}
+										id={item.id}
+										name={item.name}
+										startPrice={item.currentPrice}
+										imgUrl={item.imgUrl}
+										onClick={() =>
+											history.push({
+												pathname: "/shop",
+												state: { item: item },
+											})
+										}
+									/>
+							  ))}
 					</div>
 				</div>
 			</div>
