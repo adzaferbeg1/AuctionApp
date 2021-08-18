@@ -70,7 +70,7 @@ export default function Shop(props) {
 		setIsLoading(false);
 	}, [currentPrice, itemId]);
 
-	const placeItemBid = async (e) => {
+	const placeItemBid = async () => {
 		if (
 			selectedItem.currentPrice < bid ||
 			(selectedItem.currentPrice === bid && noOfBids < 1)
@@ -123,7 +123,9 @@ export default function Shop(props) {
 				</div>
 				<div className="item-info">
 					<h1>{selectedItem.name}</h1>
-					<h5 style={purpleColor}>Start from - ${currentPrice}</h5>
+					<h5 style={purpleColor}>
+						Start from - ${parseInt(currentPrice) + 1}
+					</h5>
 					<div className="bid-container">
 						<input
 							type="text"
@@ -140,7 +142,7 @@ export default function Shop(props) {
 							PLACE BID <RiArrowRightSLine />{" "}
 						</button>
 					</div>
-					<p>Enter ${currentPrice} or more</p>
+					<p>Enter ${parseInt(currentPrice) + 1} or more</p>
 					<h6>Highest bid: ${currentPrice}</h6>
 					<h6>No bids: {noOfBids}</h6>
 					<h6>Time left: {timeLeft} days</h6>
