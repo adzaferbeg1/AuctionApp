@@ -1,0 +1,46 @@
+.settings-tab {
+	margin-bottom: 5em;
+	.deactivate {
+		width: 45%;
+		border: 2px solid #e3e3e3;
+
+		.content-below-nav {
+			text-align: left;
+			padding: 5em 0 5em;
+			margin: auto;
+			width: 70%;
+			margin: auto;
+
+			p {
+				font-size: 19px;
+				padding-bottom: 1em;
+				color: gray;
+			}
+
+			button {
+				border: 2px solid #e3e3e3;
+				height: 40px;
+				width: 200px;
+				background-color: white;
+				font-weight: 600;
+			}
+
+			button:hover {
+				border-color: #8367d8;
+			}
+		}
+	}
+}
+
+.bidders,
+.sellers {
+	table {
+		border: 2px solid #ececec;
+		text-align: left;
+		margin-bottom: 5em;
+
+		th {
+			background-color: #f3f4f5;
+		}
+	}
+}

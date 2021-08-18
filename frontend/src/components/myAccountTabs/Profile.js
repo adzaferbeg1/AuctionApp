@@ -1,7 +1,7 @@
 import React from "react";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { RiArrowRightSLine } from "react-icons/ri";
-import LabelNavbar from "./LabelNavbar";
+import LabelNavbar from "../../shared/common/LabelNavbar";
 
 const Profile = () => {
 	const range = (start, stop, step) =>
