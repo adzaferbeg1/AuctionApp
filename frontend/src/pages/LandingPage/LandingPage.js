@@ -46,6 +46,7 @@ const LandingPage = () => {
 										pathname: "/products",
 										state: {
 											categoryId: category.id,
+											categoryTag: category.title,
 										},
 									})
 								}

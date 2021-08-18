@@ -28,8 +28,12 @@ const ProductList = (props) => {
 	const [showSubcategories, setShowSubcategories] = useState(false);
 	const [sortTag, setSortTag] = useState("Default sorting");
 	const [gridTag, setGridTag] = useState("Grid View");
+	const [categoryTag, setCategoryTag] = useState(
+		props.location.state.categoryTag
+	);
 	const [showSortTag, setShowSortTag] = useState(true);
 	const [showGridTag, setShowGridTag] = useState(true);
+	const [showCategoryTag, setShowCategoryTag] = useState(true);
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -66,6 +70,7 @@ const ProductList = (props) => {
 
 	const removeSortFilter = async () => {
 		setShowSortTag(false);
+		document.getElementById("sorting-drop-menu").value = "Default";
 		await defaultSorting();
 	};
 
@@ -73,6 +78,12 @@ const ProductList = (props) => {
 		setShowGridTag(false);
 		if (gridView) setGridView(false);
 		else setGridView(true);
+	};
+
+	const removeCategoryFilter = async () => {
+		setShowCategoryTag(false);
+		setCategoryId("1");
+		setShowSubcategories(false);
 	};
 
 	useEffect(() => {
@@ -123,16 +134,20 @@ const ProductList = (props) => {
 	return (
 		<div className="product-list">
 			<LabelNavbar label={"ITEMS"} />
-			<div className="tags-container" id="filter-tag-container">
+			<div className="tags-container">
 				{showSortTag ? (
 					<FilterTag label={sortTag} onClick={removeSortFilter} />
 				) : null}
 				{showGridTag ? (
 					<FilterTag label={gridTag} onClick={removeGridFilter} />
 				) : null}
+				{showCategoryTag ? (
+					<FilterTag label={categoryTag} onClick={removeCategoryFilter} />
+				) : null}
 			</div>
 			<div className="grid-list-btn">
 				<select
+					id="sorting-drop-menu"
 					className="sorting-menu"
 					onChange={async (e) => {
 						await sortItems(e.target.value);
@@ -178,6 +193,8 @@ const ProductList = (props) => {
 										<p
 											onClick={() => {
 												setCategoryId(category.id);
+												setCategoryTag(category.title);
+												setShowCategoryTag(true);
 											}}
 										>
 											{category.title}{" "}
@@ -203,6 +220,8 @@ const ProductList = (props) => {
 															className="subcategory"
 															onClick={() => {
 																findSubcategoryItems(subcategory.id);
+																setCategoryTag(subcategory.title);
+																setShowCategoryTag(true);
 															}}
 														>
 															{subcategory.title}
