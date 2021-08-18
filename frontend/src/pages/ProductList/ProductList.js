@@ -34,6 +34,7 @@ const ProductList = (props) => {
 	const [showSortTag, setShowSortTag] = useState(true);
 	const [showGridTag, setShowGridTag] = useState(true);
 	const [showCategoryTag, setShowCategoryTag] = useState(true);
+	const [supercategoryId, setSupercategoryId] = useState();
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -84,6 +85,23 @@ const ProductList = (props) => {
 		setShowCategoryTag(false);
 		setCategoryId("1");
 		setShowSubcategories(false);
+		hideOpenedSubcategories();
+	};
+
+	const showSubcategoryMenu = (categoryId, display) => {
+		var clickedCategory = document.getElementsByClassName(
+			"subcategory " + categoryId
+		);
+		for (var i = 0; i < clickedCategory.length; i += 1) {
+			clickedCategory[i].style.display = display;
+		}
+	};
+
+	const hideOpenedSubcategories = () => {
+		var openCategory = document.getElementsByClassName("subcategory");
+		for (var i = 0; i < openCategory.length; i += 1) {
+			openCategory[i].style.display = "none";
+		}
 	};
 
 	useEffect(() => {
@@ -198,15 +216,20 @@ const ProductList = (props) => {
 											}}
 										>
 											{category.title}{" "}
-											{showSubcategories ? (
+											{supercategoryId === category.id && showSubcategories ? (
 												<BiMinus
 													onClick={() => {
+														showSubcategoryMenu(category.id, "none");
 														setShowSubcategories(false);
+														setSupercategoryId(category.id);
 													}}
 												/>
 											) : (
 												<BiPlus
 													onClick={() => {
+														hideOpenedSubcategories();
+														setSupercategoryId(category.id);
+														showSubcategoryMenu(category.id, "block");
 														setShowSubcategories(true);
 													}}
 												/>
@@ -214,10 +237,9 @@ const ProductList = (props) => {
 										</p>
 										{allSubcategories.length !== 0
 											? allSubcategories.map((subcategory) =>
-													subcategory.supercategory === category.id &&
-													showSubcategories ? (
+													subcategory.supercategory === category.id ? (
 														<p
-															className="subcategory"
+															className={"subcategory " + category.id}
 															onClick={() => {
 																findSubcategoryItems(subcategory.id);
 																setCategoryTag(subcategory.title);
