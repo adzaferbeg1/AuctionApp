@@ -13,6 +13,7 @@ import {
 	FilterTag,
 } from "../../shared/common";
 import { purpleColor } from "../../shared/styles/PageStyles";
+import { useSearchContext } from "../../AppContext";
 
 import "./ProductList.scss";
 
@@ -35,6 +36,8 @@ const ProductList = (props) => {
 	const [showGridTag, setShowGridTag] = useState(true);
 	const [showCategoryTag, setShowCategoryTag] = useState(true);
 	const [supercategoryId, setSupercategoryId] = useState();
+	const [searchBarItems, setSearchBarItems] = useState([]);
+	const { searchWord, setFromSearchBar, fromSearchBar } = useSearchContext();
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -119,13 +122,15 @@ const ProductList = (props) => {
 				setMaxPrice(maxPrice);
 				const avgPrice = await ItemService.getAvgPrice(categoryId);
 				setAvgPrice(avgPrice);
+				const searchBarItems = await ItemService.getSearchBarItems(searchWord);
+				setSearchBarItems(searchBarItems);
 			} catch (e) {
 				console.error(e);
 			}
 		};
 
 		fetchItems();
-	}, [categoryId]);
+	}, [categoryId, searchWord]);
 
 	const sortItems = async (value) => {
 		switch (value) {
@@ -146,6 +151,78 @@ const ProductList = (props) => {
 				break;
 			default:
 				console.log(`Error`);
+		}
+	};
+
+	const renderItems = () => {
+		if (fromSearchBar && searchBarItems.length !== 0) {
+			if (gridView) {
+				return searchBarItems.map((item) => (
+					<GridView
+						key={item.name + "search"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			} else {
+				return searchBarItems.map((item) => (
+					<ListView
+						key={item.name + "search-list"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			}
+		} else if (!fromSearchBar && chosenItems.length !== 0) {
+			if (gridView) {
+				return chosenItems.map((item) => (
+					<GridView
+						key={item.id + "grid"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			} else {
+				return chosenItems.map((item) => (
+					<ListView
+						key={item.id + "grid"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			}
 		}
 	};
 
@@ -213,6 +290,7 @@ const ProductList = (props) => {
 												setCategoryId(category.id);
 												setCategoryTag(category.title);
 												setShowCategoryTag(true);
+												setFromSearchBar(false);
 											}}
 										>
 											{category.title}{" "}
@@ -244,6 +322,7 @@ const ProductList = (props) => {
 																findSubcategoryItems(subcategory.id);
 																setCategoryTag(subcategory.title);
 																setShowCategoryTag(true);
+																setFromSearchBar(false);
 															}}
 														>
 															{subcategory.title}
@@ -264,42 +343,7 @@ const ProductList = (props) => {
 					</div>
 				</div>
 				<div className="col-md-8">
-					<div className="items-view">
-						{gridView
-							? chosenItems.length !== 0
-								? chosenItems.map((item) => (
-										<GridView
-											id={item.id}
-											name={item.name}
-											startPrice={item.currentPrice}
-											imgUrl={item.imgUrl}
-											onClick={() =>
-												history.push({
-													pathname: "/shop",
-													state: { item: item },
-												})
-											}
-										/>
-								  ))
-								: null
-							: chosenItems.length !== 0
-							? chosenItems.map((item) => (
-									<ListView
-										id={item.id}
-										name={item.name}
-										description={item.description}
-										startPrice={item.currentPrice}
-										imgUrl={item.imgUrl}
-										onClick={() =>
-											history.push({
-												pathname: "/shop",
-												state: { item: item },
-											})
-										}
-									/>
-							  ))
-							: null}
-					</div>
+					<div className="items-view">{renderItems()}</div>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -13,18 +13,31 @@ import {
 	headerPlainText,
 	footerText,
 } from "../../styles/PageStyles";
-import { useUserContext } from "../../../AppContext";
+import { useUserContext, useSearchContext } from "../../../AppContext";
 
 import "./Header.scss";
 
 export default function Header() {
 	const history = useHistory();
+	const [searchKey, setSearchKey] = useState();
 	const { loggedIn, setLoggedIn } = useUserContext();
+	const { setSearchWord, setFromSearchBar } = useSearchContext();
 
 	const singOut = () => {
 		AuthenticationService.signOut();
 		setLoggedIn(false);
 		history.push("/login");
+	};
+
+	const searchForItems = () => {
+		setSearchWord(searchKey);
+		setFromSearchBar(true);
+		history.push({
+			pathname: "/products",
+			state: {
+				categoryId: "1",
+			},
+		});
 	};
 
 	return (
@@ -89,11 +102,13 @@ export default function Header() {
 							placeholder="Try enter: Shoes"
 							aria-label="Search"
 							aria-describedby="search-addon"
+							value={searchKey}
+							onChange={(e) => setSearchKey(e.target.value)}
 						/>
 						<span className="input-group-text border-0" id="search-addon">
-							<a className="search-icon" href="#home">
+							<button className="search-icon" onClick={searchForItems}>
 								<FaSearch />
-							</a>
+							</button>
 						</span>
 					</div>
 				</div>

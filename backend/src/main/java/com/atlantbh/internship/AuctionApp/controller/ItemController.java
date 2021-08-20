@@ -115,4 +115,10 @@ public class ItemController {
         return itemRepository.findSubcategoryItems(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/search")
+    public List<Item> getSearchItems(@RequestParam String name) {
+        return itemRepository.findByNameIgnoreCaseContaining(name);
+    }
+
 }
