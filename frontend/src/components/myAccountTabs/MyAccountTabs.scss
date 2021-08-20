@@ -36,11 +36,40 @@
 .sellers {
 	table {
 		border: 2px solid #ececec;
-		text-align: left;
+		text-align: center;
 		margin-bottom: 5em;
 
 		th {
 			background-color: #f3f4f5;
+		}
+
+		img {
+			width: 60px;
+			height: 60px;
+			background-color: #f0f0f0;
+		}
+
+		td {
+			color: gray;
+			text-align: center;
+			vertical-align: middle;
+
+			p {
+				color: #8367d8;
+			}
+
+			button {
+				border: 2px solid #e3e3e3;
+				background-color: white;
+				width: 65px;
+				height: 50px;
+				font-weight: 600;
+				box-shadow: 2px 2px 3px #e3e3e3;
+			}
+
+			button:hover {
+				border: 2px solid #8367d8;
+			}
 		}
 	}
 }

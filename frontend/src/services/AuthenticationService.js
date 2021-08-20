@@ -90,6 +90,15 @@ class AuthenticationService {
 			console.error(err);
 		}
 	};
+
+	findUserBids = async (id) => {
+		try {
+			const response = await axios.get("auth/userbids?id=" + id);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new AuthenticationService();

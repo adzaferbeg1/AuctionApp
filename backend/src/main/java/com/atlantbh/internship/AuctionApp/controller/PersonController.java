@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -117,5 +118,11 @@ public class PersonController {
     @GetMapping("/deleteuser")
     public void deleteUserFromDB(@RequestParam Long id) {
         personRepository.deleteUser(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/userbids")
+    public List<Object> getBidsForUser(@RequestParam Long id) {
+        return personRepository.findUserBids(id);
     }
 }

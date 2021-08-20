@@ -87,7 +87,7 @@ export default function Account(props) {
 				<div className="page-content">
 					{showProfile && user.length !== 0 ? <Profile user={user} /> : null}
 					{showSeller ? <Seller /> : null}
-					{showBids ? <Bids /> : null}
+					{showBids && user.length !== 0 ? <Bids user={user} /> : null}
 					{showSettings && user.length !== 0 ? <Settings user={user} /> : null}
 				</div>
 			</div>
