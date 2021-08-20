@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { RiArrowRightSLine } from "react-icons/ri";
+import AuthenticationService from "../../services/AuthenticationService";
 import LabelNavbar from "../../shared/common/LabelNavbar";
 
-const Profile = () => {
+function Profile({ user }) {
+	const [userId, setUserId] = useState();
+	const [userName, setUserName] = useState();
+	const [userSurname, setUserSurname] = useState();
+	const [userPhone, setUserPhone] = useState();
+	const [userEmail, setUserEmail] = useState();
+	const [userAddress, setUserAddress] = useState();
+	const [userSex, setUserSex] = useState();
+	const [userYear, setUserYear] = useState();
+	const [userMonth, setUserMonth] = useState();
+	const [userDay, setUserDay] = useState();
+	const [profilePicture, setProfilePicture] = useState([]);
+	const fileInput = useRef(null);
 	const range = (start, stop, step) =>
 		Array.from(
 			{ length: (stop - start) / step + 1 },
@@ -28,38 +41,183 @@ const Profile = () => {
 	let expYears = range(2021, 2030, 1);
 	let expMonths = range(1, 12, 1);
 
+	const findMonth = (month) => {
+		switch (month) {
+			case "01":
+				return "January";
+			case "02":
+				return "February";
+			case "03":
+				return "March";
+			case "04":
+				return "April";
+			case "05":
+				return "May";
+			case "06":
+				return "June";
+			case "07":
+				return "July";
+			case "08":
+				return "August";
+			case "09":
+				return "September";
+			case "10":
+				return "October";
+			case "11":
+				return "November";
+			case "12":
+				return "December";
+			default:
+				return "January";
+		}
+	};
+
+	const formatUserDate = (date) => {
+		if (date === null) return;
+		var splitDate = date.split("-");
+		setUserYear(splitDate[0]);
+		setUserMonth(splitDate[1]);
+		setUserDay(splitDate[2]);
+		var monthDropDown = document.getElementById("month-drop-menu");
+		monthDropDown.value = findMonth(splitDate[1]);
+		var dayDropDown = document.getElementById("day-drop-menu");
+		dayDropDown.value = splitDate[2];
+	};
+
+	useEffect(() => {
+		setUserId(user.id);
+		setUserName(user.name);
+		setUserSurname(user.surname);
+		setProfilePicture("images/guy-profile-pic.PNG");
+		setUserPhone(user.phoneNumber);
+		setUserEmail(user.email);
+		setUserAddress(user.address);
+		setUserSex(user.sex);
+		formatUserDate(user.birthDate);
+	}, []);
+
+	const changeProfilePicture = async (e) => {
+		const file = e.target.files[0];
+		setProfilePicture(await uploadImage(file));
+	};
+
+	const uploadImage = (img) =>
+		new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(img);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (error) => reject(error);
+		});
+
+	const saveChanges = async () => {
+		if (
+			userName === "" ||
+			userSurname === "" ||
+			userPhone === undefined ||
+			userPhone === "" ||
+			userEmail === ""
+		) {
+			alert("WARNING: All fields in the REQUIRED form must be filled");
+			return;
+		} else {
+			AuthenticationService.updateInformation(
+				userName,
+				userSurname,
+				userYear + "-" + userMonth + "-" + userDay,
+				userPhone,
+				userEmail,
+				userAddress,
+				userSex,
+				userId
+			).then(
+				() => {
+					window.location.reload();
+					window.scrollTo(0, 0);
+				},
+				(error) => {
+					console.error(error);
+					alert("Invalid information");
+				}
+			);
+		}
+	};
+
 	return (
 		<div className="profile">
 			<div className="required">
 				<LabelNavbar label={"REQUIRED"} />
 				<div className="content-below-nav">
 					<div className="photo-form">
-						<img alt="user" src="images/guy-profile-pic.PNG"></img>
-						<button>CHANGE PHOTO</button>
+						<img alt="user" src={profilePicture}></img>
+						<button onClick={() => fileInput.current.click()}>
+							CHANGE PHOTO
+						</button>
+						<input
+							ref={fileInput}
+							style={{ display: "none" }}
+							type="file"
+							onChange={changeProfilePicture}
+						/>
 					</div>
 					<div className="req-form">
 						<label>First Name</label>
-						<input type="text"></input>
+						<input
+							type="text"
+							value={userName}
+							onChange={(e) => {
+								setUserName(e.target.value);
+							}}
+						></input>
 						<label>Last Name</label>
-						<input type="text"></input>
+						<input
+							type="text"
+							value={userSurname}
+							onChange={(e) => {
+								setUserSurname(e.target.value);
+							}}
+						></input>
 						<label>I am</label>
 						<select>
-							<option>Male</option>
-							<option>Female</option>
+							<option value="Male" onChange={(e) => setUserSex(e.target.value)}>
+								Male
+							</option>
+							<option
+								value="Female"
+								onChange={(e) => setUserSex(e.target.value)}
+							>
+								Female
+							</option>
 						</select>
 						<label>Date of Birth</label>
 						<div className="birth-from">
-							<select>
+							<select id="month-drop-menu">
 								{months.length !== 0
-									? months.map((month) => <option key={month}>{month}</option>)
+									? months.map((month) => (
+											<option key={month} value={month}>
+												{month}
+											</option>
+									  ))
 									: null}
 							</select>
-							<select>
+							<select
+								id="day-drop-menu"
+								onChange={(e) => setUserDay(e.target.value)}
+							>
 								{days.length !== 0
-									? days.map((day) => <option key={day}>{day}</option>)
+									? days.map((day) => (
+											<option
+												key={day}
+												value={day < 9 ? "0" + day.toString() : day}
+											>
+												{day}
+											</option>
+									  ))
 									: null}
 							</select>
-							<select>
+							<select
+								value={userYear}
+								onChange={(e) => setUserYear(e.target.value)}
+							>
 								{years.length !== 0
 									? years.map((yr) => <option key={yr}>{yr}</option>)
 									: null}
@@ -67,10 +225,14 @@ const Profile = () => {
 						</div>
 						<div className="input-group mb-3">
 							<input
-								type="tel"
+								type="text"
 								className="form-control"
-								pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
 								aria-describedby="basic-addon2"
+								value={userPhone}
+								onChange={(e) => {
+									setUserPhone(e.target.value);
+								}}
+								placeholder="e.g. 555-555-555"
 							/>
 							<div className="input-group-append">
 								<span className="input-group-text" id="basic-addon2">
@@ -79,7 +241,13 @@ const Profile = () => {
 							</div>
 						</div>
 						<label>Email Address</label>
-						<input type="email"></input>
+						<input
+							type="email"
+							value={userEmail}
+							onChange={(e) => {
+								setUserEmail(e.target.value);
+							}}
+						></input>
 					</div>
 				</div>
 			</div>
@@ -174,11 +342,11 @@ const Profile = () => {
 					<input type="text" placeholder="e.g. USA" />
 				</div>
 			</div>
-			<button className="save-info-btn">
+			<button className="save-info-btn" onClick={saveChanges}>
 				SAVE INFO <RiArrowRightSLine />
 			</button>
 		</div>
 	);
-};
+}
 
 export default Profile;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsFillPersonFill, BsListUl, BsGearFill } from "react-icons/bs";
 import { ImHammer2 } from "react-icons/im";
 import { LabelNavbar } from "../../shared/common";
@@ -9,14 +9,26 @@ import {
 	Bids,
 } from "../../components/myAccountTabs/index";
 import "./Account.scss";
+import AuthenticationService from "../../services/AuthenticationService";
 
-export default function Account() {
+export default function Account(props) {
 	const [showProfile, setShowProfile] = useState(true);
 	const [showSeller, setShowSeller] = useState(false);
 	const [showBids, setShowBids] = useState(false);
 	const [showSettings, setShowSettings] = useState(false);
+	const [userEmail] = useState(props.location.state.userEmail);
+	const [user, setUser] = useState([]);
 	const activeButton = { backgroundColor: "#8367d8", color: "white" };
 	const inactiveButton = { backgroundColor: "#f0efef", color: "black" };
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const user = await AuthenticationService.findUserByEmail(userEmail);
+			setUser(user);
+		};
+
+		fetchData();
+	}, [userEmail]);
 
 	return (
 		<>
@@ -73,10 +85,10 @@ export default function Account() {
 					</button>
 				</div>
 				<div className="page-content">
-					{showProfile ? <Profile /> : null}
+					{showProfile && user.length !== 0 ? <Profile user={user} /> : null}
 					{showSeller ? <Seller /> : null}
 					{showBids ? <Bids /> : null}
-					{showSettings ? <Settings /> : null}
+					{showSettings && user.length !== 0 ? <Settings user={user} /> : null}
 				</div>
 			</div>
 		</>

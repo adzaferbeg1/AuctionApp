@@ -4,6 +4,7 @@ import com.atlantbh.internship.AuctionApp.model.Person;
 import com.atlantbh.internship.AuctionApp.repository.PersonRepository;
 import com.atlantbh.internship.AuctionApp.request.LogInRequest;
 import com.atlantbh.internship.AuctionApp.request.RegisterRequest;
+import com.atlantbh.internship.AuctionApp.request.UpdateInfoRequest;
 import com.atlantbh.internship.AuctionApp.response.JwtResponse;
 import com.atlantbh.internship.AuctionApp.security.jwt.JwtProvider;
 import com.atlantbh.internship.AuctionApp.service.PersonService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 
 @RestController
@@ -84,5 +88,34 @@ public class PersonController {
     @GetMapping("/singleuser")
     public Person getUserById(@RequestParam Long id) {
         return personRepository.findUserById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/useremail")
+    public Optional<Person> getUserByEmail(@RequestParam String email) {
+        return personRepository.findByEmail(email);
+    }
+
+    @Transactional
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/updateinformation")
+    public ResponseEntity updateProfileInformation(@RequestBody UpdateInfoRequest updateInfoRequest) {
+        personRepository.updateProfileInformation(
+                updateInfoRequest.getName(),
+                updateInfoRequest.getSurname(),
+                updateInfoRequest.getBirthDate(),
+                updateInfoRequest.getPhoneNo(),
+                updateInfoRequest.getEmail(),
+                updateInfoRequest.getAddress(),
+                updateInfoRequest.getSex(),
+                updateInfoRequest.getId());
+        return ResponseEntity.ok("Profile information successfully saved");
+    }
+
+    @Transactional
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/deleteuser")
+    public void deleteUserFromDB(@RequestParam Long id) {
+        personRepository.deleteUser(id);
     }
 }

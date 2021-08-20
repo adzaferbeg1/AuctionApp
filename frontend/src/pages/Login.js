@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 
-import { LabelNavbar } from '../shared/common';
-import Authentication from '../services/AuthenticationService'
-import { loginInput, loginButtonStyle } from '../shared/styles/PageStyles';
-import { useUserContext } from '.././AppContext';
+import { LabelNavbar } from "../shared/common";
+import Authentication from "../services/AuthenticationService";
+import { loginInput, loginButtonStyle } from "../shared/styles/PageStyles";
+import { useUserContext } from ".././AppContext";
 
 import "../shared/styles/RegisterLogin.scss";
 
 export default function Login() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState();
+	const [password, setPassword] = useState();
 	const history = useHistory();
 	const { setLoggedIn } = useUserContext();
 
@@ -21,7 +21,12 @@ export default function Login() {
 		Authentication.signin(email, password).then(
 			() => {
 				setLoggedIn(true);
-				history.push("/myaccount");
+				history.push({
+					pathname: "/myaccount",
+					state: {
+						userEmail: email,
+					},
+				});
 			},
 			(error) => {
 				console.error(error);
@@ -42,7 +47,6 @@ export default function Login() {
 					<Form.Control
 						style={loginInput}
 						type="email"
-						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						name="email"
 					/>
@@ -52,7 +56,6 @@ export default function Login() {
 					<Form.Control
 						style={loginInput}
 						type="password"
-						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						name="password"
 					/>
