@@ -105,6 +105,78 @@ const ProductList = (props) => {
 		}
 	};
 
+	const renderItems = () => {
+		if (fromSearchBar && searchBarItems.length !== 0) {
+			if (gridView) {
+				return searchBarItems.map((item) => (
+					<GridView
+						key={item.name + "search"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			} else {
+				return searchBarItems.map((item) => (
+					<ListView
+						key={item.name + "search-list"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			}
+		} else if (!fromSearchBar && chosenItems.length !== 0) {
+			if (gridView) {
+				return chosenItems.map((item) => (
+					<GridView
+						key={item.id + "grid"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			} else {
+				return chosenItems.map((item) => (
+					<ListView
+						key={item.id + "grid"}
+						id={item.id}
+						name={item.name}
+						startPrice={item.currentPrice}
+						imgUrl={item.imgUrl}
+						onClick={() =>
+							history.push({
+								pathname: "/shop",
+								state: { item: item },
+							})
+						}
+					/>
+				));
+			}
+		}
+	};
+
 	return (
 		<>
 			<LabelNavbar label={"ITEMS"} />
@@ -196,72 +268,7 @@ const ProductList = (props) => {
 					</div>
 				</div>
 				<div className="col-md-8">
-					<div className="items-view">
-						{gridView
-							? chosenItems.length !== 0 && !fromSearchBar
-								? chosenItems.map((item) => (
-										<GridView
-											key={item.id + "grid"}
-											id={item.id}
-											name={item.name}
-											startPrice={item.currentPrice}
-											imgUrl={item.imgUrl}
-											onClick={() =>
-												history.push({
-													pathname: "/shop",
-													state: { item: item },
-												})
-											}
-										/>
-								  ))
-								: searchBarItems.map((item) => (
-										<GridView
-											key={item.name + "search"}
-											id={item.id}
-											name={item.name}
-											startPrice={item.currentPrice}
-											imgUrl={item.imgUrl}
-											onClick={() =>
-												history.push({
-													pathname: "/shop",
-													state: { item: item },
-												})
-											}
-										/>
-								  ))
-							: chosenItems.length !== 0 && !fromSearchBar
-							? chosenItems.map((item) => (
-									<ListView
-										key={item.id + "list"}
-										id={item.id}
-										name={item.name}
-										description={item.description}
-										startPrice={item.currentPrice}
-										imgUrl={item.imgUrl}
-										onClick={() =>
-											history.push({
-												pathname: "/shop",
-												state: { item: item },
-											})
-										}
-									/>
-							  ))
-							: searchBarItems.map((item) => (
-									<ListView
-										key={item.name + "search-list"}
-										id={item.id}
-										name={item.name}
-										startPrice={item.currentPrice}
-										imgUrl={item.imgUrl}
-										onClick={() =>
-											history.push({
-												pathname: "/shop",
-												state: { item: item },
-											})
-										}
-									/>
-							  ))}
-					</div>
+					<div className="items-view">{renderItems()}</div>
 				</div>
 			</div>
 		</>
