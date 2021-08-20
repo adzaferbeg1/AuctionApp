@@ -36,6 +36,7 @@ export default function Header() {
 			pathname: "/products",
 			state: {
 				categoryId: "1",
+				categoryTag: searchKey,
 			},
 		});
 	};
