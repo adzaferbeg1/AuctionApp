@@ -97,9 +97,13 @@ export default function Header() {
 				</div>
 				<div className="col">
 					<section className="row">
-						<a className="nav-link links" href="/" style={footerText}>
+						<Link
+							className="nav-link links"
+							to={{ pathname: "/" }}
+							style={footerText}
+						>
 							HOME
-						</a>
+						</Link>
 						<Link
 							className="nav-link links"
 							style={footerText}
