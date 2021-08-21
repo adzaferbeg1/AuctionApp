@@ -54,7 +54,7 @@ const Bids = ({ user }) => {
 								<td>
 									{bid[2]} <br /> <p>#{bid[1]} </p>
 								</td>
-								<td>Time left</td>
+								<td>{bid[3].substr(0, 9)}</td>
 								<td style={bid[4] === bid[6] ? greenText : grayText}>
 									${bid[4]}
 								</td>
@@ -69,7 +69,9 @@ const Bids = ({ user }) => {
 						))
 					) : (
 						<tr key={"missing-bids"}>
-							<td colSpan="2">You have not placed any bids</td>
+							<td colSpan="3">You have not placed any bids</td>
+							<td></td>
+							<td></td>
 						</tr>
 					)}
 				</tbody>

@@ -126,6 +126,24 @@ class ItemService {
 			console.error(err);
 		}
 	};
+
+	getActiveSellerItems = async (sellerId) => {
+		try {
+			const response = await axios.get("item/activeitems?id=" + sellerId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getSoldSellerItems = async (sellerId) => {
+		try {
+			const response = await axios.get("item/solditems?id=" + sellerId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new ItemService();

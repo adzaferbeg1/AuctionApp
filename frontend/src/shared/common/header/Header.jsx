@@ -107,9 +107,15 @@ export default function Header() {
 						>
 							SHOP
 						</Link>
-						<a className="nav-link links" href="/myaccount" style={footerText}>
+						<Link
+							className="nav-link links"
+							to={{
+								pathname: "/myaccount",
+							}}
+							style={footerText}
+						>
 							MY ACCOUNT
-						</a>
+						</Link>
 						{loggedIn ? (
 							<a
 								id="log-out-btn"

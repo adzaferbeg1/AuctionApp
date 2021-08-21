@@ -52,4 +52,11 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query(value = "SELECT * FROM item WHERE subcategory_id= ?1", nativeQuery = true)
     List<Item> findSubcategoryItems(long id);
+
+    @Query(value = "SELECT * FROM item WHERE seller_id= ?1 AND end_date >= CURRENT_DATE", nativeQuery = true)
+    List<Item> findActiveItemsForSeller(long id);
+
+    @Query(value = "SELECT * FROM item WHERE seller_id= ?1 AND end_date < CURRENT_DATE", nativeQuery = true)
+    List<Item> findSoldItemsForSeller(long id);
+
 }

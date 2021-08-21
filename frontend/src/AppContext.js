@@ -9,9 +9,10 @@ export const Provider = ({ children }) => {
 	const [loggedIn, setLoggedIn] = useState(
 		AuthenticationService.validateToken()
 	);
+	const [user, setUser] = useState();
 
 	return (
-		<UserContext.Provider value={{ loggedIn, setLoggedIn }}>
+		<UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser }}>
 			{children}
 		</UserContext.Provider>
 	);

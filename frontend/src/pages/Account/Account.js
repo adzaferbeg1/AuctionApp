@@ -9,26 +9,16 @@ import {
 	Bids,
 } from "../../components/myAccountTabs/index";
 import "./Account.scss";
-import AuthenticationService from "../../services/AuthenticationService";
+import { useUserContext } from "../../AppContext";
 
-export default function Account(props) {
+export default function Account() {
 	const [showProfile, setShowProfile] = useState(true);
 	const [showSeller, setShowSeller] = useState(false);
 	const [showBids, setShowBids] = useState(false);
 	const [showSettings, setShowSettings] = useState(false);
-	const [userEmail] = useState(props.location.state.userEmail);
-	const [user, setUser] = useState([]);
+	const { user } = useUserContext();
 	const activeButton = { backgroundColor: "#8367d8", color: "white" };
 	const inactiveButton = { backgroundColor: "#f0efef", color: "black" };
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const user = await AuthenticationService.findUserByEmail(userEmail);
-			setUser(user);
-		};
-
-		fetchData();
-	}, [userEmail]);
 
 	return (
 		<>
@@ -86,7 +76,7 @@ export default function Account(props) {
 				</div>
 				<div className="page-content">
 					{showProfile && user.length !== 0 ? <Profile user={user} /> : null}
-					{showSeller ? <Seller /> : null}
+					{showSeller && user.length !== 0 ? <Seller user={user} /> : null}
 					{showBids && user.length !== 0 ? <Bids user={user} /> : null}
 					{showSettings && user.length !== 0 ? <Settings user={user} /> : null}
 				</div>

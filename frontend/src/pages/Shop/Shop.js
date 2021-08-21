@@ -13,7 +13,6 @@ export default function Shop(props) {
 	const [itemId] = useState(props.location.state.item.id);
 	const [selectedItem, setSelectedItem] = useState([]);
 	const [currentPrice, setCurrentPrice] = useState();
-	const [timeLeft, setTimeLeft] = useState(0);
 	const [userLoggedIn, setUserLoggedIn] = useState();
 	const [bid, setBid] = useState("");
 	const [bidders, setBidders] = useState([]);
@@ -33,24 +32,8 @@ export default function Shop(props) {
 		setCurrentPrice(props.location.state.item.currentPrice);
 		var loggedIn = AuthenticationService.validateToken();
 		setUserLoggedIn(loggedIn);
-		var endDate = selectedItem.endDate;
 		var todaysDate = new Date(Date.now()).toISOString();
-		if (parseInt(endDate) >= parseInt(todaysDate)) {
-			if (
-				parseInt(endDate.substring(5, 7)) >=
-				parseInt(todaysDate.substring(5, 7))
-			) {
-				if (
-					parseInt(endDate.substring(8, 10)) >=
-					parseInt(todaysDate.substring(8, 10))
-				)
-					setTimeLeft(
-						parseInt(endDate.substring(8, 10)) -
-							parseInt(todaysDate.substring(8, 10))
-					);
-			}
-		}
-	}, [selectedItem.endDate, props.location.state.item, itemId]);
+	}, [props.location.state.item, itemId]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -143,7 +126,7 @@ export default function Shop(props) {
 					<p>Enter ${currentPrice} or more</p>
 					<h6>Highest bid: ${currentPrice}</h6>
 					<h6>No bids: {noOfBids}</h6>
-					<h6>Time left: {timeLeft} days</h6>
+					<h6>Time left: {selectedItem.endDate.substring(0, 9)}</h6>
 					<h5 className="details-heading">Details</h5>
 					<div className="thin-line"></div>
 					<p className="item-desc">{selectedItem.description}</p>

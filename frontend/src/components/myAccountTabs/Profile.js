@@ -16,6 +16,11 @@ function Profile({ user }) {
 	const [userMonth, setUserMonth] = useState();
 	const [userDay, setUserDay] = useState();
 	const [profilePicture, setProfilePicture] = useState([]);
+	const [cardName, setCardName] = useState();
+	const [cardNumber, setCardNumber] = useState();
+	const [cardExpYear, setCardExpYear] = useState();
+	const [cardExpMonth, setCardExpMonth] = useState();
+	const [cardCvc, setCardCvc] = useState();
 	const fileInput = useRef(null);
 	const range = (start, stop, step) =>
 		Array.from(
@@ -94,7 +99,10 @@ function Profile({ user }) {
 		setUserAddress(user.address);
 		setUserSex(user.sex);
 		formatUserDate(user.birthDate);
+		setCardName(user.name + " " + user.surname);
 	}, []);
+
+	useEffect(() => {});
 
 	const changeProfilePicture = async (e) => {
 		const file = e.target.files[0];
@@ -120,25 +128,23 @@ function Profile({ user }) {
 			alert("WARNING: All fields in the REQUIRED form must be filled");
 			return;
 		} else {
-			AuthenticationService.updateInformation(
-				userName,
-				userSurname,
-				userYear + "-" + userMonth + "-" + userDay,
-				userPhone,
-				userEmail,
-				userAddress,
-				userSex,
-				userId
-			).then(
-				() => {
-					window.location.reload();
-					window.scrollTo(0, 0);
-				},
-				(error) => {
-					console.error(error);
-					alert("Invalid information");
-				}
-			);
+			try {
+				await AuthenticationService.updateInformation(
+					userName,
+					userSurname,
+					userYear + "-" + userMonth + "-" + userDay,
+					userPhone,
+					userEmail,
+					userAddress,
+					userSex,
+					userId
+				);
+				window.location.reload();
+				window.scrollTo(0, 0);
+			} catch {
+				alert("WARNING: All fields in the REQUIRED form must be filled");
+				return;
+			}
 		}
 	};
 
@@ -290,8 +296,18 @@ function Profile({ user }) {
 							<label>Card Number</label>
 						</div>
 						<div>
-							<input type="text" placeholder="e.g. Adam Smith" />
-							<input type="text" placeholder="e.g. 4242 4242 4242 4242" />
+							<input
+								type="text"
+								placeholder="e.g. Adam Smith"
+								value={cardName}
+								onChange={(e) => setCardName(e.target.value)}
+							/>
+							<input
+								type="text"
+								placeholder="e.g. 4242 4242 4242 4242"
+								value={cardNumber}
+								onChange={(e) => setCardNumber(e.target.value)}
+							/>
 						</div>
 					</div>
 					<div className="card-owner-details">
@@ -305,19 +321,24 @@ function Profile({ user }) {
 							</label>
 						</div>
 						<div>
-							<select>
+							<select onChange={(e) => setCardExpYear(e.target.value)}>
 								{expYears.length !== 0
 									? expYears.map((yr) => <option key={yr + "exp"}>{yr}</option>)
 									: null}
 							</select>
-							<select>
+							<select onChange={(e) => setCardExpMonth(e.target.value)}>
 								{expMonths.length !== 0
 									? expMonths.map((month) => (
 											<option key={month}>{month}</option>
 									  ))
 									: null}
 							</select>
-							<input type="text" placeholder="1234" />
+							<input
+								type="text"
+								placeholder="1234"
+								value={cardCvc}
+								onChange={(e) => setCardCvc(e.target.value)}
+							/>
 						</div>
 					</div>
 				</div>

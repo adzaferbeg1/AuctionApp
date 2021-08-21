@@ -13,26 +13,32 @@ export default function Login() {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 	const history = useHistory();
-	const { setLoggedIn } = useUserContext();
+	const { setLoggedIn, setUser } = useUserContext();
 
 	const loginButton = async (event) => {
 		event.preventDefault();
-
 		Authentication.signin(email, password).then(
 			() => {
-				setLoggedIn(true);
-				history.push({
-					pathname: "/myaccount",
-					state: {
-						userEmail: email,
+				findUserByEmail(email).then(
+					() => {
+						history.push("/myaccount");
 					},
-				});
+					(error) => {
+						console.error(error);
+					}
+				);
 			},
 			(error) => {
 				console.error(error);
 				alert("Invalid email or password! Try again");
 			}
 		);
+	};
+
+	const findUserByEmail = async (email) => {
+		const user = await Authentication.findUserByEmail(email);
+		setUser(user);
+		setLoggedIn(true);
 	};
 
 	return (
