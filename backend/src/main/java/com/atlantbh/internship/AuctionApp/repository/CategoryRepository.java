@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
@@ -14,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Query(value = "SELECT * FROM category WHERE supercategory_id<>id ORDER BY supercategory_id ASC", nativeQuery = true)
     List<Category> getAllSubcategories();
+
+    Optional<Category> findByTitle(String title);
 }

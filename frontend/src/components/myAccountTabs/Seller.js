@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { HiOutlineShoppingBag, HiChevronRight } from "react-icons/hi";
+import { HiOutlineShoppingBag, HiChevronRight, HiPlus } from "react-icons/hi";
 import ItemService from "../../services/ItemService";
 
 const Seller = ({ user }) => {
@@ -92,7 +92,7 @@ const Seller = ({ user }) => {
 					<div className="sell-content">
 						<HiOutlineShoppingBag />
 						<p>You do not have any scheduled items for sale</p>
-						<button>
+						<button onClick={() => history.push("/sell")}>
 							START SELLING <HiChevronRight />
 						</button>
 					</div>
@@ -121,6 +121,9 @@ const Seller = ({ user }) => {
 					}}
 				>
 					Sold
+				</button>
+				<button className="add-btn" onClick={() => history.push("/sell")}>
+					<HiPlus /> ADD ITEM
 				</button>
 			</div>
 			{renderItems()}

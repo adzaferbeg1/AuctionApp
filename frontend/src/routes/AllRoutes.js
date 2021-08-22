@@ -12,6 +12,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import ProductList from "../pages/ProductList/ProductList";
+import Sell from "../pages/Sell/Sell";
 
 const AllRoutes = () => {
 	return (
@@ -25,6 +26,7 @@ const AllRoutes = () => {
 			<PublicRoute exact path="/register" component={Register} />
 			<PublicRoute exact path="/login" component={Login} />
 			<PrivateRoute path="/myaccount" component={Account} />
+			<PrivateRoute path="/sell" component={Sell} />
 		</Switch>
 	);
 };

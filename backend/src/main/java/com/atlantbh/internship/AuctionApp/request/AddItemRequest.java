@@ -1,27 +1,15 @@
-package com.atlantbh.internship.AuctionApp.model;
+package com.atlantbh.internship.AuctionApp.request;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Entity
-public class Item {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @NotNull
+public class AddItemRequest {
+    @NotBlank
     @Column(name = "seller_id", nullable = false)
     private long sellerId;
 
-    @NotNull
+    @NotBlank
     @Column(name = "category_id", nullable = false)
     private long categoryId;
 
@@ -50,22 +38,16 @@ public class Item {
     @Column(name = "img_url")
     private String imgUrl;
 
-    public Item() {
-    }
-
-
-    public Item(
-            final long categoryId,
-            final double currentPrice,
-            final String description,
-            final LocalDateTime endDate,
-            final String imgUrl,
-            final String name,
-            final long sellerId,
-            final LocalDateTime startDate,
-            final double startPrice,
-            final Integer subcategoryId) {
-
+    public AddItemRequest(final long sellerId,
+                          final long categoryId,
+                          Integer subcategoryId,
+                          final String name,
+                          String description,
+                          double startPrice,
+                          double currentPrice,
+                          LocalDateTime startDate,
+                          LocalDateTime endDate,
+                          String imgUrl) {
         this.sellerId = sellerId;
         this.categoryId = categoryId;
         this.subcategoryId = subcategoryId;
@@ -78,72 +60,72 @@ public class Item {
         this.imgUrl = imgUrl;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public long getSellerId() {
         return sellerId;
-    }
-
-    public long getCategoryId() {
-        return categoryId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getStartPrice() {
-        return startPrice;
-    }
-
-    public double getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setSellerId(long sellerId) {
         this.sellerId = sellerId;
     }
 
+    public long getCategoryId() {
+        return categoryId;
+    }
+
     public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Integer getSubcategoryId() {
+        return subcategoryId;
+    }
+
+    public void setSubcategoryId(Integer subcategoryId) {
+        this.subcategoryId = subcategoryId;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getStartPrice() {
+        return startPrice;
     }
 
     public void setStartPrice(double startPrice) {
         this.startPrice = startPrice;
     }
 
+    public double getCurrentPrice() {
+        return currentPrice;
+    }
+
     public void setCurrentPrice(double currentPrice) {
         this.currentPrice = currentPrice;
     }
 
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
     public void setEndDate(LocalDateTime endDate) {
@@ -156,13 +138,5 @@ public class Item {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public long getSubcategoryId() {
-        return subcategoryId;
-    }
-
-    public void setSubcategoryId(Integer subcategoryId) {
-        this.subcategoryId = subcategoryId;
     }
 }

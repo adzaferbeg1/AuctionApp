@@ -144,6 +144,40 @@ class ItemService {
 			console.error(err);
 		}
 	};
+
+	addItemForSale = (
+		categoryId,
+		currentPrice,
+		description,
+		endDate,
+		imgUrl,
+		name,
+		sellerId,
+		startDate,
+		startPrice,
+		subcategoryId
+	) => {
+		return axios
+			.post("item/additem", {
+				categoryId,
+				currentPrice,
+				description,
+				endDate,
+				imgUrl,
+				name,
+				sellerId,
+				startDate,
+				startPrice,
+				subcategoryId,
+			})
+			.then((response) => {
+				return response.data;
+			})
+			.catch((err) => {
+				console.error(err);
+				throw err;
+			});
+	};
 }
 
 export default new ItemService();

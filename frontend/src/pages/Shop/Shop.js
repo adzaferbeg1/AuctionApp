@@ -142,7 +142,7 @@ export default function Shop(props) {
 						</tr>
 					</thead>
 					<tbody>
-						{bidders.length !== 0 ? (
+						{bidders !== undefined ? (
 							bidders.map((bidder) => (
 								<tr key={bidder.bid}>
 									<td colSpan="2">
