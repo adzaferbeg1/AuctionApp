@@ -3,6 +3,7 @@ import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { RiArrowRightSLine } from "react-icons/ri";
 import AuthenticationService from "../../services/AuthenticationService";
 import LabelNavbar from "../../shared/common/LabelNavbar";
+import { findMonth } from "../../utils/DateUtils";
 
 function Profile({ user }) {
 	const [userId, setUserId] = useState();
@@ -46,37 +47,6 @@ function Profile({ user }) {
 	let expYears = range(2021, 2030, 1);
 	let expMonths = range(1, 12, 1);
 
-	const findMonth = (month) => {
-		switch (month) {
-			case "01":
-				return "January";
-			case "02":
-				return "February";
-			case "03":
-				return "March";
-			case "04":
-				return "April";
-			case "05":
-				return "May";
-			case "06":
-				return "June";
-			case "07":
-				return "July";
-			case "08":
-				return "August";
-			case "09":
-				return "September";
-			case "10":
-				return "October";
-			case "11":
-				return "November";
-			case "12":
-				return "December";
-			default:
-				return "January";
-		}
-	};
-
 	const formatUserDate = (date) => {
 		if (date === null) return;
 		var splitDate = date.split("-");
@@ -118,8 +88,7 @@ function Profile({ user }) {
 		});
 
 	const saveChanges = async () => {
-		if (
-			userName === "" ||
+		if (userName === "" ||
 			userSurname === "" ||
 			userPhone === undefined ||
 			userPhone === "" ||
@@ -139,7 +108,7 @@ function Profile({ user }) {
 					userSex,
 					userId
 				);
-				window.location.reload();
+				alert("Info successfully saved");
 				window.scrollTo(0, 0);
 			} catch {
 				alert("WARNING: All fields in the REQUIRED form must be filled");
@@ -197,36 +166,32 @@ function Profile({ user }) {
 						<label>Date of Birth</label>
 						<div className="birth-from">
 							<select id="month-drop-menu">
-								{months.length !== 0
-									? months.map((month) => (
-											<option key={month} value={month}>
-												{month}
-											</option>
-									  ))
-									: null}
+								{months.map((month) => (
+									<option key={month} value={month}>
+										{month}
+									</option>
+								))}
 							</select>
 							<select
 								id="day-drop-menu"
 								onChange={(e) => setUserDay(e.target.value)}
 							>
-								{days.length !== 0
-									? days.map((day) => (
-											<option
-												key={day}
-												value={day < 9 ? "0" + day.toString() : day}
-											>
-												{day}
-											</option>
-									  ))
-									: null}
+								{days.map((day) => (
+									<option
+										key={day}
+										value={day < 9 ? "0" + day.toString() : day}
+									>
+										{day}
+									</option>
+								))}
 							</select>
 							<select
 								value={userYear}
 								onChange={(e) => setUserYear(e.target.value)}
 							>
-								{years.length !== 0
-									? years.map((yr) => <option key={yr}>{yr}</option>)
-									: null}
+								{years.map((yr) => (
+									<option key={yr}>{yr}</option>
+								))}
 							</select>
 						</div>
 						<div className="input-group mb-3">
@@ -322,16 +287,14 @@ function Profile({ user }) {
 						</div>
 						<div>
 							<select onChange={(e) => setCardExpYear(e.target.value)}>
-								{expYears.length !== 0
-									? expYears.map((yr) => <option key={yr + "exp"}>{yr}</option>)
-									: null}
+								{expYears.map((yr) => (
+									<option key={yr + "exp"}>{yr}</option>
+								))}
 							</select>
 							<select onChange={(e) => setCardExpMonth(e.target.value)}>
-								{expMonths.length !== 0
-									? expMonths.map((month) => (
-											<option key={month}>{month}</option>
-									  ))
-									: null}
+								{expMonths.map((month) => (
+									<option key={month}>{month}</option>
+								))}
 							</select>
 							<input
 								type="text"
@@ -363,9 +326,11 @@ function Profile({ user }) {
 					<input type="text" placeholder="e.g. USA" />
 				</div>
 			</div>
-			<button className="save-info-btn" onClick={saveChanges}>
+			<div className="save-info-btn" >
+			<button onClick={saveChanges}>
 				SAVE INFO <RiArrowRightSLine />
 			</button>
+			</div>
 		</div>
 	);
 }

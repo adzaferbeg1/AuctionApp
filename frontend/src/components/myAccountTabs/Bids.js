@@ -16,7 +16,6 @@ const Bids = ({ user }) => {
 		const fecthData = async () => {
 			const userBids = await AuthenticationService.findUserBids(user.id);
 			setUserBids(userBids);
-			console.log(userBids[0]);
 		};
 
 		fecthData();

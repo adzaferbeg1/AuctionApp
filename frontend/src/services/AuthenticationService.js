@@ -61,8 +61,7 @@ class AuthenticationService {
 		}
 	};
 
-	updateInformation = async (
-		name,
+	updateInformation = async (name,
 		surname,
 		birthDate,
 		phoneNo,
