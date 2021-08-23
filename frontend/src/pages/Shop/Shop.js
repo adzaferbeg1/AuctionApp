@@ -2,10 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { useHistory } from "react-router-dom";
+import { useUserContext } from "../../AppContext";
+import Pagination from "../../components/Pagination";
 import AuthenticationService from "../../services/AuthenticationService";
 import BidService from "../../services/BidService";
 import ItemService from "../../services/ItemService";
 import { LabelNavbar } from "../../shared/common";
+import RelatedItemView from "../../shared/common/RelatedItemView";
 import { purpleColor, landingPageButton } from "../../shared/styles/PageStyles";
 import "./Shop.scss";
 
@@ -18,6 +22,11 @@ export default function Shop(props) {
 	const [bidders, setBidders] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [noOfBids, setNoOfBids] = useState(0);
+	const { user } = useUserContext();
+	const history = useHistory();
+	const [relatedProducts, setRelatedProducts] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postsPerPage] = useState(3);
 
 	const alertSuccess = (display) => {
 		document.getElementById("highest-bid").style.display = display;
@@ -39,6 +48,10 @@ export default function Shop(props) {
 		const fetchData = async () => {
 			var numberOfBids = await BidService.getNoOfBids(itemId);
 			setNoOfBids(numberOfBids);
+			var relatedProducts = await ItemService.getFilteredByCategory(
+				props.location.state.item.categoryId
+			);
+			setRelatedProducts(relatedProducts.filter((i) => i.id !== itemId));
 		};
 		fetchData();
 	}, [itemId]);
@@ -87,6 +100,12 @@ export default function Shop(props) {
 		return null;
 	}
 
+	const indexOfLastPage = currentPage * postsPerPage;
+	const indexOfFirstPage = indexOfLastPage - postsPerPage;
+	const currentBiddersPage = bidders.slice(indexOfFirstPage, indexOfLastPage);
+
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 	return (
 		<div className="shop-page">
 			<LabelNavbar label={"SINGLE PRODUCT"} />
@@ -134,34 +153,66 @@ export default function Shop(props) {
 					<p className="item-desc">{selectedItem.description}</p>
 				</div>
 			</div>
-			<div className="bidder-container">
-				<Table variant="gray-transparent" responsive>
-					<thead>
-						<tr className="product-table-header">
-							<th colSpan="2">Bidder</th>
-							<th>Date</th>
-							<th>Bid</th>
-						</tr>
-					</thead>
-					<tbody>
-						{bidders.length !== 0 ? (
-							bidders.map((bidder) => (
-								<tr key={bidder.bid}>
-									<td colSpan="2">
-										{bidder.name} {bidder.surname}
-									</td>
-									<td>{bidder.date.substring(0, 10)}</td>
-									<td>${bidder.bid}</td>
-								</tr>
-							))
-						) : (
-							<tr key={"no-bids"}>
-								<td colSpan="2">No bids to show</td>
+			{user === undefined || user.id !== selectedItem.sellerId ? (
+				<div className="related-products">
+					<div className="title">Related products</div>
+					<div className="grid-card">
+						{relatedProducts.map((item, index) => {
+							if (index < 3) {
+								return (
+									<RelatedItemView
+										key={item.id + " related-grid"}
+										name={item.name}
+										startPrice={item.currentPrice}
+										imgUrl={item.imgUrl}
+										onClick={() =>
+											history.push({
+												pathname: "/shop",
+												state: { item: item },
+											})
+										}
+									/>
+								);
+							}
+						})}
+					</div>
+				</div>
+			) : null}
+			{user !== undefined && user.id === selectedItem.sellerId ? (
+				<div className="bidder-container">
+					<Table variant="gray-transparent" responsive>
+						<thead>
+							<tr className="product-table-header">
+								<th colSpan="2">Bidder</th>
+								<th>Date</th>
+								<th>Bid</th>
 							</tr>
-						)}
-					</tbody>
-				</Table>
-			</div>
+						</thead>
+						<tbody>
+							{bidders !== undefined ? (
+								currentBiddersPage.map((bidder, index) => (
+									<tr key={bidder.bid + index}>
+										<td colSpan="2">
+											{bidder.name} {bidder.surname}
+										</td>
+										<td>{bidder.date.substring(0, 10)}</td>
+										<td>${bidder.bid}</td>
+									</tr>
+								))
+							) : (
+								<tr key={"no-bids"}>
+									<td colSpan="2">No bids to show</td>
+								</tr>
+							)}
+						</tbody>
+					</Table>
+					<Pagination
+						postsPerPage={postsPerPage}
+						totalPosts={bidders.length}
+						paginate={paginate}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }
