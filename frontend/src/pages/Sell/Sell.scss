@@ -1,0 +1,142 @@
+.sell-page {
+	.content-below-nav {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.progress-container {
+			width: 45%;
+
+			.step-btn {
+				width: 20px;
+				height: 20px;
+			}
+
+			.RFS-StepperContainer {
+				.RFS-StepButton {
+					background-color: #8367d8;
+				}
+			}
+		}
+
+		.add-item {
+			width: 45%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			border: 2px solid #e3e3e3;
+			margin-bottom: 5em;
+			.add-nav {
+				background-color: #f5f4f4;
+				width: 100%;
+				height: 50px;
+				padding-top: 0.8em;
+				font-weight: 600;
+				font-size: 18px;
+			}
+
+			input {
+				width: 70%;
+				height: 40px;
+				background-color: #f5f4f4;
+				border: 2px solid #e3e3e3;
+				padding-left: 0.5em;
+			}
+
+			.description-container {
+				height: 150px;
+			}
+
+			.labels {
+				width: 70%;
+				text-align: left;
+				label {
+					margin-top: 2em;
+					font-weight: 600;
+				}
+			}
+
+			.small-text {
+				width: 70%;
+				text-align: right;
+				label {
+					margin-top: 0em;
+					color: gray;
+					font-size: 10pt;
+				}
+			}
+
+			.select-cat {
+				display: flex;
+				justify-content: space-between;
+				width: 70%;
+				select {
+					width: 200px;
+					height: 40px;
+					border: 2px solid #e3e3e3;
+					margin-top: 2em;
+				}
+
+				select:first-child {
+					margin-right: 1em;
+				}
+
+				input {
+					margin-top: 1em;
+					width: 200px;
+				}
+			}
+		}
+
+		.back-next-btn {
+			width: 70%;
+			display: flex;
+			justify-content: space-between;
+			margin: 5em 0 5em;
+
+			button {
+				width: 150px;
+				height: 40px;
+				border: 2px solid #e3e3e3;
+				background-color: white;
+
+				svg {
+					font-size: 18pt;
+				}
+			}
+
+			button:hover,
+			button:focus {
+				border-color: #8367d8;
+			}
+		}
+
+		.mb-2 {
+			width: 70%;
+		}
+
+		.note-price-card {
+			margin-top: 1em;
+			width: 70%;
+			text-align: left;
+
+			p {
+				color: gray;
+				font-size: 10pt;
+			}
+		}
+
+		.start-end-date-label {
+			width: 70%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			text-align: left;
+
+			.date-label {
+				width: 200px;
+				font-weight: 600;
+				margin-top: 1em;
+			}
+		}
+	}
+}

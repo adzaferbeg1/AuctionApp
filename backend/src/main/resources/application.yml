@@ -37,4 +37,4 @@ spring:
 app:
   url: http://localhost:8080
   jwtSecret: secret-key
-  jwtExpiration: 180
+  jwtExpiration: 900

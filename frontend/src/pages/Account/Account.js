@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BsFillPersonFill, BsListUl, BsGearFill } from "react-icons/bs";
 import { ImHammer2 } from "react-icons/im";
 import { LabelNavbar } from "../../shared/common";
@@ -8,8 +8,8 @@ import {
 	Settings,
 	Bids,
 } from "../../components/myAccountTabs/index";
-import "./Account.scss";
 import { useUserContext } from "../../AppContext";
+import "./Account.scss";
 
 export default function Account() {
 	const [showProfile, setShowProfile] = useState(true);

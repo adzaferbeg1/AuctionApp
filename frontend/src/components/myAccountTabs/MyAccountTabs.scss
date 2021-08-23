@@ -90,6 +90,22 @@
 			background-color: #8367d8;
 			color: white;
 		}
+
+		.add-btn {
+			width: 150px;
+			float: right;
+			background-color: #8367d8;
+			color: white;
+
+			svg {
+				height: 25px;
+				width: 25px;
+			}
+		}
+
+		.add-btn:hover {
+			text-decoration: underline;
+		}
 	}
 
 	.start-selling {
@@ -99,9 +115,9 @@
 
 		.sell-nav {
 			background-color: #f3f4f5;
-			height: 40px;
+			height: 50px;
 			padding-top: 0.5em;
-			font-size: large;
+			font-size: 16pt;
 			font-weight: 600;
 		}
 

@@ -18,6 +18,15 @@ class CategoryService {
 			console.error(err);
 		}
 	};
+
+	getCategoryByTitle = async (title) => {
+		try {
+			const response = await axios.get("category/title?title=" + title);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new CategoryService();
