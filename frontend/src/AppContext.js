@@ -13,11 +13,19 @@ export const Provider = ({ children }) => {
 	);
 	const [searchWord, setSearchWord] = useState("");
 	const [fromSearchBar, setFromSearchBar] = useState(false);
+	const [spellCheck, setSpellCheck] = useState("");
 
 	return (
 		<UserContext.Provider value={{ loggedIn, setLoggedIn }}>
 			<SearchContext.Provider
-				value={{ searchWord, setSearchWord, fromSearchBar, setFromSearchBar }}
+				value={{
+					searchWord,
+					setSearchWord,
+					fromSearchBar,
+					setFromSearchBar,
+					spellCheck,
+					setSpellCheck,
+				}}
 			>
 				{children}
 			</SearchContext.Provider>

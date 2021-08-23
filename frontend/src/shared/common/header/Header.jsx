@@ -14,14 +14,14 @@ import {
 	footerText,
 } from "../../styles/PageStyles";
 import { useUserContext, useSearchContext } from "../../../AppContext";
-
+import { spellCheckDistance1 } from "../../../utils/SpellChecker";
 import "./Header.scss";
 
 export default function Header() {
 	const history = useHistory();
 	const [searchKey, setSearchKey] = useState();
 	const { loggedIn, setLoggedIn } = useUserContext();
-	const { setSearchWord, setFromSearchBar } = useSearchContext();
+	const { setSearchWord, setFromSearchBar, setSpellCheck } = useSearchContext();
 
 	const singOut = () => {
 		AuthenticationService.signOut();
@@ -30,6 +30,7 @@ export default function Header() {
 	};
 
 	const searchForItems = () => {
+		setSpellCheck(spellCheckDistance1(searchKey));
 		setSearchWord(searchKey);
 		setFromSearchBar(true);
 		history.push({
