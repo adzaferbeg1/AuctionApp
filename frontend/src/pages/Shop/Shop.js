@@ -56,6 +56,14 @@ export default function Shop(props) {
 		fetchData();
 	}, [itemId]);
 
+	const indexOfLastPage = currentPage * postsPerPage;
+	const indexOfFirstPage = indexOfLastPage - postsPerPage;
+	let currentBiddersPage = [];
+
+	if (bidders !== undefined) {
+		currentBiddersPage = bidders.slice(indexOfFirstPage, indexOfLastPage);
+	}
+
 	useEffect(() => {
 		const fetchItems = async () => {
 			var itemBidders = await BidService.getAllBidders(itemId);
@@ -99,10 +107,6 @@ export default function Shop(props) {
 	if (isLoading) {
 		return null;
 	}
-
-	const indexOfLastPage = currentPage * postsPerPage;
-	const indexOfFirstPage = indexOfLastPage - postsPerPage;
-	const currentBiddersPage = bidders.slice(indexOfFirstPage, indexOfLastPage);
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -178,7 +182,7 @@ export default function Shop(props) {
 					</div>
 				</div>
 			) : null}
-			{user !== undefined && user.id === selectedItem.sellerId ? (
+			{user !== undefined || user.id === selectedItem.sellerId ? (
 				<div className="bidder-container">
 					<Table variant="gray-transparent" responsive>
 						<thead>
@@ -206,11 +210,13 @@ export default function Shop(props) {
 							)}
 						</tbody>
 					</Table>
-					<Pagination
-						postsPerPage={postsPerPage}
-						totalPosts={bidders.length}
-						paginate={paginate}
-					/>
+					{bidders !== undefined ? (
+						<Pagination
+							postsPerPage={postsPerPage}
+							totalPosts={bidders.length}
+							paginate={paginate}
+						/>
+					) : null}
 				</div>
 			) : null}
 		</div>

@@ -40,6 +40,7 @@ const ProductList = (props) => {
 	const { searchWord, spellCheck, setFromSearchBar, fromSearchBar } =
 		useSearchContext();
 	const [didYouMean, setDidYouMean] = useState();
+	const [loading, setLoading] = useState(true);
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -131,13 +132,15 @@ const ProductList = (props) => {
 				promise.then(function (val) {
 					setDidYouMean(val);
 				});
+
+				setLoading(false);
 			} catch (e) {
 				console.error(e);
 			}
 		};
 
 		fetchItems();
-	}, [categoryId, searchWord, spellCheck]);
+	}, [categoryId, searchWord]);
 
 	const sortItems = async (value) => {
 		switch (value) {
@@ -162,78 +165,78 @@ const ProductList = (props) => {
 	};
 
 	const renderItems = () => {
-		if (fromSearchBar && searchBarItems !== undefined) {
-			if (gridView) {
-				return searchBarItems.map((item) => (
-					<GridView
-						key={item.name + "search"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
-			} else {
-				return searchBarItems.map((item) => (
-					<ListView
-						key={item.name + "search-list"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
+		if (loading) {
+			return <h5 style={{ color: "gray" }}>Loading...</h5>;
+		} else {
+			if (fromSearchBar && searchBarItems !== undefined) {
+				if (gridView) {
+					return searchBarItems.map((item) => (
+						<GridView
+							key={item.name + "search"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				} else {
+					return searchBarItems.map((item) => (
+						<ListView
+							key={item.name + "search-list"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				}
+			} else if (!fromSearchBar && chosenItems !== undefined) {
+				if (gridView) {
+					return chosenItems.map((item) => (
+						<GridView
+							key={item.id + "grid"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				} else {
+					return chosenItems.map((item) => (
+						<ListView
+							key={item.id + "grid"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				}
 			}
-		} else if (!fromSearchBar && chosenItems !== undefined) {
-			if (gridView) {
-				return chosenItems.map((item) => (
-					<GridView
-						key={item.id + "grid"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
-			} else {
-				return chosenItems.map((item) => (
-					<ListView
-						key={item.id + "grid"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
-			}
-		} else if (fromSearchBar && searchBarItems.length === 0) {
-			return (
-				<div className="did-you-mean-mssg">No items match your search</div>
-			);
 		}
 	};
 

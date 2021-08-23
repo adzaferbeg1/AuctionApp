@@ -132,6 +132,7 @@ export default function Sell() {
 					endDate: endDate,
 					imgUrl: imgUrl,
 				};
+				console.log(addedItem);
 				history.push({
 					pathname: "/shop",
 					state: { item: addedItem },

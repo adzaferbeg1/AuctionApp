@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { HiOutlineShoppingBag, HiChevronRight, HiPlus } from "react-icons/hi";
 import ItemService from "../../services/ItemService";
+import BidService from "../../services/BidService";
 
 const Seller = ({ user }) => {
 	const [activeBtn, setActiveBtn] = useState(true);
@@ -69,7 +70,7 @@ const Seller = ({ user }) => {
 								>
 									${item.startPrice}
 								</td>
-								<td>No bids</td>
+								<td>Bids no.</td>
 								<td
 									style={
 										item.startPrice === item.currentPrice ? greenText : blueText

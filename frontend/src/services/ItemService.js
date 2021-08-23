@@ -132,6 +132,7 @@ class ItemService {
 			const response = await axios.get(
 				"http://localhost:8080/item/search?name=" + searchWord
 			);
+			return response.data;
 		} catch (err) {
 			console.error(err);
 		}
