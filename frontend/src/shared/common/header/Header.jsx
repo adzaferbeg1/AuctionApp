@@ -115,9 +115,13 @@ export default function Header() {
 				</div>
 				<div className="col">
 					<section className="row">
-						<a className="nav-link links" href="/" style={footerText}>
+						<Link
+							className="nav-link links"
+							to={{ pathname: "/" }}
+							style={footerText}
+						>
 							HOME
-						</a>
+						</Link>
 						<Link
 							className="nav-link links"
 							style={footerText}
@@ -128,9 +132,15 @@ export default function Header() {
 						>
 							SHOP
 						</Link>
-						<a className="nav-link links" href="/myaccount" style={footerText}>
+						<Link
+							className="nav-link links"
+							to={{
+								pathname: "/myaccount",
+							}}
+							style={footerText}
+						>
 							MY ACCOUNT
-						</a>
+						</Link>
 						{loggedIn ? (
 							<a
 								id="log-out-btn"

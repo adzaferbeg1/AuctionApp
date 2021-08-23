@@ -132,6 +132,23 @@ class ItemService {
 			const response = await axios.get(
 				"http://localhost:8080/item/search?name=" + searchWord
 			);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getActiveSellerItems = async (sellerId) => {
+		try {
+			const response = await axios.get("item/activeitems?id=" + sellerId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getSoldSellerItems = async (sellerId) => {
+		try {
+			const response = await axios.get("item/solditems?id=" + sellerId);
 			return response.data;
 		} catch (err) {
 			console.error(err);

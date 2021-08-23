@@ -121,4 +121,15 @@ public class ItemController {
         return itemRepository.findByNameIgnoreCaseContaining(name);
     }
 
+    @GetMapping("/activeitems")
+    public List<Item> getActiveItemsForSeller(@RequestParam Long id) {
+        return itemRepository.findActiveItemsForSeller(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/solditems")
+    public List<Item> getSoldItemsForSeller(@RequestParam Long id) {
+        return itemRepository.findSoldItemsForSeller(id);
+    }
+
 }

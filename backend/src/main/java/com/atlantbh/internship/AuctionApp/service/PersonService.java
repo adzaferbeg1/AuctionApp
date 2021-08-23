@@ -3,6 +3,7 @@ package com.atlantbh.internship.AuctionApp.service;
 import com.atlantbh.internship.AuctionApp.model.Person;
 import com.atlantbh.internship.AuctionApp.repository.PersonRepository;
 import com.atlantbh.internship.AuctionApp.request.LogInRequest;
+import com.atlantbh.internship.AuctionApp.request.UpdateInfoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,9 +35,7 @@ public class PersonService implements UserDetailsService {
     }
 
     public Person signIn(LogInRequest loginRequest) {
-
         return personRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new IllegalStateException("Wrong email"));
     }
-
 }

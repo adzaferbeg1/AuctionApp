@@ -1,0 +1,139 @@
+.settings-tab {
+	margin-bottom: 5em;
+	.deactivate {
+		width: 45%;
+		border: 2px solid #e3e3e3;
+
+		.content-below-nav {
+			text-align: left;
+			padding: 5em 0 5em;
+			margin: auto;
+			width: 70%;
+			margin: auto;
+
+			p {
+				font-size: 19px;
+				padding-bottom: 1em;
+				color: gray;
+			}
+
+			button {
+				border: 2px solid #e3e3e3;
+				height: 40px;
+				width: 200px;
+				background-color: white;
+				font-weight: 600;
+			}
+
+			button:hover {
+				border-color: #8367d8;
+			}
+		}
+	}
+}
+
+.bidders,
+.sellers {
+	table {
+		border: 2px solid #ececec;
+		text-align: center;
+		margin-bottom: 5em;
+
+		th {
+			background-color: #f3f4f5;
+		}
+
+		img {
+			width: 60px;
+			height: 60px;
+			background-color: #f0f0f0;
+		}
+
+		td {
+			color: gray;
+			text-align: center;
+			vertical-align: middle;
+
+			p {
+				color: #8367d8;
+			}
+
+			button {
+				border: 2px solid #e3e3e3;
+				background-color: white;
+				width: 65px;
+				height: 50px;
+				font-weight: 600;
+				box-shadow: 2px 2px 3px #e3e3e3;
+			}
+
+			button:hover {
+				border: 2px solid #8367d8;
+			}
+		}
+	}
+}
+
+.sellers {
+	.switch-btn {
+		text-align: left;
+		button {
+			border: 2px solid #e3e3e3;
+			border-bottom: 0;
+			height: 40px;
+			width: 85px;
+			font-weight: 600;
+			background-color: #f0efef;
+		}
+
+		button:hover {
+			background-color: #8367d8;
+			color: white;
+		}
+	}
+
+	.start-selling {
+		border: 2px solid #e3e3e3;
+		padding-bottom: 5em;
+		margin-bottom: 5em;
+
+		.sell-nav {
+			background-color: #f3f4f5;
+			height: 40px;
+			padding-top: 0.5em;
+			font-size: large;
+			font-weight: 600;
+		}
+
+		.sell-content {
+			padding-top: 5em;
+			svg {
+				color: #8367d8;
+				font-size: 150px;
+			}
+
+			p {
+				font-size: 20px;
+			}
+
+			button {
+				width: 250px;
+				height: 50px;
+				background-color: white;
+				border: 2px solid #8367d8;
+				box-shadow: 2px 5px 5px #8367d8;
+				margin-top: 5em;
+				font-weight: 600;
+
+				svg {
+					color: black;
+					font-size: 30px;
+				}
+			}
+
+			button:hover {
+				border-color: gray;
+			}
+		}
+	}
+}

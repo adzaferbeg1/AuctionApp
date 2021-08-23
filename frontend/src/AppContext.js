@@ -13,9 +13,10 @@ export const Provider = ({ children }) => {
 	);
 	const [searchWord, setSearchWord] = useState("");
 	const [fromSearchBar, setFromSearchBar] = useState(false);
+	const [user, setUser] = useState();
 
 	return (
-		<UserContext.Provider value={{ loggedIn, setLoggedIn }}>
+		<UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser }}>
 			<SearchContext.Provider
 				value={{ searchWord, setSearchWord, fromSearchBar, setFromSearchBar }}
 			>
