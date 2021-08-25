@@ -67,11 +67,11 @@ export default function Sell() {
 			subcategoryTitle
 		);
 		setChosenSubCategory(subcategory);
+		console.log(subcategory);
 	};
 
 	const switchFirstCard = () => {
-		if (
-			itemName === undefined ||
+		if (itemName === undefined ||
 			itemName === "" ||
 			chosenCategory === undefined ||
 			chosenSubCategory === undefined ||
@@ -84,8 +84,7 @@ export default function Sell() {
 	};
 
 	const switchSecondCard = () => {
-		if (
-			userStreet === undefined ||
+		if (userStreet === undefined ||
 			userCity === undefined ||
 			userCountry === undefined ||
 			userZipCode === undefined ||
@@ -98,8 +97,7 @@ export default function Sell() {
 	};
 
 	const addNewItem = async () => {
-		if (
-			startPrice === undefined ||
+		if (startPrice === undefined ||
 			startDate === undefined ||
 			endDate === undefined
 		) {
@@ -121,16 +119,16 @@ export default function Sell() {
 					chosenSubCategory.id
 				);
 				let addedItem = {
-					sellerId: user.id,
 					categoryId: chosenCategory.id,
-					subcategoryId: chosenSubCategory.id,
-					name: itemName,
-					description: itemDescription,
-					startPrice: startPrice,
 					currentPrice: startPrice,
-					startDate: startDate,
+					description: itemDescription,
 					endDate: endDate,
 					imgUrl: imgUrl,
+					name: itemName,
+					sellerId: user.id,
+					startDate: startDate,
+					startPrice: startPrice,
+					subcategoryId: chosenSubCategory.id,
 				};
 				console.log(addedItem);
 				history.push({
@@ -324,6 +322,7 @@ export default function Sell() {
 				</div>
 			);
 	};
+	
 	return (
 		<div className="sell-page">
 			<LabelNavbar label={"ADD ITEM FOR SALE"} />

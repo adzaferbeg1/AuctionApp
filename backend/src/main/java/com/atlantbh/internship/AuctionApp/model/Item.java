@@ -17,11 +17,11 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
+    @NotBlank
     @Column(name = "seller_id", nullable = false)
     private long sellerId;
 
-    @NotNull
+    @NotBlank
     @Column(name = "category_id", nullable = false)
     private long categoryId;
 

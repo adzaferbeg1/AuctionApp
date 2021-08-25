@@ -76,7 +76,20 @@
 
 .sellers {
 	.switch-btn {
-		text-align: left;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.right-tab {
+			width: 300px;
+			text-align: left;
+		}
+
+		.left-tab {
+			width: 300px;
+			text-align: right;
+		}
+
 		button {
 			border: 2px solid #e3e3e3;
 			border-bottom: 0;
@@ -93,9 +106,9 @@
 
 		.add-btn {
 			width: 150px;
-			float: right;
 			background-color: #8367d8;
 			color: white;
+			text-transform: uppercase;
 
 			svg {
 				height: 25px;

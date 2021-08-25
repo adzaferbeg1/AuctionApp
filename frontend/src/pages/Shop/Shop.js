@@ -39,22 +39,23 @@ export default function Shop(props) {
 	useEffect(() => {
 		setSelectedItem(props.location.state.item);
 		setCurrentPrice(props.location.state.item.currentPrice);
-		var loggedIn = AuthenticationService.validateToken();
+		const loggedIn = AuthenticationService.validateToken();
 		setUserLoggedIn(loggedIn);
-		var todaysDate = new Date(Date.now()).toISOString();
+		// const todaysDate = new Date(Date.now()).toISOString();
 	}, [props.location.state.item, itemId]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			var numberOfBids = await BidService.getNoOfBids(itemId);
+			const numberOfBids = await BidService.getNoOfBids(itemId);
 			setNoOfBids(numberOfBids);
-			var relatedProducts = await ItemService.getFilteredByCategory(
+			const relatedProducts = await ItemService.getFilteredByCategory(
 				props.location.state.item.categoryId
 			);
-			setRelatedProducts(relatedProducts.filter((i) => i.id !== itemId));
+			if (relatedProducts !== undefined)
+				setRelatedProducts(relatedProducts.filter((i) => i.id !== itemId));
 		};
 		fetchData();
-	}, [itemId]);
+	}, [itemId, props.location.state.item.categoryId]);
 
 	const indexOfLastPage = currentPage * postsPerPage;
 	const indexOfFirstPage = indexOfLastPage - postsPerPage;
@@ -66,7 +67,7 @@ export default function Shop(props) {
 
 	useEffect(() => {
 		const fetchItems = async () => {
-			var itemBidders = await BidService.getAllBidders(itemId);
+			const itemBidders = await BidService.getAllBidders(itemId);
 			setBidders(itemBidders);
 		};
 
@@ -157,7 +158,8 @@ export default function Shop(props) {
 					<p className="item-desc">{selectedItem.description}</p>
 				</div>
 			</div>
-			{user === undefined || user.id !== selectedItem.sellerId ? (
+			{user === undefined ||
+			(user !== undefined && user.id !== selectedItem.sellerId) ? (
 				<div className="related-products">
 					<div className="title">Related products</div>
 					<div className="grid-card">
@@ -182,7 +184,7 @@ export default function Shop(props) {
 					</div>
 				</div>
 			) : null}
-			{user !== undefined || user.id === selectedItem.sellerId ? (
+			{user !== undefined && user.id === selectedItem.sellerId ? (
 				<div className="bidder-container">
 					<Table variant="gray-transparent" responsive>
 						<thead>

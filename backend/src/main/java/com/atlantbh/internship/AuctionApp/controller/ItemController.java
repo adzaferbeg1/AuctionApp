@@ -137,8 +137,7 @@ public class ItemController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/additem")
     public ResponseEntity addItemForSale(@RequestBody AddItemRequest addItemRequest) {
-        Item item = new Item(
-                addItemRequest.getCategoryId(),
+        final Item item = new Item(addItemRequest.getCategoryId(),
                 addItemRequest.getCurrentPrice(),
                 addItemRequest.getDescription(),
                 addItemRequest.getEndDate(),
@@ -148,7 +147,7 @@ public class ItemController {
                 addItemRequest.getStartDate(),
                 addItemRequest.getStartPrice(),
                 addItemRequest.getSubcategoryId()
-                );
+        );
         itemRepository.save(item);
         return ResponseEntity.ok().body("New item added successfully!");
     }
