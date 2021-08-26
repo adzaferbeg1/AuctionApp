@@ -21,10 +21,13 @@ const ProductList = (props) => {
 	const [categoryId, setCategoryId] = useState(props.location.state.categoryId);
 	const [allCategories, setAllCategories] = useState([]);
 	const [allSubcategories, setAllSubcategories] = useState([]);
+	const [allItems, setAllItems] = useState([]);
 	const [gridView, setGridView] = useState(true);
 	const [chosenItems, setChosenItems] = useState([]);
 	const [minPrice, setMinPrice] = useState();
 	const [maxPrice, setMaxPrice] = useState();
+	const [sliderMinPrice, setSliderMinPrice] = useState();
+	const [sliderMaxPrice, setSliderMaxPrice] = useState();
 	const [avgPrice, setAvgPrice] = useState();
 	const [showSubcategories, setShowSubcategories] = useState(false);
 	const [categoryTag, setCategoryTag] = useState(
@@ -104,10 +107,13 @@ const ProductList = (props) => {
 				setAllSubcategories(allSubcategories);
 				const chosenItems = await ItemService.getDefaultSort(categoryId);
 				setChosenItems(chosenItems);
+				setAllItems(chosenItems);
 				const minPrice = await ItemService.getMinPrice(categoryId);
 				setMinPrice(minPrice);
+				setSliderMinPrice(minPrice);
 				const maxPrice = await ItemService.getMaxPrice(categoryId);
 				setMaxPrice(maxPrice);
+				setSliderMaxPrice(maxPrice);
 				const avgPrice = await ItemService.getAvgPrice(categoryId);
 				setAvgPrice(avgPrice);
 				const searchBarItems = await ItemService.getSearchBarItems(searchWord);
@@ -225,12 +231,14 @@ const ProductList = (props) => {
 	};
 
 	const setMinMaxPrice = (minValue, maxValue) => {
-		setMinPrice(minValue);
-		setMaxPrice(maxValue);
-		const minMaxItems = chosenItems.filter(
-			(item) => item.currentPrice >= minValue && item.currentPrice <= maxValue
+		setSliderMinPrice(minValue);
+		setSliderMaxPrice(maxValue);
+		let minMaxItems = allItems;
+		setChosenItems(
+			minMaxItems.filter(
+				(item) => item.currentPrice >= minValue && item.currentPrice <= maxValue
+			)
 		);
-		setChosenItems(minMaxItems);
 	};
 
 	return (
@@ -315,7 +323,7 @@ const ProductList = (props) => {
 							/>
 						</div>
 						<p>
-							${minPrice}-${maxPrice}
+							${sliderMinPrice}-${sliderMaxPrice}
 						</p>
 						<p>The average price is ${avgPrice}</p>
 					</div>
