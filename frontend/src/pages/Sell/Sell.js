@@ -67,7 +67,6 @@ export default function Sell() {
 			subcategoryTitle
 		);
 		setChosenSubCategory(subcategory);
-		console.log(subcategory);
 	};
 
 	const switchFirstCard = () => {
@@ -130,7 +129,6 @@ export default function Sell() {
 					startPrice: startPrice,
 					subcategoryId: chosenSubCategory.id,
 				};
-				console.log(addedItem);
 				history.push({
 					pathname: "/shop",
 					state: { item: addedItem },
@@ -322,13 +320,25 @@ export default function Sell() {
 				</div>
 			);
 	};
-	
+
 	return (
 		<div className="sell-page">
 			<LabelNavbar label={"ADD ITEM FOR SALE"} />
 			<div className="content-below-nav">
 				<div className="progress-container">
-					<Stepper activeStep={activeCard}>
+					<Stepper
+						activeStep={activeCard}
+						connectorStateColors={true}
+						connectorStyleConfig={{
+							completedColor: "#8367d7",
+							activeColor: "#8367d7",
+							size: "3px",
+						}}
+						styleConfig={{
+							activeBgColor: "#8367d7",
+							completedBgColor: "#8367d8",
+						}}
+					>
 						<Step></Step>
 						<Step></Step>
 						<Step></Step>

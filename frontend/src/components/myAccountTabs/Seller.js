@@ -15,18 +15,16 @@ const Seller = ({ user }) => {
 	const blueText = { color: "blue" };
 	const grayText = { color: "gray" };
 	const history = useHistory();
-	const [loading, setLoading] = useState(true);
+	const [setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const activeItems = await ItemService.getActiveSellerItems(user.id);
 			setActiveItems(activeItems);
-			console.log(activeItems);
 			const soldItems = await ItemService.getSoldSellerItems(user.id);
 			setSoldItems(soldItems);
 			if (activeBtn) setRenderedItems(activeItems);
 			else setRenderedItems(soldItems);
-			console.log(activeItems);
 			setLoading(false);
 		};
 
