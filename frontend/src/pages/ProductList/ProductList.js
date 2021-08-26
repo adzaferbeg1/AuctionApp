@@ -14,7 +14,7 @@ import {
 } from "../../shared/common";
 import { purpleColor } from "../../shared/styles/PageStyles";
 import { useSearchContext } from "../../AppContext";
-
+import RangeSlider from "../../shared/common/rangeSlider/RangeSlider";
 import "./ProductList.scss";
 
 const ProductList = (props) => {
@@ -27,13 +27,9 @@ const ProductList = (props) => {
 	const [maxPrice, setMaxPrice] = useState();
 	const [avgPrice, setAvgPrice] = useState();
 	const [showSubcategories, setShowSubcategories] = useState(false);
-	const [sortTag, setSortTag] = useState("Default sorting");
-	const [gridTag, setGridTag] = useState("Grid View");
 	const [categoryTag, setCategoryTag] = useState(
 		props.location.state.categoryTag
 	);
-	const [showSortTag, setShowSortTag] = useState(true);
-	const [showGridTag, setShowGridTag] = useState(true);
 	const [showCategoryTag, setShowCategoryTag] = useState(true);
 	const [supercategoryId, setSupercategoryId] = useState();
 	const [searchBarItems, setSearchBarItems] = useState([]);
@@ -73,18 +69,6 @@ const ProductList = (props) => {
 			subcategoryId
 		);
 		setChosenItems(subcategoryItems);
-	};
-
-	const removeSortFilter = async () => {
-		setShowSortTag(false);
-		document.getElementById("sorting-drop-menu").value = "Default";
-		await defaultSorting();
-	};
-
-	const removeGridFilter = async () => {
-		setShowGridTag(false);
-		if (gridView) setGridView(false);
-		else setGridView(true);
 	};
 
 	const removeCategoryFilter = async () => {
@@ -240,6 +224,15 @@ const ProductList = (props) => {
 		}
 	};
 
+	const setMinMaxPrice = (minValue, maxValue) => {
+		setMinPrice(minValue);
+		setMaxPrice(maxValue);
+		const minMaxItems = chosenItems.filter(
+			(item) => item.currentPrice >= minValue && item.currentPrice <= maxValue
+		);
+		setChosenItems(minMaxItems);
+	};
+
 	return (
 		<div className="product-list">
 			{fromSearchBar && searchBarItems.length === 0 ? (
@@ -252,12 +245,6 @@ const ProductList = (props) => {
 			) : null}
 			<LabelNavbar label={"ITEMS"} />
 			<div className="tags-container">
-				{showSortTag ? (
-					<FilterTag label={sortTag} onClick={removeSortFilter} />
-				) : null}
-				{showGridTag ? (
-					<FilterTag label={gridTag} onClick={removeGridFilter} />
-				) : null}
 				{showCategoryTag ? (
 					<FilterTag label={categoryTag} onClick={removeCategoryFilter} />
 				) : null}
@@ -320,6 +307,13 @@ const ProductList = (props) => {
 					</div>
 					<div className="price-card">
 						<div className="price-card-title">FILTER BY PRICE</div>
+						<div className="range-container">
+							<RangeSlider
+								minValue={minPrice}
+								maxValue={maxPrice}
+								setMinMaxPrice={setMinMaxPrice}
+							/>
+						</div>
 						<p>
 							${minPrice}-${maxPrice}
 						</p>
@@ -333,8 +327,6 @@ const ProductList = (props) => {
 							className="sorting-menu"
 							onChange={async (e) => {
 								await sortItems(e.target.value);
-								setSortTag(e.target.value);
-								setShowSortTag(true);
 							}}
 						>
 							<option value="Default">Default sorting</option>
@@ -348,8 +340,6 @@ const ProductList = (props) => {
 								autoFocus
 								onClick={() => {
 									setGridView(true);
-									setGridTag("Grid View");
-									setShowGridTag(true);
 								}}
 								style={
 									gridView
@@ -363,8 +353,6 @@ const ProductList = (props) => {
 							<button
 								onClick={() => {
 									setGridView(false);
-									setGridTag("List View");
-									setShowGridTag(true);
 								}}
 								style={
 									!gridView
