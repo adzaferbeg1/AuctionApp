@@ -37,7 +37,10 @@ const ProductList = (props) => {
 	const [showCategoryTag, setShowCategoryTag] = useState(true);
 	const [supercategoryId, setSupercategoryId] = useState();
 	const [searchBarItems, setSearchBarItems] = useState([]);
-	const { searchWord, setFromSearchBar, fromSearchBar } = useSearchContext();
+	const { searchWord, spellCheck, setFromSearchBar, fromSearchBar } =
+		useSearchContext();
+	const [didYouMean, setDidYouMean] = useState();
+	const [loading, setLoading] = useState(true);
 	const history = useHistory();
 
 	const lowPriceSorting = async () => {
@@ -85,6 +88,7 @@ const ProductList = (props) => {
 	};
 
 	const removeCategoryFilter = async () => {
+		if (fromSearchBar) setFromSearchBar(false);
 		setShowCategoryTag(false);
 		setCategoryId("1");
 		setShowSubcategories(false);
@@ -92,17 +96,17 @@ const ProductList = (props) => {
 	};
 
 	const showSubcategoryMenu = (categoryId, display) => {
-		var clickedCategory = document.getElementsByClassName(
+		const clickedCategory = document.getElementsByClassName(
 			"subcategory " + categoryId
 		);
-		for (var i = 0; i < clickedCategory.length; i += 1) {
+		for (let i = 0; i < clickedCategory.length; i += 1) {
 			clickedCategory[i].style.display = display;
 		}
 	};
 
 	const hideOpenedSubcategories = () => {
-		var openCategory = document.getElementsByClassName("subcategory");
-		for (var i = 0; i < openCategory.length; i += 1) {
+		const openCategory = document.getElementsByClassName("subcategory");
+		for (let i = 0; i < openCategory.length; i += 1) {
 			openCategory[i].style.display = "none";
 		}
 	};
@@ -124,6 +128,12 @@ const ProductList = (props) => {
 				setAvgPrice(avgPrice);
 				const searchBarItems = await ItemService.getSearchBarItems(searchWord);
 				setSearchBarItems(searchBarItems);
+				const promise = Promise.resolve(spellCheck);
+				promise.then(function (val) {
+					setDidYouMean(val);
+				});
+
+				setLoading(false);
 			} catch (e) {
 				console.error(e);
 			}
@@ -155,79 +165,91 @@ const ProductList = (props) => {
 	};
 
 	const renderItems = () => {
-		if (fromSearchBar && searchBarItems.length !== 0) {
-			if (gridView) {
-				return searchBarItems.map((item) => (
-					<GridView
-						key={item.name + "search"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
-			} else {
-				return searchBarItems.map((item) => (
-					<ListView
-						key={item.name + "search-list"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
-			}
-		} else if (!fromSearchBar && chosenItems.length !== 0) {
-			if (gridView) {
-				return chosenItems.map((item) => (
-					<GridView
-						key={item.id + "grid"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
-			} else {
-				return chosenItems.map((item) => (
-					<ListView
-						key={item.id + "grid"}
-						id={item.id}
-						name={item.name}
-						startPrice={item.currentPrice}
-						imgUrl={item.imgUrl}
-						onClick={() =>
-							history.push({
-								pathname: "/shop",
-								state: { item: item },
-							})
-						}
-					/>
-				));
+		if (loading) {
+			return <h5 style={{ color: "gray" }}>Loading...</h5>;
+		} else {
+			if (fromSearchBar && searchBarItems !== undefined) {
+				if (gridView) {
+					return searchBarItems.map((item) => (
+						<GridView
+							key={item.name + "search"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				} else {
+					return searchBarItems.map((item) => (
+						<ListView
+							key={item.name + "search-list"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				}
+			} else if (!fromSearchBar && chosenItems !== undefined) {
+				if (gridView) {
+					return chosenItems.map((item) => (
+						<GridView
+							key={item.id + "grid"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				} else {
+					return chosenItems.map((item) => (
+						<ListView
+							key={item.id + "grid"}
+							id={item.id}
+							name={item.name}
+							startPrice={item.currentPrice}
+							imgUrl={item.imgUrl}
+							onClick={() =>
+								history.push({
+									pathname: "/shop",
+									state: { item: item },
+								})
+							}
+						/>
+					));
+				}
 			}
 		}
 	};
 
 	return (
 		<div className="product-list">
+			{fromSearchBar && searchBarItems.length === 0 ? (
+				<div className="did-you-mean">
+					Did you mean?{" "}
+					<div style={{ color: "#8367d8", marginLeft: "0.5em" }}>
+						{didYouMean}
+					</div>
+				</div>
+			) : null}
 			<LabelNavbar label={"ITEMS"} />
 			<div className="tags-container">
 				{showSortTag ? (
@@ -240,49 +262,11 @@ const ProductList = (props) => {
 					<FilterTag label={categoryTag} onClick={removeCategoryFilter} />
 				) : null}
 			</div>
-			<div className="grid-list-btn">
-				<select
-					id="sorting-drop-menu"
-					className="sorting-menu"
-					onChange={async (e) => {
-						await sortItems(e.target.value);
-						setSortTag(e.target.value);
-						setShowSortTag(true);
-					}}
-				>
-					<option value="Default">Default sorting</option>
-					<option value="Newest">Added: New to Old</option>
-					<option value="Oldest">Time left</option>
-					<option value="Low Price">Price: Low to High</option>
-					<option value="High Price">Price: High to Low</option>
-				</select>
-				<button
-					autoFocus
-					onClick={() => {
-						setGridView(true);
-						setGridTag("Grid View");
-						setShowGridTag(true);
-					}}
-				>
-					{" "}
-					<BsFillGrid3X3GapFill /> Grid
-				</button>
-				<button
-					onClick={() => {
-						setGridView(false);
-						setGridTag("List View");
-						setShowGridTag(true);
-					}}
-				>
-					{" "}
-					<FaThList /> List
-				</button>
-			</div>
 			<div className="product-container">
 				<div className="col-sm-4">
 					<div className="list-of-cats">
 						<h6 style={purpleColor}>PRODUCT CATEGORIES</h6>
-						{allCategories.length !== 0
+						{allCategories !== undefined
 							? allCategories.map((category) => (
 									<>
 										<p
@@ -313,7 +297,7 @@ const ProductList = (props) => {
 												/>
 											)}
 										</p>
-										{allSubcategories.length !== 0
+										{allSubcategories !== undefined
 											? allSubcategories.map((subcategory) =>
 													subcategory.supercategory === category.id ? (
 														<p
@@ -343,6 +327,56 @@ const ProductList = (props) => {
 					</div>
 				</div>
 				<div className="col-md-8">
+					<div className="grid-list-btn">
+						<select
+							id="sorting-drop-menu"
+							className="sorting-menu"
+							onChange={async (e) => {
+								await sortItems(e.target.value);
+								setSortTag(e.target.value);
+								setShowSortTag(true);
+							}}
+						>
+							<option value="Default">Default sorting</option>
+							<option value="Newest">Added: New to Old</option>
+							<option value="Oldest">Time left</option>
+							<option value="Low Price">Price: Low to High</option>
+							<option value="High Price">Price: High to Low</option>
+						</select>
+						<div>
+							<button
+								autoFocus
+								onClick={() => {
+									setGridView(true);
+									setGridTag("Grid View");
+									setShowGridTag(true);
+								}}
+								style={
+									gridView
+										? { backgroundColor: "#8367d8", color: "white" }
+										: { backgroundColor: "white", color: "black" }
+								}
+							>
+								{" "}
+								<BsFillGrid3X3GapFill /> Grid
+							</button>
+							<button
+								onClick={() => {
+									setGridView(false);
+									setGridTag("List View");
+									setShowGridTag(true);
+								}}
+								style={
+									!gridView
+										? { backgroundColor: "#8367d8", color: "white" }
+										: { backgroundColor: "white", color: "black" }
+								}
+							>
+								{" "}
+								<FaThList /> List
+							</button>
+						</div>
+					</div>
 					<div className="items-view">{renderItems()}</div>
 				</div>
 			</div>

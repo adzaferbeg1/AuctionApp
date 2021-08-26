@@ -13,6 +13,7 @@ const LandingPage = () => {
 	const [newLastItems, setNewLastItems] = useState([]);
 	const [categories, setCategories] = useState([]);
 	const [highlightItem, setHighlightItem] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -21,14 +22,17 @@ const LandingPage = () => {
 				const categories = await CategoryService.getAllCategories();
 				setCategories(categories);
 				const newArrival = await ItemService.getNewArrival();
-				setHighlightItem(newArrival);
 				const lastChance = await ItemService.getLastChance();
 				setNewLastItems([newArrival, lastChance]);
+				setHighlightItem(newArrival);
+				setLoading(false);
 			} catch (e) {}
 		};
 
 		fetchItems();
 	}, []);
+
+	if (loading) return <h5 style={{ color: "gray" }}>Loading...</h5>;
 
 	return (
 		<div className="landing-page">
@@ -58,7 +62,7 @@ const LandingPage = () => {
 					</ListGroup>
 				</div>
 				<div className="col">
-					{highlightItem.length !== 0 ? (
+					{highlightItem !== undefined ? (
 						<div className="highlighted-item">
 							<img
 								className="highlighted-img"
@@ -118,7 +122,7 @@ const LandingPage = () => {
 				</ul>
 			</div>
 			<div className="row card-container">
-				{newLastItems.length !== 0
+				{newLastItems !== undefined
 					? newLastItems[clicked].map((item) => (
 							<GridView
 								key={item.id}

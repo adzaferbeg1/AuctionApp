@@ -2,6 +2,7 @@ package com.atlantbh.internship.AuctionApp.controller;
 
 import com.atlantbh.internship.AuctionApp.model.Item;
 import com.atlantbh.internship.AuctionApp.repository.ItemRepository;
+import com.atlantbh.internship.AuctionApp.request.AddItemRequest;
 import com.atlantbh.internship.AuctionApp.request.UpdatePriceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -130,6 +131,25 @@ public class ItemController {
     @GetMapping("/solditems")
     public List<Item> getSoldItemsForSeller(@RequestParam Long id) {
         return itemRepository.findSoldItemsForSeller(id);
+    }
+
+    @Transactional
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/additem")
+    public ResponseEntity addItemForSale(@RequestBody AddItemRequest addItemRequest) {
+        final Item item = new Item(addItemRequest.getCategoryId(),
+                addItemRequest.getCurrentPrice(),
+                addItemRequest.getDescription(),
+                addItemRequest.getEndDate(),
+                addItemRequest.getImgUrl(),
+                addItemRequest.getName(),
+                addItemRequest.getSellerId(),
+                addItemRequest.getStartDate(),
+                addItemRequest.getStartPrice(),
+                addItemRequest.getSubcategoryId()
+        );
+        itemRepository.save(item);
+        return ResponseEntity.ok().body("New item added successfully!");
     }
 
 }

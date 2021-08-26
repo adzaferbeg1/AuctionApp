@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { HiOutlineShoppingBag, HiChevronRight } from "react-icons/hi";
+import { HiOutlineShoppingBag, HiChevronRight, HiPlus } from "react-icons/hi";
 import ItemService from "../../services/ItemService";
 
 const Seller = ({ user }) => {
@@ -15,6 +15,7 @@ const Seller = ({ user }) => {
 	const blueText = { color: "blue" };
 	const grayText = { color: "gray" };
 	const history = useHistory();
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -24,6 +25,7 @@ const Seller = ({ user }) => {
 			setSoldItems(soldItems);
 			if (activeBtn) setRenderedItems(activeItems);
 			else setRenderedItems(soldItems);
+			setLoading(false);
 		};
 
 		fetchData();
@@ -69,7 +71,7 @@ const Seller = ({ user }) => {
 								>
 									${item.startPrice}
 								</td>
-								<td>No bids</td>
+								<td>Bids no.</td>
 								<td
 									style={
 										item.startPrice === item.currentPrice ? greenText : blueText
@@ -85,14 +87,14 @@ const Seller = ({ user }) => {
 					</tbody>
 				</Table>
 			);
-		} else {
+		} else if (renderedItems.length === 0) {
 			return (
 				<div className="start-selling">
 					<div className="sell-nav">SELL</div>
 					<div className="sell-content">
 						<HiOutlineShoppingBag />
 						<p>You do not have any scheduled items for sale</p>
-						<button>
+						<button onClick={() => history.push("/sell")}>
 							START SELLING <HiChevronRight />
 						</button>
 					</div>
@@ -104,24 +106,31 @@ const Seller = ({ user }) => {
 	return (
 		<div className="sellers">
 			<div className="switch-btn">
-				<button
-					style={activeBtn ? activeButton : inactiveButton}
-					onClick={() => {
-						setActiveBtn(true);
-						setRenderedItems(activeItems);
-					}}
-				>
-					Active
-				</button>
-				<button
-					style={!activeBtn ? activeButton : inactiveButton}
-					onClick={() => {
-						setActiveBtn(false);
-						setRenderedItems(soldItems);
-					}}
-				>
-					Sold
-				</button>
+				<div className="right-tab">
+					<button
+						style={activeBtn ? activeButton : inactiveButton}
+						onClick={() => {
+							setActiveBtn(true);
+							setRenderedItems(activeItems);
+						}}
+					>
+						Active
+					</button>
+					<button
+						style={!activeBtn ? activeButton : inactiveButton}
+						onClick={() => {
+							setActiveBtn(false);
+							setRenderedItems(soldItems);
+						}}
+					>
+						Sold
+					</button>
+				</div>
+				<div className="left-tab">
+					<button className="add-btn" onClick={() => history.push("/sell")}>
+						<HiPlus /> Add item
+					</button>
+				</div>
 			</div>
 			{renderItems()}
 		</div>

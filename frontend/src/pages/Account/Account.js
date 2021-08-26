@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BsFillPersonFill, BsListUl, BsGearFill } from "react-icons/bs";
 import { ImHammer2 } from "react-icons/im";
 import { LabelNavbar } from "../../shared/common";
@@ -8,8 +8,8 @@ import {
 	Settings,
 	Bids,
 } from "../../components/myAccountTabs/index";
-import "./Account.scss";
 import { useUserContext } from "../../AppContext";
+import "./Account.scss";
 
 export default function Account() {
 	const [showProfile, setShowProfile] = useState(true);
@@ -19,6 +19,20 @@ export default function Account() {
 	const { user } = useUserContext();
 	const activeButton = { backgroundColor: "#8367d8", color: "white" };
 	const inactiveButton = { backgroundColor: "#f0efef", color: "black" };
+
+	const renderComponents = () => {
+		if (user !== undefined) {
+			if (showProfile) {
+				return <Profile user={user} />;
+			} else if (showSeller) {
+				return <Seller user={user} />;
+			} else if (showBids) {
+				return <Bids user={user} />;
+			} else if (showSettings) {
+				return <Settings user={user} />;
+			}
+		}
+	};
 
 	return (
 		<>
@@ -74,12 +88,7 @@ export default function Account() {
 						<BsGearFill /> Settings
 					</button>
 				</div>
-				<div className="page-content">
-					{showProfile && user !== undefined ? <Profile user={user} /> : null}
-					{showSeller && user !== undefined ? <Seller user={user} /> : null}
-					{showBids && user !== undefined ? <Bids user={user} /> : null}
-					{showSettings && user !== undefined ? <Settings user={user} /> : null}
-				</div>
+				<div className="page-content">{renderComponents()}</div>
 			</div>
 		</>
 	);

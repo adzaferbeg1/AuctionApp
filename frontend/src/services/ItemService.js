@@ -132,6 +132,7 @@ class ItemService {
 			const response = await axios.get(
 				"http://localhost:8080/item/search?name=" + searchWord
 			);
+			return response.data;
 		} catch (err) {
 			console.error(err);
 		}
@@ -153,6 +154,40 @@ class ItemService {
 		} catch (err) {
 			console.error(err);
 		}
+	};
+
+	addItemForSale = (
+		categoryId,
+		currentPrice,
+		description,
+		endDate,
+		imgUrl,
+		name,
+		sellerId,
+		startDate,
+		startPrice,
+		subcategoryId
+	) => {
+		return axios
+			.post("item/additem", {
+				categoryId,
+				currentPrice,
+				description,
+				endDate,
+				imgUrl,
+				name,
+				sellerId,
+				startDate,
+				startPrice,
+				subcategoryId,
+			})
+			.then((response) => {
+				return response.data;
+			})
+			.catch((err) => {
+				console.error(err);
+				throw err;
+			});
 	};
 }
 

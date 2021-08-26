@@ -11,37 +11,6 @@
 		}
 	}
 
-	.grid-list-btn {
-		float: right;
-		margin-right: 19%;
-
-		.sorting-menu {
-			width: 200px;
-			height: 40px;
-			margin-top: 0.5em;
-			margin-right: 10em;
-			padding-left: 0.5em;
-			font-weight: 500;
-		}
-
-		.sorting-menu:focus {
-			outline-color: #8367d8;
-		}
-
-		button {
-			border: 0;
-			background-color: white;
-			width: 100px;
-			height: 50px;
-		}
-
-		button:focus,
-		button:active {
-			background-color: #8367d8;
-			color: white;
-		}
-	}
-
 	.product-container {
 		clear: right;
 		display: flex;
@@ -107,10 +76,53 @@
 		}
 
 		.col-md-8 {
+			display: flex;
+			flex-direction: column;
+
+			.grid-list-btn {
+				margin-top: 0.5em;
+				width: 94%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+
+				.sorting-menu {
+					width: 200px;
+					height: 40px;
+					margin-top: 0.5em;
+					font-weight: 500;
+				}
+
+				.sorting-menu:focus {
+					outline-color: #8367d8;
+				}
+
+				button {
+					border: 0;
+					background-color: white;
+					width: 100px;
+					height: 50px;
+				}
+
+				button:focus,
+				button:hover {
+					background-color: #8367d8;
+					color: white;
+				}
+			}
+
 			.items-view {
 				display: flex;
 				flex-wrap: wrap;
 				align-items: flex-start;
+
+				.did-you-mean-mssg {
+					width: 70%;
+					display: flex;
+					flex-direction: row;
+					font-size: 20px;
+					margin-top: 1em;
+				}
 			}
 
 			.single-card {
@@ -160,5 +172,16 @@
 				}
 			}
 		}
+	}
+
+	.did-you-mean {
+		width: 100%;
+		margin: auto;
+		margin-bottom: 1em;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		font-size: 18px;
+		color: gray;
 	}
 }

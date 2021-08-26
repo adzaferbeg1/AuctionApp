@@ -67,7 +67,6 @@
 
 		table {
 			margin-top: 7em;
-			margin-bottom: 10em;
 			text-align: left;
 			border: 2px solid #ececec;
 
@@ -80,6 +79,10 @@
 			th {
 				padding-left: 2em;
 			}
+		}
+
+		.pagination {
+			margin-bottom: 5em;
 		}
 	}
 
@@ -98,5 +101,43 @@
 		background-color: #f7e8c7;
 		color: #ab944e;
 		display: none;
+	}
+
+	.related-products {
+		width: 950px;
+		margin: auto;
+		margin-top: 5em;
+		margin-bottom: 5em;
+
+		.title {
+			font-size: 20pt;
+			text-align: left;
+			border-bottom: 2px solid #e3e3e3;
+		}
+
+		.grid-card {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+			margin-top: 1em;
+
+			.card-element {
+				width: 30%;
+				height: 400px;
+
+				img {
+					margin: 0.5em 0 0.5em;
+					width: 290px;
+					height: 290px;
+					background-color: #e3e3e3;
+				}
+
+				.details {
+					width: 100%;
+					margin: auto;
+					text-align: left;
+				}
+			}
+		}
 	}
 }
