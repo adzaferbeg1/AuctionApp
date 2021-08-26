@@ -1,0 +1,20 @@
+.min-max-range {
+	width: 90%;
+	margin: auto;
+	margin-top: 2em;
+	margin-bottom: 2em;
+
+	.range-slider > .rc-slider-track {
+		background: #dad8d8;
+		border-radius: 1px;
+		height: 3px;
+	}
+
+	.range-slider > .rc-slider-handle {
+		background-image: radial-gradient(circle, #8367d8 40%, white 40%);
+		border: 1px solid #8367d8;
+		width: 20px;
+		height: 20px;
+		margin-top: -7px;
+	}
+}

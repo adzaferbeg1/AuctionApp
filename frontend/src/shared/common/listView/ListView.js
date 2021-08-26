@@ -14,12 +14,14 @@ export const ListView = ({
 			<div className="card" onClick={onClick}>
 				<div className="card-body">
 					<img className="list-item-img" src={imgUrl} alt={name}></img>
-					<h5 className="card-title">{name}</h5>
-					<p className="card-desc">{description}</p>
-					<p className="card-text">Start From ${startPrice}</p>
-					<button>
-						Bid <ImHammer2 />
-					</button>
+					<div>
+						<h5 className="card-title">{name}</h5>
+						<p className="card-desc">{description}</p>
+						<h5 className="card-text">Start From ${startPrice}</h5>
+						<button>
+							Bid <ImHammer2 />
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -15,7 +15,6 @@ const Seller = ({ user }) => {
 	const blueText = { color: "blue" };
 	const grayText = { color: "gray" };
 	const history = useHistory();
-	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -25,7 +24,6 @@ const Seller = ({ user }) => {
 			setSoldItems(soldItems);
 			if (activeBtn) setRenderedItems(activeItems);
 			else setRenderedItems(soldItems);
-			setLoading(false);
 		};
 
 		fetchData();

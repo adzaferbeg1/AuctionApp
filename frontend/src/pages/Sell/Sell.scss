@@ -13,7 +13,11 @@
 
 			.RFS-StepperContainer {
 				.RFS-StepButton {
-					background-color: #8367d8;
+					font-size: 10pt;
+
+					.RFS-StepButtonContent {
+						visibility: hidden;
+					}
 				}
 			}
 		}

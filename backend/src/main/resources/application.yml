@@ -38,4 +38,3 @@ app:
   url: http://localhost:8080
   jwtSecret: secret-key
   jwtExpiration: 900
-  

@@ -1,4 +1,6 @@
 .product-list {
+	margin-bottom: 5em;
+
 	.tags-container {
 		width: 70%;
 		margin: auto;
@@ -59,6 +61,11 @@
 				text-align: left;
 				padding-bottom: 15px;
 				margin-bottom: 5em;
+
+				.range-container {
+					width: 90%;
+					margin: auto;
+				}
 
 				.price-card-title {
 					margin-top: 15px;
