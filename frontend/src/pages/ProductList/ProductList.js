@@ -183,6 +183,7 @@ const ProductList = (props) => {
 							name={item.name}
 							startPrice={item.currentPrice}
 							imgUrl={item.imgUrl}
+							description={item.description}
 							onClick={() =>
 								history.push({
 									pathname: "/shop",
@@ -217,6 +218,7 @@ const ProductList = (props) => {
 							name={item.name}
 							startPrice={item.currentPrice}
 							imgUrl={item.imgUrl}
+							description={item.description}
 							onClick={() =>
 								history.push({
 									pathname: "/shop",

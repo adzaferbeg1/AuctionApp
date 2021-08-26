@@ -6,55 +6,46 @@
 	margin-bottom: 0.7em;
 	text-align: left;
 
-	
 	button {
-		visibility: hidden;
-		border: none;
+		border: 2px solid #e3e3e3;
+		background-color: white;
 		width: 100px;
-		height: 50px;
-		margin: auto;
-		visibility: hidden;
+		height: 35px;
 		float: right;
 
 		svg {
 			margin-left: 0.5em;
+			color: #e3e3e3;
+			font-size: 15pt;
 		}
 	}
 
-	.card {
+	.card-body {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 
 		.list-item-img {
 			width: 250px;
-			height: 270px;
-			float: left;
-			margin-right: 1em;
+			height: 250px;
 			background-color: #f0f0f0;
 		}
-		.card-text {
-			color: #8367d8;
-			font-size: 18pt;
-		}
-		.card-desc {
-			color: gray;
-		}
+		div {
+			width: 255px;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			.card-text {
+				color: #8367d8;
+				margin-bottom: 1em;
+			}
+			.card-desc {
+				color: gray;
+			}
 
-		.card-title {
-			font-weight: bold;
-		}
-	}
-
-	.card:hover {
-		background: rgba(104, 65, 136, 0.3);
-
-		button {
-			visibility: visible;
-		}
-
-		.list-item-img,
-		.card-title,
-		.card-desc,
-		.card-text {
-			visibility: hidden;
+			.card-title {
+				font-weight: bold;
+			}
 		}
 	}
 }
