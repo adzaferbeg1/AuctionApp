@@ -96,17 +96,17 @@ const ProductList = (props) => {
 	};
 
 	const showSubcategoryMenu = (categoryId, display) => {
-		var clickedCategory = document.getElementsByClassName(
+		const clickedCategory = document.getElementsByClassName(
 			"subcategory " + categoryId
 		);
-		for (var i = 0; i < clickedCategory.length; i += 1) {
+		for (let i = 0; i < clickedCategory.length; i += 1) {
 			clickedCategory[i].style.display = display;
 		}
 	};
 
 	const hideOpenedSubcategories = () => {
-		var openCategory = document.getElementsByClassName("subcategory");
-		for (var i = 0; i < openCategory.length; i += 1) {
+		const openCategory = document.getElementsByClassName("subcategory");
+		for (let i = 0; i < openCategory.length; i += 1) {
 			openCategory[i].style.display = "none";
 		}
 	};
@@ -128,7 +128,7 @@ const ProductList = (props) => {
 				setAvgPrice(avgPrice);
 				const searchBarItems = await ItemService.getSearchBarItems(searchWord);
 				setSearchBarItems(searchBarItems);
-				var promise = Promise.resolve(spellCheck);
+				const promise = Promise.resolve(spellCheck);
 				promise.then(function (val) {
 					setDidYouMean(val);
 				});

@@ -67,7 +67,6 @@ export default function Sell() {
 			subcategoryTitle
 		);
 		setChosenSubCategory(subcategory);
-		console.log(subcategory);
 	};
 
 	const switchFirstCard = () => {
@@ -130,7 +129,6 @@ export default function Sell() {
 					startPrice: startPrice,
 					subcategoryId: chosenSubCategory.id,
 				};
-				console.log(addedItem);
 				history.push({
 					pathname: "/shop",
 					state: { item: addedItem },

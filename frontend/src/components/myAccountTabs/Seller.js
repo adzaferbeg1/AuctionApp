@@ -21,12 +21,10 @@ const Seller = ({ user }) => {
 		const fetchData = async () => {
 			const activeItems = await ItemService.getActiveSellerItems(user.id);
 			setActiveItems(activeItems);
-			console.log(activeItems);
 			const soldItems = await ItemService.getSoldSellerItems(user.id);
 			setSoldItems(soldItems);
 			if (activeBtn) setRenderedItems(activeItems);
 			else setRenderedItems(soldItems);
-			console.log(activeItems);
 			setLoading(false);
 		};
 

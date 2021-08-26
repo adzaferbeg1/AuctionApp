@@ -41,7 +41,6 @@ export default function Shop(props) {
 		setCurrentPrice(props.location.state.item.currentPrice);
 		const loggedIn = AuthenticationService.validateToken();
 		setUserLoggedIn(loggedIn);
-		// const todaysDate = new Date(Date.now()).toISOString();
 	}, [props.location.state.item, itemId]);
 
 	useEffect(() => {
