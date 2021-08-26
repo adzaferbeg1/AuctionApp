@@ -48,6 +48,15 @@ Removes this tool and copies build dependencies, configuration files and scripts
 
 ### Second month
 
+- Grid View/List View
+- Sorting filters
+- Subcategory and Price filters
+- User Profile page
+- Seller page
+- 'Did you mean...?' functionality
+- Related Items
+- Recommended Items
+
 ### Third month
 
 

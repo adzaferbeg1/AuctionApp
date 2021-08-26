@@ -320,7 +320,6 @@ export default function Sell() {
 				</div>
 			);
 	};
-
 	return (
 		<div className="sell-page">
 			<LabelNavbar label={"ADD ITEM FOR SALE"} />
