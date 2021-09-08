@@ -36,8 +36,8 @@ export default function Sell() {
 			const address = user.address.split("//");
 			setUserStreet(address[0]);
 			setUserCity(address[1]);
-			setUserCountry(address[2]);
-			setUserZipCode(address[3]);
+			setUserZipCode(address[2]);
+			setUserCountry(address[4]);
 		}
 	};
 

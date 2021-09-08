@@ -89,6 +89,12 @@
 			<version>0.9.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>15.7.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

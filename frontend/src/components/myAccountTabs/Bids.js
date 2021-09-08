@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import AuthenticationService from "../../services/AuthenticationService";
+import BidService from "../../services/BidService";
 import ItemService from "../../services/ItemService";
+import { isAuctionClosed } from "../../utils/DateUtils";
 import "./MyAccountTabs.scss";
 
 const Bids = ({ user }) => {
@@ -11,11 +13,14 @@ const Bids = ({ user }) => {
 	const greenText = { color: "rgb(9, 170, 9)" };
 	const blueText = { color: "blue" };
 	const grayText = { color: "gray" };
+	const [closedBids, setClosedBids] = useState();
 
 	useEffect(() => {
 		const fecthData = async () => {
 			const userBids = await AuthenticationService.findUserBids(user.id);
 			setUserBids(userBids);
+			let closedBids = await BidService.getAllClosedBids(user.id);
+			setClosedBids(closedBids.filter((bid) => bid[1] === user.id));
 		};
 
 		fecthData();
@@ -27,6 +32,32 @@ const Bids = ({ user }) => {
 			pathname: "/shop",
 			state: { item: item },
 		});
+	};
+
+	const finishPayment = async (itemId) => {
+		const item = await ItemService.getItemById(itemId);
+		history.push({
+			pathname: "/payment",
+			state: { item: item },
+		});
+	};
+
+	const displayPayButton = (itemId, highestBid, placedBid, endDate) => {
+		if (closedBids !== undefined) {
+			for (let i = 0; i < closedBids.length; i++) {
+				if (closedBids[i][0] === itemId &&
+					closedBids[i][2] === highestBid &&
+					highestBid === placedBid &&
+					isAuctionClosed(endDate)
+				) {
+					return (
+						<button className="pay-btn" onClick={() => finishPayment(itemId)}>
+							Pay
+						</button>
+					);
+				}
+			}
+		}
 	};
 
 	return (
@@ -44,7 +75,7 @@ const Bids = ({ user }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{userBids.length !== 0 ? (
+					{userBids.length !== 0 && closedBids !== undefined ? (
 						userBids.map((bid, index) => (
 							<tr key={index + ": userBid: " + bid[0]}>
 								<td colSpan="2">
@@ -61,8 +92,9 @@ const Bids = ({ user }) => {
 								<td style={bid[4] === bid[6] ? greenText : blueText}>
 									${bid[6]}
 								</td>
-								<td>
-									<button onClick={() => shopItem(bid[1])}>VIEW</button>
+								<td className="btn-col">
+									<button onClick={() => shopItem(bid[1])}>View</button>
+									{displayPayButton(bid[1], bid[6], bid[4], bid[3])}
 								</td>
 							</tr>
 						))

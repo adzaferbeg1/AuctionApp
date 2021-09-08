@@ -20,4 +20,10 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
     @Query(value = "SELECT COUNT(bid) FROM bid WHERE item_id = ?1", nativeQuery = true)
     Integer getNumberOfBids(long itemId);
 
+    Bid findTop1ByItemIdOrderByBidDesc(long itemId);
+
+    @Query(value = "SELECT b.itemId, b.bidderId, max(b.bid) FROM Bid AS b " +
+                    "GROUP BY b.itemId, b.bidderId ORDER BY b.itemId ASC")
+    List<Object> findAllClosedBids();
+
 }

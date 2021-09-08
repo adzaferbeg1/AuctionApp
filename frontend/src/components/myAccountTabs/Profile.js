@@ -11,7 +11,11 @@ function Profile({ user }) {
 	const [userSurname, setUserSurname] = useState();
 	const [userPhone, setUserPhone] = useState();
 	const [userEmail, setUserEmail] = useState();
-	const [userAddress, setUserAddress] = useState();
+	const [userStreet, setUserStreet] = useState();
+	const [userCity, setUserCity] = useState();
+	const [userZip, setUserZip] = useState();
+	const [userState, setUserState] = useState();
+	const [userCountry, setUserCountry] = useState();
 	const [userSex, setUserSex] = useState();
 	const [userYear, setUserYear] = useState();
 	const [userMonth, setUserMonth] = useState();
@@ -19,8 +23,6 @@ function Profile({ user }) {
 	const [profilePicture, setProfilePicture] = useState([]);
 	const [cardName, setCardName] = useState();
 	const [cardNumber, setCardNumber] = useState();
-	const [cardExpYear, setCardExpYear] = useState();
-	const [cardExpMonth, setCardExpMonth] = useState();
 	const [cardCvc, setCardCvc] = useState();
 	const fileInput = useRef(null);
 	const range = (start, stop, step) =>
@@ -66,13 +68,18 @@ function Profile({ user }) {
 		setProfilePicture("images/guy-profile-pic.PNG");
 		setUserPhone(user.phoneNumber);
 		setUserEmail(user.email);
-		setUserAddress(user.address);
+		if (user.address !== null) {
+			const addressArray = user.address.split("//");
+			setUserStreet(addressArray[0]);
+			setUserCity(addressArray[1]);
+			setUserZip(addressArray[2]);
+			setUserState(addressArray[3]);
+			setUserCountry(addressArray[4]);
+		}
 		setUserSex(user.sex);
 		formatUserDate(user.birthDate);
 		setCardName(user.name + " " + user.surname);
-	}, []);
-
-	useEffect(() => {});
+	}, [user]);
 
 	const changeProfilePicture = async (e) => {
 		const file = e.target.files[0];
@@ -90,8 +97,8 @@ function Profile({ user }) {
 	const saveChanges = async () => {
 		if (userName === "" ||
 			userSurname === "" ||
+			userPhone === null ||
 			userPhone === undefined ||
-			userPhone === "" ||
 			userEmail === ""
 		) {
 			alert("WARNING: All fields in the REQUIRED form must be filled");
@@ -104,14 +111,22 @@ function Profile({ user }) {
 					userYear + "-" + userMonth + "-" + userDay,
 					userPhone,
 					userEmail,
-					userAddress,
+					userStreet +
+						"//" +
+						userCity +
+						"//" +
+						userZip +
+						"//" +
+						userState +
+						"//" +
+						userCountry,
 					userSex,
 					userId
 				);
 				alert("Info successfully saved");
 				window.scrollTo(0, 0);
 			} catch {
-				alert("WARNING: All fields in the REQUIRED form must be filled");
+				alert("Something went wrong");
 				return;
 			}
 		}
@@ -286,12 +301,12 @@ function Profile({ user }) {
 							</label>
 						</div>
 						<div>
-							<select onChange={(e) => setCardExpYear(e.target.value)}>
+							<select>
 								{expYears.map((yr) => (
 									<option key={yr + "exp"}>{yr}</option>
 								))}
 							</select>
-							<select onChange={(e) => setCardExpMonth(e.target.value)}>
+							<select>
 								{expMonths.map((month) => (
 									<option key={month}>{month}</option>
 								))}
@@ -311,25 +326,50 @@ function Profile({ user }) {
 				<div className="content-below-nav">
 					<h3>Address</h3>
 					<label>Street</label>
-					<input type="text" placeholder="e.g. 5th Avenue" />
+					<input
+						value={userStreet}
+						type="text"
+						placeholder="e.g. 5th Avenue"
+						onChange={(e) => setUserStreet(e.target.value)}
+					/>
 					<div className="city-zip-container">
 						<label>City</label>
 						<label>Zip Code</label>
 					</div>
 					<div className="city-zip-container">
-						<input type="text" placeholder="e.g. New York" />
-						<input type="text" placeholder="e.g. 10056" />
+						<input
+							value={userCity}
+							type="text"
+							placeholder="e.g. New York"
+							onChange={(e) => setUserCity(e.target.value)}
+						/>
+						<input
+							value={userZip}
+							type="text"
+							placeholder="e.g. 10056"
+							onChange={(e) => setUserZip(e.target.value)}
+						/>
 					</div>
 					<label>State</label>
-					<input type="text" placeholder="e.g. New York" />
+					<input
+						value={userState}
+						type="text"
+						placeholder="e.g. New York"
+						onChange={(e) => setUserState(e.target.value)}
+					/>
 					<label>Country</label>
-					<input type="text" placeholder="e.g. USA" />
+					<input
+						value={userCountry}
+						type="text"
+						placeholder="e.g. USA"
+						onChange={(e) => setUserCountry(e.target.value)}
+					/>
 				</div>
 			</div>
-			<div className="save-info-btn" >
-			<button onClick={saveChanges}>
-				SAVE INFO <RiArrowRightSLine />
-			</button>
+			<div className="save-info-btn">
+				<button onClick={saveChanges}>
+					SAVE INFO <RiArrowRightSLine />
+				</button>
 			</div>
 		</div>
 	);

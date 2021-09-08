@@ -65,12 +65,32 @@
 				height: 50px;
 				font-weight: 600;
 				box-shadow: 2px 2px 3px #e3e3e3;
+				text-transform: uppercase;
 			}
 
 			button:hover {
 				border: 2px solid #8367d8;
 			}
 		}
+
+		.btn-col {
+			text-align: left;
+		}
+	}
+}
+
+.bidders {
+	.pay-btn {
+		background-color: #8367d8;
+		color: white;
+		border: 2px solid #8367d8;
+		margin-left: 00.5em;
+		box-shadow: 2px 2px 3px #e3e3e3;
+	}
+
+	.pay-btn:hover {
+		border: 2px solid black;
+		box-shadow: 2px 2px 3px #e3e3e3;
 	}
 }
 

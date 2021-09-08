@@ -50,4 +50,10 @@ public class BidController {
         return bidRepository.getNumberOfBids(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/highestbids")
+    public List<Object> getAllHighestBids() {
+        return bidRepository.findAllClosedBids();
+    }
+
 }
