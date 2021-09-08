@@ -23,7 +23,7 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
     Bid findTop1ByItemIdOrderByBidDesc(long itemId);
 
     @Query(value = "SELECT b.itemId, b.bidderId, max(b.bid) FROM Bid AS b " +
-                    "GROUP BY b.itemId, b.bidderId ORDER BY b.itemId ASC")
+            "GROUP BY b.itemId, b.bidderId ORDER BY b.itemId ASC")
     List<Object> findAllClosedBids();
 
 }
