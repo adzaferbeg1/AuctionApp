@@ -35,6 +35,15 @@ class BidService {
 			console.error(err);
 		}
 	};
+
+	getHighestBidderForItem = async (itemId) => {
+		try {
+			const response = await axios.get("bid/highestbidder?item_id=" + itemId);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new BidService();
