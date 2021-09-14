@@ -6,6 +6,9 @@ import CategoryService from "../../services/CategoryService";
 import ItemService from "../../services/ItemService";
 import { landingPageButton, purpleColor } from "../../shared/styles/PageStyles";
 import { GridView } from "../../shared/common";
+import NotificationService from "../../services/NotificationService";
+import { useNotificationContext } from "../../AppContext";
+import { generateNotifications } from "../../utils/NotificationUtils";
 import "./LandingPage.scss";
 
 const LandingPage = () => {
@@ -15,6 +18,7 @@ const LandingPage = () => {
 	const [highlightItem, setHighlightItem] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const history = useHistory();
+	const { setAllNotifications } = useNotificationContext();
 
 	useEffect(() => {
 		const fetchItems = async () => {
@@ -25,6 +29,9 @@ const LandingPage = () => {
 				const lastChance = await ItemService.getLastChance();
 				setNewLastItems([newArrival, lastChance]);
 				setHighlightItem(newArrival);
+				const allNotifications = await NotificationService.getAll();
+				setAllNotifications(allNotifications);
+				await generateNotifications(newArrival, allNotifications);
 				setLoading(false);
 			} catch (e) {}
 		};

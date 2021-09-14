@@ -12,6 +12,7 @@ import { LabelNavbar } from "../../shared/common";
 import RelatedItemView from "../../shared/common/RelatedItemView";
 import { purpleColor, landingPageButton } from "../../shared/styles/PageStyles";
 import { isAuctionClosed } from "../../utils/DateUtils";
+import { notifyHighestBidder } from "../../utils/NotificationUtils";
 import "./Shop.scss";
 
 export default function Shop(props) {
@@ -72,7 +73,6 @@ export default function Shop(props) {
 			const itemBidders = await BidService.getAllBidders(itemId);
 			setBidders(itemBidders);
 		};
-
 		fetchItems();
 		setIsLoading(false);
 	}, [currentPrice, itemId]);
@@ -83,8 +83,8 @@ export default function Shop(props) {
 			alertSuccess("flex");
 			alertWarning("none");
 			setCurrentPrice(bid);
-			await BidService.placeBid(
-				selectedItem.id,
+			await notifyHighestBidder(user.id, itemId, selectedItem.name);
+			await BidService.placeBid(selectedItem.id,
 				AuthenticationService.getCurrentUser().personId,
 				bid
 			);

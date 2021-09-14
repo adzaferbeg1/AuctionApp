@@ -9,24 +9,85 @@
 		overflow-x: hidden;
 	}
 
-	.button-menu {
-		margin-top: 2em;
-		margin-bottom: 2em;
-		button {
-			border: 0;
-			height: 40px;
+	.account-main-nav {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+		position: relative;
+
+		.button-menu {
+			margin-top: 2em;
+			margin-bottom: 2em;
+			button {
+				border: 0;
+				height: 40px;
+				margin-right: 1em;
+				font-weight: 600;
+				background-color: #f0efef;
+			}
+
+			button:hover {
+				background-color: #8367d8;
+				color: white;
+			}
+
+			svg {
+				margin-right: 0.5em;
+			}
+		}
+
+		.notification {
+			margin-top: 0.6em;
+			height: 30px;
+			position: relative;
+
+			svg:nth-child(1) {
+				font-size: 20pt;
+			}
+
+			svg:nth-child(2) {
+				color: red;
+				font-size: 5pt;
+				position: absolute;
+				right: 0;
+				bottom: 5pt;
+			}
+
+			svg:hover {
+				cursor: pointer;
+			}
+		}
+		.notification-menu {
+			z-index: 2;
+			position: fixed;
+			right: 0;
 			margin-right: 1em;
-			font-weight: 600;
-			background-color: #f0efef;
-		}
+			margin-top: 4em;
+			width: 250px;
+			text-align: left;
+			background-color: white;
+			box-shadow: 3px 3px 15px #8367d7;
 
-		button:hover {
-			background-color: #8367d8;
-			color: white;
-		}
+			svg {
+				font-size: 15pt;
+				margin-left: 0.2em;
+			}
 
-		svg {
-			margin-right: 0.5em;
+			p {
+				padding-left: 0.5em;
+				padding-bottom: 0.5em;
+				margin-top: 1em;
+				border-bottom: 1px solid #e3e3e3;
+				color: gray;
+				font-size: 10pt;
+			}
+
+			p:hover {
+				cursor: pointer;
+				text-decoration: underline;
+				color: #8367d7;
+			}
 		}
 	}
 

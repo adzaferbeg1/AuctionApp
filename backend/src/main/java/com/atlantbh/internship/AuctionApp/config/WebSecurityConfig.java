@@ -31,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/bid/**",
             "/card/**",
             "/checkout/**",
+            "/notification/**"
     };
 
     @Autowired
