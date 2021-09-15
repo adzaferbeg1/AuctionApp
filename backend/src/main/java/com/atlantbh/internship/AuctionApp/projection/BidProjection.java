@@ -7,6 +7,6 @@ public interface BidProjection {
     UUID getId();
     String getName();
     String getSurname();
-    double getBid();
+    Double getBid();
     LocalDateTime getDate();
 }

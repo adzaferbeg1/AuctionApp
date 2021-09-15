@@ -23,7 +23,7 @@ public class Item {
     private long categoryId;
 
     @Column(name = "subcategory_id")
-    private Integer subcategoryId;
+    private long subcategoryId;
 
     @NotBlank
     @Column(name = "name")
@@ -60,7 +60,8 @@ public class Item {
                 final long sellerId,
                 final LocalDateTime startDate,
                 final double startPrice,
-                final Integer subcategoryId) {
+                final long subcategoryId
+    ) {
 
         this.sellerId = sellerId;
         this.categoryId = categoryId;
@@ -158,7 +159,7 @@ public class Item {
         return subcategoryId;
     }
 
-    public void setSubcategoryId(Integer subcategoryId) {
+    public void setSubcategoryId(long subcategoryId) {
         this.subcategoryId = subcategoryId;
     }
 }

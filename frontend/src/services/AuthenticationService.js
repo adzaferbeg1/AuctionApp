@@ -4,7 +4,7 @@ import { decode } from "jsonwebtoken";
 class AuthenticationService {
 	signin = (email, password) => {
 		return axios
-			.post("auth/signin", { email, password })
+			.post("auth/sign-in", { email, password })
 			.then((response) => {
 				if (response.data.token) {
 					localStorage.setItem("user", JSON.stringify(response.data));
@@ -22,7 +22,7 @@ class AuthenticationService {
 	}
 
 	register = async (name, surname, username, email, password) => {
-		return axios.post("auth/signup", {
+		return axios.post("auth/sign-up", {
 			name,
 			surname,
 			username,
@@ -54,7 +54,7 @@ class AuthenticationService {
 
 	findUserByEmail = async (email) => {
 		try {
-			const response = await axios.get("auth/useremail?email=" + email);
+			const response = await axios.get("auth/user-email?email=" + email);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -70,7 +70,7 @@ class AuthenticationService {
 		sex,
 		id
 	) => {
-		return axios.post("auth/updateinformation", {
+		return axios.post("auth/update-information", {
 			name,
 			surname,
 			birthDate,
@@ -84,7 +84,7 @@ class AuthenticationService {
 
 	deactivateAccount = async (id) => {
 		try {
-			await axios.get("auth/deleteuser?id=" + id);
+			await axios.get("auth/delete-user?id=" + id);
 		} catch (err) {
 			console.error(err);
 		}
@@ -92,7 +92,7 @@ class AuthenticationService {
 
 	findUserBids = async (id) => {
 		try {
-			const response = await axios.get("auth/userbids?id=" + id);
+			const response = await axios.get("auth/user-bids?id=" + id);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -101,7 +101,7 @@ class AuthenticationService {
 
 	getUserAddress = async (id) => {
 		try {
-			const response = await axios.get("auth/useraddress?id=" + id);
+			const response = await axios.get("auth/user-address?id=" + id);
 			return response.data;
 		} catch (err) {
 			console.error(err);

@@ -50,7 +50,7 @@ public class PersonController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/signin")
+    @PostMapping("/sign-in")
     public ResponseEntity authenticateUser(@RequestBody LogInRequest loginRequest) {
         final Person person = personService.signIn(loginRequest);
         if (!passwordEncoder.matches(loginRequest.getPassword(), person.getPassword()))
@@ -60,46 +60,42 @@ public class PersonController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/signup")
+    @PostMapping("/sign-up")
     public ResponseEntity registerUser(@RequestBody RegisterRequest signUpRequest) {
         if (personRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity("Fail -> Username is already taken!",
                     HttpStatus.BAD_REQUEST);
         }
-
         if (personRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
         }
-
         Person user = new Person(
                 signUpRequest.getName(),
                 signUpRequest.getSurname(),
                 signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                passwordEncoder.encode(signUpRequest.getPassword()));
-
-
+                passwordEncoder.encode(signUpRequest.getPassword())
+        );
         personRepository.save(user);
-
         return ResponseEntity.ok().body("User registered successfully!");
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/singleuser")
-    public Person getUserById(@RequestParam Long id) {
-        return personRepository.findUserById(id);
+    @GetMapping("/single-user")
+    public Optional<Person> getUserById(@RequestParam Long id) {
+        return personRepository.findById(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/useremail")
+    @GetMapping("/user-email")
     public Optional<Person> getUserByEmail(@RequestParam String email) {
         return personRepository.findByEmail(email);
     }
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/updateinformation")
+    @PostMapping("/update-information")
     public ResponseEntity updateProfileInformation(@RequestBody UpdateInfoRequest updateInfoRequest) {
         personRepository.updateProfileInformation(
                 updateInfoRequest.getName(),
@@ -115,20 +111,24 @@ public class PersonController {
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/deleteuser")
+    @GetMapping("/delete-user")
     public void deleteUserFromDB(@RequestParam Long id) {
-        personRepository.deleteUser(id);
+        personRepository.deleteById(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/userbids")
+    @GetMapping("/user-bids")
     public List<Object> getBidsForUser(@RequestParam Long id) {
         return personRepository.findUserBids(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/useraddress")
-    public Optional<String> getAddressForUser(@RequestParam Long id) {
-        return personRepository.findAddressById(id);
+    @GetMapping("/user-address")
+    public String getUserAddress(@RequestParam Long id) {
+        final Optional<Person> person = personRepository.findById(id);
+        if (person.isPresent()) {
+            return person.get().getAddress();
+        }
+        return "";
     }
 }

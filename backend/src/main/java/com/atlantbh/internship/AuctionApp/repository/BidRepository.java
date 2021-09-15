@@ -17,8 +17,7 @@ public interface BidRepository extends JpaRepository<Bid, Long> {
             "where bid.item_id= ?1", nativeQuery = true)
     List<BidProjection> getAllBiddersForItem(long itemId);
 
-    @Query(value = "SELECT COUNT(bid) FROM bid WHERE item_id = ?1", nativeQuery = true)
-    Integer getNumberOfBids(long itemId);
+    Integer countByItemId(long itemId);
 
     Bid findTop1ByItemIdOrderByBidDesc(long itemId);
 
