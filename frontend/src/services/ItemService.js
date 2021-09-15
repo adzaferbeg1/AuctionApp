@@ -3,7 +3,7 @@ import axios from "axios";
 class ItemService {
 	getLastChance = async () => {
 		try {
-			const response = await axios.get("item/lastchance");
+			const response = await axios.get("item/last-chance");
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -12,7 +12,7 @@ class ItemService {
 
 	getNewArrival = async () => {
 		try {
-			const response = await axios.get("item/newarrival");
+			const response = await axios.get("item/new-arrival");
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -29,7 +29,7 @@ class ItemService {
 	};
 
 	placeBid = async (bid, itemId) => {
-		return axios.post("/item/placebid", {
+		return axios.post("/item/place-bid", {
 			itemId,
 			bid,
 		});
@@ -37,7 +37,7 @@ class ItemService {
 
 	getItemById = async (id) => {
 		try {
-			const response = await axios.get("item/singleitem?id=" + id);
+			const response = await axios.get("item/single-item?id=" + id);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -46,7 +46,7 @@ class ItemService {
 
 	getLowPriceSort = async (categoryId) => {
 		try {
-			const response = await axios.get("item/sortpricelow?id=" + categoryId);
+			const response = await axios.get("item/sort-price-low?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -55,7 +55,7 @@ class ItemService {
 
 	getHighPriceSort = async (categoryId) => {
 		try {
-			const response = await axios.get("item/sortpricehigh?id=" + categoryId);
+			const response = await axios.get("item/sort-price-high?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -64,7 +64,7 @@ class ItemService {
 
 	getDefaultSort = async (categoryId) => {
 		try {
-			const response = await axios.get("item/sortdefault?id=" + categoryId);
+			const response = await axios.get("item/sort-default?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -73,7 +73,7 @@ class ItemService {
 
 	getTimeLeftSort = async (categoryId) => {
 		try {
-			const response = await axios.get("item/timeleft?id=" + categoryId);
+			const response = await axios.get("item/time-left?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -82,7 +82,7 @@ class ItemService {
 
 	getNewToOldSort = async (categoryId) => {
 		try {
-			const response = await axios.get("item/newtoold?id=" + categoryId);
+			const response = await axios.get("item/new-to-old?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -91,7 +91,7 @@ class ItemService {
 
 	getMinPrice = async (categoryId) => {
 		try {
-			const response = await axios.get("item/minprice?id=" + categoryId);
+			const response = await axios.get("item/min-price?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -100,7 +100,7 @@ class ItemService {
 
 	getMaxPrice = async (categoryId) => {
 		try {
-			const response = await axios.get("item/maxprice?id=" + categoryId);
+			const response = await axios.get("item/max-price?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -109,7 +109,7 @@ class ItemService {
 
 	getAvgPrice = async (categoryId) => {
 		try {
-			const response = await axios.get("item/avgprice?id=" + categoryId);
+			const response = await axios.get("item/avg-price?id=" + categoryId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -119,7 +119,7 @@ class ItemService {
 	getSubcategoryItems = async (subcategoryId) => {
 		try {
 			const response = await axios.get(
-				"item/subcategoryitems?id=" + subcategoryId
+				"item/subcategory-items?id=" + subcategoryId
 			);
 			return response.data;
 		} catch (err) {
@@ -129,9 +129,7 @@ class ItemService {
 
 	getSearchBarItems = async (searchWord) => {
 		try {
-			const response = await axios.get(
-				"http://localhost:8080/item/search?name=" + searchWord
-			);
+			const response = await axios.get("item/search?name=" + searchWord);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -140,7 +138,7 @@ class ItemService {
 
 	getActiveSellerItems = async (sellerId) => {
 		try {
-			const response = await axios.get("item/activeitems?id=" + sellerId);
+			const response = await axios.get("item/active-items?id=" + sellerId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -149,15 +147,14 @@ class ItemService {
 
 	getSoldSellerItems = async (sellerId) => {
 		try {
-			const response = await axios.get("item/solditems?id=" + sellerId);
+			const response = await axios.get("item/sold-items?id=" + sellerId);
 			return response.data;
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
-	addItemForSale = (
-		categoryId,
+	addItemForSale = (categoryId,
 		currentPrice,
 		description,
 		endDate,
@@ -169,7 +166,7 @@ class ItemService {
 		subcategoryId
 	) => {
 		return axios
-			.post("item/additem", {
+			.post("item/add-item", {
 				categoryId,
 				currentPrice,
 				description,

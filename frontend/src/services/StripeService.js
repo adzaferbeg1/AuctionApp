@@ -3,7 +3,7 @@ import axios from "axios";
 class StripeService {
 	processCardPayment = async (amount, id) => {
 		try {
-			const response = await axios.post("checkout/card_payment", {
+			const response = await axios.post("checkout/card-payment", {
 				amount: amount,
 				id: id,
 			});

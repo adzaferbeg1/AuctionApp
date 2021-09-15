@@ -20,9 +20,9 @@ public class CardController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/userinformation")
+    @GetMapping("/user-information")
     public Card getUserCardInfo(@RequestParam Long id) {
-        return categoryRepository.findUserCardInformation(id);
+        return categoryRepository.findByPersonId(id);
     }
 
 }

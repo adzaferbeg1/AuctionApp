@@ -2,7 +2,7 @@ import axios from "axios";
 
 class BidService {
 	placeBid = async (itemId, bidderId, bid) => {
-		return axios.post("/bid/placebid", {
+		return axios.post("/bid/place-bid", {
 			itemId,
 			bidderId,
 			bid,
@@ -20,7 +20,7 @@ class BidService {
 
 	getNoOfBids = async (id) => {
 		try {
-			const response = await axios.get("bid/bidsno?id=" + id);
+			const response = await axios.get("bid/bids-no?id=" + id);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -29,7 +29,7 @@ class BidService {
 
 	getAllClosedBids = async () => {
 		try {
-			const response = await axios.get("bid/highestbids");
+			const response = await axios.get("bid/highest-bids");
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -38,7 +38,7 @@ class BidService {
 
 	getHighestBidderForItem = async (itemId) => {
 		try {
-			const response = await axios.get("bid/highestbidder?item_id=" + itemId);
+			const response = await axios.get("bid/highest-bidder?item_id=" + itemId);
 			return response.data;
 		} catch (err) {
 			console.error(err);

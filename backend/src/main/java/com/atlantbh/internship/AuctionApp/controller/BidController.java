@@ -29,7 +29,7 @@ public class BidController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/placebid")
+    @PostMapping("/place-bid")
     public ResponseEntity placeBid(@Valid @RequestBody BidRequest bidRequest) {
 
         Bid bid = new Bid(bidRequest.getItemId(), bidRequest.getBidderId(), bidRequest.getBid());
@@ -45,19 +45,19 @@ public class BidController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/bidsno")
+    @GetMapping("/bids-no")
     public Integer getNumberOfBidsForItem(@RequestParam Long id) {
-        return bidRepository.getNumberOfBids(id);
+        return bidRepository.countByItemId(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/highestbids")
+    @GetMapping("/highest-bids")
     public List<Object> getAllHighestBids() {
         return bidRepository.findAllClosedBids();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/highestbidder")
+    @GetMapping("/highest-bidder")
     public Bid getHighestBidder(@RequestParam(name = "item_id") long itemId) {
         return bidRepository.findTop1ByItemIdOrderByBidDesc(itemId);
     }

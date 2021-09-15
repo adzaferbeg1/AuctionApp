@@ -21,7 +21,7 @@ public class PaymentController {
     private String stripeSecretKey;
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/card_payment")
+    @PostMapping("/card-payment")
     public ResponseEntity processCardPayment(@RequestBody CardPaymentRequest cardPaymentRequest) {
         Stripe.apiKey = stripeSecretKey;
         try {
