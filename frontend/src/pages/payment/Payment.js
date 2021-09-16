@@ -64,7 +64,6 @@ export default function Payment({ closedItem }) {
 					id
 				);
 				if (response.status === 200) {
-					console.log("Successful payment");
 					setSuccess(true);
 				}
 			} catch (error) {
