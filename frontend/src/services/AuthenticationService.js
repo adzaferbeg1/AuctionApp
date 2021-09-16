@@ -1,5 +1,6 @@
 import axios from "axios";
 import { decode } from "jsonwebtoken";
+import { SetAuthorisationHeader } from "config/AppConfig";
 
 class AuthenticationService {
 	signin = (email, password) => {
@@ -70,21 +71,27 @@ class AuthenticationService {
 		sex,
 		id
 	) => {
-		return axios.post("auth/update-information", {
-			name,
-			surname,
-			birthDate,
-			phoneNo,
-			email,
-			address,
-			sex,
-			id,
-		});
+		const auth = SetAuthorisationHeader();
+		return axios.post(
+			"auth/update-information",
+			{
+				name,
+				surname,
+				birthDate,
+				phoneNo,
+				email,
+				address,
+				sex,
+				id,
+			},
+			auth
+		);
 	};
 
 	deactivateAccount = async (id) => {
 		try {
-			await axios.get("auth/delete-user?id=" + id);
+			const auth = SetAuthorisationHeader();
+			await axios.get("auth/delete-user?id=" + id, auth);
 		} catch (err) {
 			console.error(err);
 		}
@@ -92,7 +99,8 @@ class AuthenticationService {
 
 	findUserBids = async (id) => {
 		try {
-			const response = await axios.get("auth/user-bids?id=" + id);
+			const auth = SetAuthorisationHeader();
+			const response = await axios.get("auth/user-bids?id=" + id, auth);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -101,7 +109,8 @@ class AuthenticationService {
 
 	getUserAddress = async (id) => {
 		try {
-			const response = await axios.get("auth/user-address?id=" + id);
+			const auth = SetAuthorisationHeader();
+			const response = await axios.get("auth/user-address?id=" + id, auth);
 			return response.data;
 		} catch (err) {
 			console.error(err);

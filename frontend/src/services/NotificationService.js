@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SetAuthorisationHeader } from "config/AppConfig";
 
 class NotificationService {
 	postNotification = (itemId, userId, message, seen) => {
@@ -24,7 +25,8 @@ class NotificationService {
 
 	updateSeenStatus = async (id) => {
 		try {
-			await axios.get("notification/set-seen?id=" + id);
+			const auth = SetAuthorisationHeader();
+			await axios.get("notification/set-seen?id=" + id, auth);
 		} catch (err) {
 			console.error(err);
 		}
@@ -32,8 +34,10 @@ class NotificationService {
 
 	getNotificationsForUser = async (userId) => {
 		try {
+			const auth = SetAuthorisationHeader();
 			const response = await axios.get(
-				"notification/user-notifications?id=" + userId
+				"notification/user-notifications?id=" + userId,
+				auth
 			);
 			return response.data;
 		} catch (err) {

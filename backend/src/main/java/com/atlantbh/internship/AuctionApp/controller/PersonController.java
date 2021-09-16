@@ -119,7 +119,7 @@ public class PersonController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/user-bids")
     public List<Object> getBidsForUser(@RequestParam Long id) {
-        return personRepository.findUserBids(id);
+        return personRepository.findPlacedBids(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

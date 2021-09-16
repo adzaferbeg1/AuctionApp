@@ -2,6 +2,7 @@ package com.atlantbh.internship.AuctionApp.controller;
 
 import com.atlantbh.internship.AuctionApp.model.Bid;
 import com.atlantbh.internship.AuctionApp.projection.BidProjection;
+import com.atlantbh.internship.AuctionApp.projection.HighestItemBidProjection;
 import com.atlantbh.internship.AuctionApp.repository.BidRepository;
 import com.atlantbh.internship.AuctionApp.request.BidRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,8 @@ public class BidController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/highest-bids")
-    public List<Object> getAllHighestBids() {
-        return bidRepository.findAllClosedBids();
+    public List<HighestItemBidProjection> getAllHighestBids() {
+        return bidRepository.findHighestPlacedItemBid();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

@@ -34,5 +34,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             "item.end_date AS item_end, bid.bid AS bid_value, " +
             "(SELECT COUNT(bid) FROM bid WHERE bid.item_id=item.id) as bids_no, item.current_price AS highest_bid " +
             "FROM bid INNER JOIN item ON bid.item_id=item.id WHERE bid.bidder_id= ?1", nativeQuery = true)
-    List<Object> findUserBids(long id);
+    List<Object> findPlacedBids(long id);
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/card")
 public class CardController {
@@ -21,7 +23,7 @@ public class CardController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/user-information")
-    public Card getUserCardInfo(@RequestParam Long id) {
+    public Optional<Card> getUserCardInfo(@RequestParam Long id) {
         return categoryRepository.findByPersonId(id);
     }
 
