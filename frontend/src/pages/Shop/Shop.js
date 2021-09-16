@@ -79,8 +79,7 @@ export default function Shop(props) {
 
 	const placeItemBid = async () => {
 		if (selectedItem.currentPrice < bid ||
-			(selectedItem.currentPrice === bid && noOfBids < 1))
-			{
+			(selectedItem.currentPrice === bid && noOfBids < 1)){
 			alertSuccess("flex");
 			alertWarning("none");
 			setCurrentPrice(bid);
