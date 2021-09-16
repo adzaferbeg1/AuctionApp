@@ -1,6 +1,6 @@
 import React from "react";
 import { TiDeleteOutline } from "react-icons/ti";
-import "./FilterTag.scss";
+import "shared/common/filterTag/FilterTag.scss";
 
 const FilterTag = ({ label, onClick }) => {
 	return (

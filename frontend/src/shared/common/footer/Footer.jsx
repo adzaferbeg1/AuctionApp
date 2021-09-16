@@ -1,13 +1,10 @@
 import React from "react";
-
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { TiSocialInstagram, TiSocialGooglePlus } from "react-icons/ti";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-
-import { footerSocialIcon } from "../../styles/PageStyles";
-
-import "./Footer.scss";
+import { footerSocialIcon } from "shared/styles/PageStyles";
+import "shared/common/footer/Footer.scss";
 
 export default function Footer() {
 	return (

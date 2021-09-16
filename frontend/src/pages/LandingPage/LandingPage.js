@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { ListGroup } from "react-bootstrap";
 import { RiArrowRightSLine } from "react-icons/ri";
-import CategoryService from "../../services/CategoryService";
-import ItemService from "../../services/ItemService";
-import { landingPageButton, purpleColor } from "../../shared/styles/PageStyles";
-import { GridView } from "../../shared/common";
-import NotificationService from "../../services/NotificationService";
-import { useNotificationContext } from "../../AppContext";
-import { generateNotifications } from "../../utils/NotificationUtils";
+import CategoryService from "services/CategoryService";
+import ItemService from "services/ItemService";
+import { landingPageButton, purpleColor } from "shared/styles/PageStyles";
+import { GridView } from "shared/common";
+import NotificationService from "services/NotificationService";
+import { useNotificationContext } from "AppContext";
+import { generateNotifications } from "utils/NotificationUtils";
 import "./LandingPage.scss";
 
 const LandingPage = () => {

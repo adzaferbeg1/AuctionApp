@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 import { FaSearch, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { TiSocialInstagram, TiSocialGooglePlus } from "react-icons/ti";
 import { useHistory } from "react-router-dom";
-import AuthenticationService from "../../../services/AuthenticationService";
+import AuthenticationService from "services/AuthenticationService";
 import {
 	headerSocialIcon,
 	headerLoginReg,
 	headerPlainText,
 	footerText,
-} from "../../styles/PageStyles";
-import { useUserContext, useSearchContext } from "../../../AppContext";
-import { spellCheckDistance1 } from "../../../utils/SpellChecker";
-import "./Header.scss";
+} from "shared/styles/PageStyles";
+import { useUserContext, useSearchContext } from "AppContext";
+import { spellCheckDistance1 } from "utils/SpellChecker";
+import "shared/common/header/Header.scss";
 
 export default function Header() {
 	const history = useHistory();

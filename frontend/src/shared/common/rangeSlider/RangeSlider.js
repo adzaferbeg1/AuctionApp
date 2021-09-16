@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Range } from "rc-slider";
 import "rc-slider/assets/index.css";
-import "./RangeSlider.scss";
+import "shared/common/rangeSlider/RangeSlider.scss";
 
 const RangeSlider = ({ minValue, maxValue, setMinMaxPrice }) => {
 	const [min, setMin] = useState();

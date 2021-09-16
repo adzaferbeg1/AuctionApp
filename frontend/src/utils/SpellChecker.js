@@ -1,5 +1,5 @@
-import CategoryService from "../services/CategoryService";
-import ItemService from "../services/ItemService";
+import CategoryService from "services/CategoryService";
+import ItemService from "services/ItemService";
 
 export const spellCheckDistance1 = async (word) => {
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";

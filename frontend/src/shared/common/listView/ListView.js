@@ -1,6 +1,6 @@
 import React from "react";
 import { ImHammer2 } from "react-icons/im";
-import "./ListView.scss";
+import "shared/common/listView/ListView.scss";
 
 export const ListView = ({
 	name,

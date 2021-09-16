@@ -3,17 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
-import { useUserContext } from "../../AppContext";
-import Pagination from "../../components/Pagination";
-import AuthenticationService from "../../services/AuthenticationService";
-import BidService from "../../services/BidService";
-import ItemService from "../../services/ItemService";
-import { LabelNavbar } from "../../shared/common";
-import RelatedItemView from "../../shared/common/RelatedItemView";
-import { purpleColor, landingPageButton } from "../../shared/styles/PageStyles";
-import { isAuctionClosed } from "../../utils/DateUtils";
-import { notifyHighestBidder } from "../../utils/NotificationUtils";
-import "./Shop.scss";
+import { useUserContext } from "AppContext";
+import Pagination from "components/Pagination";
+import AuthenticationService from "services/AuthenticationService";
+import BidService from "services/BidService";
+import ItemService from "services/ItemService";
+import { LabelNavbar } from "shared/common";
+import RelatedItemView from "shared/common/RelatedItemView";
+import { purpleColor, landingPageButton } from "shared/styles/PageStyles";
+import { isAuctionClosed } from "utils/DateUtils";
+import { notifyHighestBidder } from "utils/NotificationUtils";
+import "pages/shop/Shop.scss";
 
 export default function Shop(props) {
 	const [itemId] = useState(props.location.state.item.id);

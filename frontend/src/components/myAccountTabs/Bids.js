@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import AuthenticationService from "../../services/AuthenticationService";
-import BidService from "../../services/BidService";
-import ItemService from "../../services/ItemService";
-import { isAuctionClosed } from "../../utils/DateUtils";
-import { finishPayment } from "../../utils/PaymentUtil";
+import AuthenticationService from "services/AuthenticationService";
+import BidService from "services/BidService";
+import ItemService from "services/ItemService";
+import { isAuctionClosed } from "utils/DateUtils";
+import { finishPayment } from "utils/PaymentUtil";
 import "./MyAccountTabs.scss";
 
 const Bids = ({ user }) => {

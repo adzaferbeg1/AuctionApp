@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { HiOutlineShoppingBag, HiChevronRight, HiPlus } from "react-icons/hi";
-import ItemService from "../../services/ItemService";
+import ItemService from "services/ItemService";
 
 const Seller = ({ user }) => {
 	const [activeBtn, setActiveBtn] = useState(true);

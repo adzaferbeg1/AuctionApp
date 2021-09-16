@@ -7,10 +7,10 @@ import {
 	IoIosHome,
 } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
-import { useUserContext } from "../../AppContext";
-import { LabelNavbar } from "../../shared/common/index";
-import StripeService from "../../services/StripeService";
-import "./Payment.scss";
+import { useUserContext } from "AppContext";
+import { LabelNavbar } from "shared/common/index";
+import StripeService from "services/StripeService";
+import "pages/payment/Payment.scss";
 import { Link } from "react-router-dom";
 
 export default function Payment({ closedItem }) {

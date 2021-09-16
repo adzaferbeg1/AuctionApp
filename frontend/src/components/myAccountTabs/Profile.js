@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { RiArrowRightSLine } from "react-icons/ri";
-import AuthenticationService from "../../services/AuthenticationService";
-import LabelNavbar from "../../shared/common/LabelNavbar";
-import { findMonth } from "../../utils/DateUtils";
+import AuthenticationService from "services/AuthenticationService";
+import LabelNavbar from "shared/common/LabelNavbar";
+import { findMonth } from "utils/DateUtils";
 
 function Profile({ user }) {
 	const [userId, setUserId] = useState();
