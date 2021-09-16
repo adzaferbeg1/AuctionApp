@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SetAuthorisationHeader } from "config/AppConfig";
 
 class ItemService {
 	getLastChance = async () => {
@@ -29,10 +30,15 @@ class ItemService {
 	};
 
 	placeBid = async (bid, itemId) => {
-		return axios.post("/item/place-bid", {
-			itemId,
-			bid,
-		});
+		const auth = SetAuthorisationHeader();
+		return axios.post(
+			"/item/place-bid",
+			{
+				itemId,
+				bid,
+			},
+			auth
+		);
 	};
 
 	getItemById = async (id) => {
@@ -154,7 +160,8 @@ class ItemService {
 		}
 	};
 
-	addItemForSale = (categoryId,
+	addItemForSale = (
+		categoryId,
 		currentPrice,
 		description,
 		endDate,
@@ -165,19 +172,24 @@ class ItemService {
 		startPrice,
 		subcategoryId
 	) => {
+		const auth = SetAuthorisationHeader();
 		return axios
-			.post("item/add-item", {
-				categoryId,
-				currentPrice,
-				description,
-				endDate,
-				imgUrl,
-				name,
-				sellerId,
-				startDate,
-				startPrice,
-				subcategoryId,
-			})
+			.post(
+				"item/add-item",
+				{
+					categoryId,
+					currentPrice,
+					description,
+					endDate,
+					imgUrl,
+					name,
+					sellerId,
+					startDate,
+					startPrice,
+					subcategoryId,
+				},
+				auth
+			)
 			.then((response) => {
 				return response.data;
 			})

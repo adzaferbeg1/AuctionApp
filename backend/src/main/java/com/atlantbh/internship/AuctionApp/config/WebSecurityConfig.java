@@ -24,14 +24,48 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final String[] routes = {
-            "/auth/**",
+    private final String[] publicRoutes = {
+            "/bid/bids-no",
+            "/bid/highest-bids",
+            "/bid/highest-bidder",
             "/category/**",
-            "/item/**",
-            "/bid/**",
-            "/card/**",
-            "/checkout/**",
-            "/notification/**"
+            "/item/sold-items",
+            "/item/active-items",
+            "/item/subcategory-items",
+            "/item/search",
+            "/item/avg-price",
+            "/item/min-price",
+            "/item/max-price",
+            "/item/time-left",
+            "/item/new-to-old",
+            "/item/sort-default",
+            "/item/sort-price-high",
+            "/item/sort-price-low",
+            "/item/single-item",
+            "/item/category",
+            "/item/last-chance",
+            "/item/new-arrival",
+            "/notification/all-notifications",
+            "/notification/post-notification",
+            "/auth/sign-in",
+            "/auth/sign-up",
+            "/auth/single-user",
+            "/auth/user-email",
+    };
+
+    private final String[] privateRoutes = {
+            "/bid/place-bid",
+            "/bid/bidders",
+            "/card/user-information",
+            "/item/place-bid",
+            "/item/add-item",
+            "/notification/set-seen",
+            "/notification/user-notifications",
+            "/checkout/card-payment",
+            "/auth/update-information",
+            "/auth/delete-user",
+            "/auth/user-bids",
+            "/auth/user-address",
     };
 
     @Autowired
@@ -71,9 +105,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(routes)
+                .antMatchers(publicRoutes)
                 .permitAll()
-                .anyRequest()
+                .and()
+                .authorizeRequests()
+                .antMatchers(privateRoutes)
                 .authenticated()
                 .and()
                 .exceptionHandling()
