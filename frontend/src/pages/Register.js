@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-import Authentication from "../services/AuthenticationService";
-import { LabelNavbar } from "../shared/common";
+import Authentication from "services/AuthenticationService";
+import { LabelNavbar } from "shared/common";
 import {
 	registerInput,
 	registerLink,
 	registerPlainText,
-} from "../shared/styles/PageStyles";
+} from "shared/styles/PageStyles";
 
-import "../shared/styles/RegisterLogin.scss";
+import "shared/styles/RegisterLogin.scss";
 
 export default function Register() {
 	const [name, setName] = useState("");

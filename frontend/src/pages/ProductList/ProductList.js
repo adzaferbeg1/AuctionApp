@@ -4,18 +4,18 @@ import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { BiPlus, BiMinus } from "react-icons/bi";
 
-import CategoryService from "../../services/CategoryService";
-import ItemService from "../../services/ItemService";
+import CategoryService from "services/CategoryService";
+import ItemService from "services/ItemService";
 import {
 	GridView,
 	ListView,
 	LabelNavbar,
 	FilterTag,
-} from "../../shared/common";
-import { purpleColor } from "../../shared/styles/PageStyles";
-import { useSearchContext } from "../../AppContext";
-import RangeSlider from "../../shared/common/rangeSlider/RangeSlider";
-import "./ProductList.scss";
+} from "shared/common";
+import { purpleColor } from "shared/styles/PageStyles";
+import { useSearchContext } from "AppContext";
+import RangeSlider from "shared/common/rangeSlider/RangeSlider";
+import "pages/productList/ProductList.scss";
 
 const ProductList = (props) => {
 	const [categoryId, setCategoryId] = useState(props.location.state.categoryId);

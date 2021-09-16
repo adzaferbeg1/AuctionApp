@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import AuthenticationService from "./services/AuthenticationService";
+import AuthenticationService from "services/AuthenticationService";
 
 export const UserContext = createContext({});
 export const SearchContext = createContext({});

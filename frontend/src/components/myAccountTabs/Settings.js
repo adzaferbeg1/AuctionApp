@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import AuthenticationService from "../../services/AuthenticationService";
-import { LabelNavbar } from "../../shared/common";
-import { useUserContext } from "../../AppContext";
+import AuthenticationService from "services/AuthenticationService";
+import { LabelNavbar } from "shared/common";
+import { useUserContext } from "AppContext";
 import "./MyAccountTabs.scss";
 
 const Settings = ({ user }) => {

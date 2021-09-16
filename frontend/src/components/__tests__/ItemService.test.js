@@ -1,4 +1,4 @@
-import ItemService from "../../services/ItemService";
+import ItemService from "services/ItemService";
 
 /**
  * @jest-environment node

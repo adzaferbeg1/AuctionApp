@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Step, Stepper } from "react-form-stepper";
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
-import { LabelNavbar } from "../../shared/common";
-import { useUserContext } from "../../AppContext";
-import CategoryService from "../../services/CategoryService";
-import ItemService from "../../services/ItemService";
-import "./Sell.scss";
+import { LabelNavbar } from "shared/common";
+import { useUserContext } from "AppContext";
+import CategoryService from "services/CategoryService";
+import ItemService from "services/ItemService";
+import "pages/sell/Sell.scss";
 
 export default function Sell() {
 	const { user } = useUserContext();

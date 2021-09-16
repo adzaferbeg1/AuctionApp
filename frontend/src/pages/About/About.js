@@ -1,7 +1,7 @@
 import React from "react";
 
-import { LabelNavbar } from "../../shared/common";
-import { aboutDivCol, aboutDivRow } from "../../shared/styles/PageStyles";
+import { LabelNavbar } from "shared/common";
+import { aboutDivCol, aboutDivRow } from "shared/styles/PageStyles";
 
 import "./About.scss";
 

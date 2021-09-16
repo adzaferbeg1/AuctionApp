@@ -1,4 +1,4 @@
-import AuthenticationService from "../../services/AuthenticationService";
+import AuthenticationService from "services/AuthenticationService";
 
 /**
  * @jest-environment node
