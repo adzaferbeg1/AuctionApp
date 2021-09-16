@@ -11,6 +11,7 @@ import ItemService from "../../services/ItemService";
 import { LabelNavbar } from "../../shared/common";
 import RelatedItemView from "../../shared/common/RelatedItemView";
 import { purpleColor, landingPageButton } from "../../shared/styles/PageStyles";
+import { isAuctionClosed } from "../../utils/DateUtils";
 import "./Shop.scss";
 
 export default function Shop(props) {
@@ -26,7 +27,8 @@ export default function Shop(props) {
 	const history = useHistory();
 	const [relatedProducts, setRelatedProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [postsPerPage] = useState(3);
+	const [postsPerPage] = useState(5);
+	const [closedAuction, setClosedAuction] = useState();
 
 	const alertSuccess = (display) => {
 		document.getElementById("highest-bid").style.display = display;
@@ -38,6 +40,7 @@ export default function Shop(props) {
 
 	useEffect(() => {
 		setSelectedItem(props.location.state.item);
+		setClosedAuction(isAuctionClosed(props.location.state.item.endDate));
 		setCurrentPrice(props.location.state.item.currentPrice);
 		const loggedIn = AuthenticationService.validateToken();
 		setUserLoggedIn(loggedIn);
@@ -75,10 +78,8 @@ export default function Shop(props) {
 	}, [currentPrice, itemId]);
 
 	const placeItemBid = async () => {
-		if (
-			selectedItem.currentPrice < bid ||
-			(selectedItem.currentPrice === bid && noOfBids < 1)
-		) {
+		if (selectedItem.currentPrice < bid ||
+			(selectedItem.currentPrice === bid && noOfBids < 1)){
 			alertSuccess("flex");
 			alertWarning("none");
 			setCurrentPrice(bid);
@@ -109,6 +110,13 @@ export default function Shop(props) {
 	}
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+	const enableBidPlacing = () => {
+		if (userLoggedIn && !closedAuction) {
+			return false;
+		} else {
+			return true;
+		}
+	};
 
 	return (
 		<div className="shop-page">
@@ -129,20 +137,26 @@ export default function Shop(props) {
 				</div>
 				<div className="item-info">
 					<h1>{selectedItem.name}</h1>
-					<h5 style={purpleColor}>
-						Start from - ${parseInt(currentPrice) + 1}
-					</h5>
+					{closedAuction ? (
+						<h5 style={{ color: "#8367d8", textTransform: "uppercase" }}>
+							Auction closed
+						</h5>
+					) : (
+						<h5 style={purpleColor}>
+							Start from - ${parseInt(currentPrice) + 1}
+						</h5>
+					)}
 					<div className="bid-container">
 						<input
 							type="text"
-							disabled={!userLoggedIn}
+							disabled={enableBidPlacing()}
 							value={bid}
 							onChange={(e) => setBid(e.target.value)}
 							name="bid"
 						></input>
 						<button
 							style={landingPageButton}
-							disabled={!userLoggedIn}
+							disabled={enableBidPlacing()}
 							onClick={placeItemBid}
 						>
 							PLACE BID <RiArrowRightSLine />{" "}
@@ -178,6 +192,8 @@ export default function Shop(props) {
 										}
 									/>
 								);
+							} else {
+								return null;
 							}
 						})}
 					</div>

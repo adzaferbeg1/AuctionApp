@@ -44,5 +44,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
                     "FROM bid INNER JOIN item ON bid.item_id=item.id WHERE bid.bidder_id= ?1", nativeQuery = true)
     List<Object> findUserBids(long id);
 
-
+    @Query(value = "SELECT p.address FROM Person as p WHERE p.id = ?1")
+    Optional<String> findAddressById(long id);
 }

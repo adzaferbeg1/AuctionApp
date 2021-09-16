@@ -28,3 +28,8 @@ export const findMonth = (month) => {
 			return "January";
 	}
 };
+
+export const isAuctionClosed = (endDate) => {
+	const itemDate = new Date(endDate);
+	return Date.now() >= itemDate;
+};

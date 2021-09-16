@@ -78,7 +78,7 @@ const Seller = ({ user }) => {
 									${item.currentPrice}
 								</td>
 								<td>
-									<button onClick={() => shopItem(item.id)}>VIEW</button>
+									<button onClick={() => shopItem(item.id)}>View</button>
 								</td>
 							</tr>
 						))}

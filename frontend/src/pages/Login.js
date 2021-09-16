@@ -45,7 +45,7 @@ export default function Login() {
 		<div className="reg-login">
 			<LabelNavbar label={"LOGIN"} />
 
-			<Form className="register-form" onSubmit={loginButton} val>
+			<Form className="register-form" onSubmit={loginButton}>
 				<h4 className="register-heading">LOGIN</h4>
 
 				<Form.Group>

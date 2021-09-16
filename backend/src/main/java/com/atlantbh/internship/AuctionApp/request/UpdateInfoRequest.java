@@ -2,7 +2,6 @@ package com.atlantbh.internship.AuctionApp.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 
 public class UpdateInfoRequest {
     @NotBlank

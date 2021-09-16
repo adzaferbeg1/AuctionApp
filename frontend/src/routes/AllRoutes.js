@@ -3,16 +3,17 @@ import { Route, Switch } from "react-router-dom";
 
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
-import About from "../pages/About/About";
+import About from "../pages/about/About";
 import Privacy from "../pages/Privacy";
 import Terms from "../pages/Terms";
 import Shop from "../pages/Shop/Shop";
-import Account from "../pages/Account/Account";
+import Account from "../pages/account/Account";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
-import LandingPage from "../pages/LandingPage/LandingPage";
-import ProductList from "../pages/ProductList/ProductList";
-import Sell from "../pages/Sell/Sell";
+import LandingPage from "../pages/landingPage/LandingPage";
+import ProductList from "../pages/productList/ProductList";
+import Sell from "../pages/sell/Sell";
+import StripePayment from "../components/StripePayment";
 
 const AllRoutes = () => {
 	return (
@@ -27,6 +28,7 @@ const AllRoutes = () => {
 			<PublicRoute exact path="/login" component={Login} />
 			<PrivateRoute path="/myaccount" component={Account} />
 			<PrivateRoute path="/sell" component={Sell} />
+			<PrivateRoute path="/payment" component={StripePayment} />
 		</Switch>
 	);
 };

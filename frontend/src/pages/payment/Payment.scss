@@ -1,0 +1,126 @@
+.payment-tab {
+	.payment-card {
+		width: 50%;
+		margin: auto;
+		margin-top: 2em;
+		margin-bottom: 5em;
+		border: 2px solid #e3e3e3;
+
+		.payment-tab-div {
+			text-align: left;
+			background-color: #f3f4f5;
+			width: 100%;
+			font-size: 15pt;
+
+			svg {
+				font-size: 18pt;
+				margin-bottom: 0.1em;
+				margin-right: 0.1em;
+			}
+
+			label {
+				padding-left: 2em;
+				text-transform: uppercase;
+				padding-top: 0.5em;
+			}
+		}
+
+		.card-inputs {
+			display: flex;
+			flex-direction: column;
+			width: 50%;
+			margin: auto;
+			text-align: left;
+			margin-top: 5em;
+			margin-bottom: 5em;
+
+			.StripeElement {
+				border-bottom: 2px solid #e3e3e3;
+				margin-bottom: 2em;
+			}
+
+			label {
+				font-weight: 600;
+			}
+
+			input {
+				border: 0;
+				border-bottom: 2px solid #e3e3e3;
+				margin-bottom: 1.2em;
+			}
+
+			.zip-input,
+			.zip-label {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+
+			.zip-input {
+				input {
+					width: 130px;
+				}
+			}
+
+			.zip-label {
+				label {
+					width: 130px;
+				}
+			}
+
+			.back-btn {
+				width: 30%;
+				margin-bottom: 3em;
+			}
+
+			.pay-btn {
+				background-color: #8367d8;
+				color: white;
+			}
+
+			.pay-btn:hover,
+			.pay-btn:focus {
+				background-color: white;
+				color: black;
+			}
+
+			.pay-btn:disabled {
+				background-color: #e3e3e3;
+				color: white;
+			}
+
+			button {
+				text-transform: uppercase;
+				border: 0;
+				height: 40px;
+				width: 100%;
+				background-color: white;
+				color: black;
+				box-shadow: 3px 3px #e3e3e3;
+				border: 2px solid #8367d8;
+				font-weight: 600;
+			}
+
+			button:hover,
+			button:focus {
+				background-color: #8367d8;
+				color: white;
+			}
+		}
+
+		.success-payment {
+			font-size: 13pt;
+			padding-bottom: 1em;
+			color: gray;
+
+			svg {
+				color: #8367d8;
+				font-size: 20pt;
+			}
+
+			a {
+				color: #8367d8;
+			}
+		}
+	}
+}
