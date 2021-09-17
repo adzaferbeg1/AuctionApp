@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/checkout")
 public class PaymentController {
 
-    @Value("${app.STRIPE_SECRET_KEY}")
+    @Value("${STRIPE_SECRET_KEY}")
     private String stripeSecretKey;
 
     @CrossOrigin(origins = "http://localhost:3000")

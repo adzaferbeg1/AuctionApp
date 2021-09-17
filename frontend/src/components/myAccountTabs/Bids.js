@@ -21,7 +21,7 @@ const Bids = ({ user }) => {
 			const userBids = await AuthenticationService.findUserBids(user.id);
 			setUserBids(userBids);
 			let highestBids = await BidService.getHighestItemBids(user.id);
-			setHighestBids(highestBids.filter((bid) => bid[1] === user.id));
+			setHighestBids(highestBids.filter((bid) => bid.bidderId === user.id));
 		};
 
 		fecthData();
