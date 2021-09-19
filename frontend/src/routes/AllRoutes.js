@@ -14,6 +14,8 @@ import LandingPage from "pages/landingPage/LandingPage";
 import ProductList from "pages/productList/ProductList";
 import Sell from "pages/sell/Sell";
 import StripePayment from "components/StripePayment";
+import ResetPassword from "pages/resetPassword/ResetPassword";
+import VerifyPassword from "pages/resetPassword/VerifyPassword";
 
 const AllRoutes = () => {
 	return (
@@ -29,6 +31,8 @@ const AllRoutes = () => {
 			<PrivateRoute path="/myaccount" component={Account} />
 			<PrivateRoute path="/sell" component={Sell} />
 			<PrivateRoute path="/payment" component={StripePayment} />
+			<PublicRoute path="/reset-password" component={ResetPassword} />
+			<PublicRoute path="/verify-password" component={VerifyPassword} />
 		</Switch>
 	);
 };

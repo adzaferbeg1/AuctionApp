@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 
 import { LabelNavbar } from "shared/common";
@@ -82,6 +82,12 @@ export default function Login() {
 				>
 					LOGIN
 				</Button>
+				<Link
+					style={{ color: "#8367d8"}}
+					to="/reset-password"
+				>
+					Forgot Password?
+				</Link>
 			</Form>
 		</div>
 	);

@@ -16,13 +16,11 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-
   mail:
-    host: localhost
-    port: 1025
-    username: hello
-    password: hello
-
+    host: smtp.mailtrap.io
+    port: 2525
+    username: 5e9ac088682d63
+    password: bd8871b488a73a
     properties:
       mail:
         smtp:

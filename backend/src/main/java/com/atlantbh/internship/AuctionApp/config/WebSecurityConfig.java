@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/auth/sign-up",
             "/auth/single-user",
             "/auth/user-email",
+            "/auth/reset-password",
     };
 
     private final String[] privateRoutes = {
@@ -66,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/auth/delete-user",
             "/auth/user-bids",
             "/auth/user-address",
+            "/auth/save-new-password",
     };
 
     @Autowired

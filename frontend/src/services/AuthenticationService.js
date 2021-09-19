@@ -116,6 +116,37 @@ class AuthenticationService {
 			console.error(err);
 		}
 	};
+
+	resetPassword = async (email) => {
+		return axios
+			.post("auth/reset-password?email=" + email)
+			.then((response) => {
+				return response;
+			})
+			.catch((err) => {
+				console.error(err);
+				throw err;
+			});
+	};
+
+	saveNewPassword = async (token, password, email) => {
+		return axios
+			.post(
+				"auth/save-new-password",
+				{
+					password: password,
+					email: email,
+				},
+				{ headers: { Authorization: `Bearer ${token}` } }
+			)
+			.then((response) => {
+				return response;
+			})
+			.catch((err) => {
+				console.error(err);
+				throw err;
+			});
+	};
 }
 
 export default new AuthenticationService();

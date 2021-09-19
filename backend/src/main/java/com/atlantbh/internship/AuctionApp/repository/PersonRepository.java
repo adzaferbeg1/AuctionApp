@@ -35,4 +35,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             "(SELECT COUNT(bid) FROM bid WHERE bid.item_id=item.id) as bids_no, item.current_price AS highest_bid " +
             "FROM bid INNER JOIN item ON bid.item_id=item.id WHERE bid.bidder_id= ?1", nativeQuery = true)
     List<Object> findPlacedBids(long id);
+
+    @Modifying
+    @Query(value = "UPDATE Person p SET p.password = ?1 WHERE p.email = ?2")
+    void resetPassword(String password, String email);
 }

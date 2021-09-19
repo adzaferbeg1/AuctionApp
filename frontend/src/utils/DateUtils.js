@@ -1,3 +1,5 @@
+import { decode } from "jsonwebtoken";
+
 export const findMonth = (month) => {
 	switch (month) {
 		case "01":
@@ -33,4 +35,9 @@ export const isAuctionClosed = (endDate) => {
 	const currentDate = new Date(Date.now()).toISOString();
 	const itemDate = new Date(endDate).toISOString();
 	return currentDate >= itemDate;
+};
+
+export const isTokenValid = (token) => {
+	const exp = decode(token, { complete: true }).payload.exp;
+	return Date.now() < exp * 1000;
 };
