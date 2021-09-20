@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
 import {
 	IoIosArrowBack,
@@ -11,7 +12,6 @@ import { useUserContext } from "../../AppContext";
 import { LabelNavbar } from "../../shared/common/index";
 import StripeService from "../../services/StripeService";
 import "./Payment.scss";
-import { Link } from "react-router-dom";
 
 export default function Payment({ closedItem }) {
 	const [showCardInfo, setShowCardInfo] = useState(false);
