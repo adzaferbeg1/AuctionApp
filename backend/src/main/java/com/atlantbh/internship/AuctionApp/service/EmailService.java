@@ -25,7 +25,6 @@ public class EmailService {
         helper.setSubject(subject);
         helper.setText(generateEmailBody(to, token), true);
         javaMailSender.send(message);
-        System.out.println("Mail sent");
     }
 
     private String generateEmailBody(String email, String token) {

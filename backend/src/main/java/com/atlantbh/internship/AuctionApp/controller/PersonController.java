@@ -148,7 +148,8 @@ public class PersonController {
     @PostMapping("/save-new-password")
     public ResponseEntity saveNewPassword(@RequestBody ResetPasswordRequest request) {
         try {
-            personRepository.resetPassword(passwordEncoder.encode(request.getPassword()),
+            personRepository.resetPassword(
+                    passwordEncoder.encode(request.getPassword()),
                     request.getEmail()
             );
             return ResponseEntity.ok().body("Password has been updated");
