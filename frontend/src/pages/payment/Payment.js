@@ -11,6 +11,7 @@ import { TiTick } from "react-icons/ti";
 import { useUserContext } from "AppContext";
 import { LabelNavbar } from "shared/common/index";
 import StripeService from "services/StripeService";
+
 import "pages/payment/Payment.scss";
 
 export default function Payment({ closedItem }) {
