@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { BsFillPersonFill, BsListUl, BsGearFill } from "react-icons/bs";
 import { ImHammer2 } from "react-icons/im";
-import { LabelNavbar } from "../../shared/common";
+import { LabelNavbar } from "shared/common";
 import {
 	Profile,
 	Seller,
 	Settings,
 	Bids,
-} from "../../components/myAccountTabs/index";
-import { useUserContext } from "../../AppContext";
+} from "components/myAccountTabs/index";
+import { useUserContext } from "AppContext";
 import { FaBell, FaCircle } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
-import { finishPayment } from "../../utils/PaymentUtil";
-import NotificationService from "../../services/NotificationService";
+import { finishPayment } from "utils/PaymentUtil";
+import NotificationService from "services/NotificationService";
 import "./Account.scss";
-import ItemService from "../../services/ItemService";
+import ItemService from "services/ItemService";
 
 export default function Account() {
 	const [showProfile, setShowProfile] = useState(true);

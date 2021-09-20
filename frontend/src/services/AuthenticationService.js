@@ -1,10 +1,11 @@
 import axios from "axios";
 import { decode } from "jsonwebtoken";
+import { SetAuthorisationHeader } from "config/AppConfig";
 
 class AuthenticationService {
 	signin = (email, password) => {
 		return axios
-			.post("auth/signin", { email, password })
+			.post("auth/sign-in", { email, password })
 			.then((response) => {
 				if (response.data.token) {
 					localStorage.setItem("user", JSON.stringify(response.data));
@@ -22,7 +23,7 @@ class AuthenticationService {
 	}
 
 	register = async (name, surname, username, email, password) => {
-		return axios.post("auth/signup", {
+		return axios.post("auth/sign-up", {
 			name,
 			surname,
 			username,
@@ -54,7 +55,7 @@ class AuthenticationService {
 
 	findUserByEmail = async (email) => {
 		try {
-			const response = await axios.get("auth/useremail?email=" + email);
+			const response = await axios.get("auth/user-email?email=" + email);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -70,21 +71,27 @@ class AuthenticationService {
 		sex,
 		id
 	) => {
-		return axios.post("auth/updateinformation", {
-			name,
-			surname,
-			birthDate,
-			phoneNo,
-			email,
-			address,
-			sex,
-			id,
-		});
+		const auth = SetAuthorisationHeader();
+		return axios.post(
+			"auth/update-information",
+			{
+				name,
+				surname,
+				birthDate,
+				phoneNo,
+				email,
+				address,
+				sex,
+				id,
+			},
+			auth
+		);
 	};
 
 	deactivateAccount = async (id) => {
 		try {
-			await axios.get("auth/deleteuser?id=" + id);
+			const auth = SetAuthorisationHeader();
+			await axios.get("auth/delete-user?id=" + id, auth);
 		} catch (err) {
 			console.error(err);
 		}
@@ -92,7 +99,8 @@ class AuthenticationService {
 
 	findUserBids = async (id) => {
 		try {
-			const response = await axios.get("auth/userbids?id=" + id);
+			const auth = SetAuthorisationHeader();
+			const response = await axios.get("auth/user-bids?id=" + id, auth);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -101,7 +109,8 @@ class AuthenticationService {
 
 	getUserAddress = async (id) => {
 		try {
-			const response = await axios.get("auth/useraddress?id=" + id);
+			const auth = SetAuthorisationHeader();
+			const response = await axios.get("auth/user-address?id=" + id, auth);
 			return response.data;
 		} catch (err) {
 			console.error(err);

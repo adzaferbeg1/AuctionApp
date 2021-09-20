@@ -1,8 +1,8 @@
-import Header from "./header/Header";
-import Footer from "./footer/Footer";
-import LabelNavbar from "./LabelNavbar";
-import GridView from "./GridView";
-import ListView from "./listView/ListView";
-import FilterTag from "./filterTag/FilterTag";
+import Header from "shared/common/header/Header";
+import Footer from "shared/common/footer/Footer";
+import LabelNavbar from "shared/common/LabelNavbar";
+import GridView from "shared/common/GridView";
+import ListView from "shared/common/listView/ListView";
+import FilterTag from "shared/common/filterTag/FilterTag";
 
 export { Header, Footer, LabelNavbar, GridView, ListView, FilterTag };

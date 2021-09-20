@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/item")
@@ -29,15 +31,15 @@ public class ItemController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/newarrival")
+    @GetMapping("/new-arrival")
     public List<Item> getNewArrival() {
-        return itemRepository.findNewArrivals();
+        return itemRepository.findAllByOrderByStartDateDesc();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/lastchance")
+    @GetMapping("/last-chance")
     public List<Item> getLastChance() {
-        return itemRepository.findLastChances();
+        return itemRepository.findAllByOrderByEndDateAsc();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -48,72 +50,72 @@ public class ItemController {
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/placebid")
+    @PostMapping("/place-bid")
     public ResponseEntity updateCurrentPrice(@RequestBody UpdatePriceRequest updatePriceRequest) {
-
         itemRepository.updateCurrentPrice(updatePriceRequest.getBid(), updatePriceRequest.getItemId());
-
         return ResponseEntity.ok().body("Current price updated successfully!");
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/singleitem")
-    public Item getItemById(@RequestParam Long id) {
-        return itemRepository.findItemById(id);
+    @GetMapping("/single-item")
+    public Optional<Item> getItemById(@RequestParam Long id) {
+        return itemRepository.findById(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/sortpricelow")
+    @GetMapping("/sort-price-low")
     public List<Item> getLowPrice(@RequestParam Long id) {
-        return itemRepository.sortByLowPrice(id);
+        return itemRepository.findByCategoryIdOrderByCurrentPriceAsc(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/sortpricehigh")
+    @GetMapping("/sort-price-high")
     public List<Item> getHighPrice(@RequestParam Long id) {
-        return itemRepository.sortByHighPrice(id);
+        return itemRepository.findByCategoryIdOrderByCurrentPriceDesc(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/sortdefault")
+    @GetMapping("/sort-default")
     public List<Item> getDefault(@RequestParam Long id) {
-        return itemRepository.sortByDefault(id);
+        return itemRepository.findByCategoryIdOrderByNameAsc(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/newtoold")
+    @GetMapping("/new-to-old")
     public List<Item> getNewToOld(@RequestParam Long id) {
-        return itemRepository.sortByNewToOld(id);
+        return itemRepository.findByCategoryIdOrderByStartDateDesc(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/timeleft")
+    @GetMapping("/time-left")
     public List<Item> getTimeLeft(@RequestParam Long id) {
-        return itemRepository.sortByTimeLeft(id);
+        return itemRepository.findByCategoryIdOrderByEndDateAsc(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/maxprice")
-    public Integer getMaxPrice(@RequestParam Long id) {
-        return itemRepository.findMaxPrice(id);
+    @GetMapping("/max-price")
+    public double getMaxPrice(@RequestParam Long id) {
+        final Item item = itemRepository.findTop1ByCategoryIdOrderByCurrentPriceDesc(id);
+        return item.getCurrentPrice();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/minprice")
-    public Integer getMinPrice(@RequestParam Long id) {
-        return itemRepository.findMinPrice(id);
+    @GetMapping("/min-price")
+    public double getMinPrice(@RequestParam Long id) {
+        final Item item = itemRepository.findTop1ByCategoryIdOrderByCurrentPriceAsc(id);
+        return item.getCurrentPrice();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/avgprice")
+    @GetMapping("/avg-price")
     public Integer getAvgPrice(@RequestParam Long id) {
-        return itemRepository.findAvgPrice(id);
+        return itemRepository.findAveragePrice(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/subcategoryitems")
-    public List<Item> getSubcategoryItems(@RequestParam Long id) {
-        return itemRepository.findSubcategoryItems(id);
+    @GetMapping("/subcategory-items")
+    public List<Item> getSubcategoryItems(@RequestParam long id) {
+        return itemRepository.findBySubcategoryId(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -122,20 +124,20 @@ public class ItemController {
         return itemRepository.findByNameIgnoreCaseContaining(name);
     }
 
-    @GetMapping("/activeitems")
+    @GetMapping("/active-items")
     public List<Item> getActiveItemsForSeller(@RequestParam Long id) {
-        return itemRepository.findActiveItemsForSeller(id);
+        return itemRepository.findBySellerIdAndEndDateGreaterThanEqual(id, LocalDateTime.now());
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/solditems")
+    @GetMapping("/sold-items")
     public List<Item> getSoldItemsForSeller(@RequestParam Long id) {
-        return itemRepository.findSoldItemsForSeller(id);
+        return itemRepository.findBySellerIdAndEndDateLessThan(id, LocalDateTime.now());
     }
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/additem")
+    @PostMapping("/add-item")
     public ResponseEntity addItemForSale(@RequestBody AddItemRequest addItemRequest) {
         final Item item = new Item(addItemRequest.getCategoryId(),
                 addItemRequest.getCurrentPrice(),

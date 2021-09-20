@@ -28,7 +28,7 @@ public class NotificationController {
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/post_notification")
+    @PostMapping("/post-notification")
     public ResponseEntity postNotificationForUser(@RequestBody NotificationRequest notificationRequest) {
         final Notification notification = new Notification(notificationRequest.getItemId(),
                 notificationRequest.getUserId(),
@@ -40,20 +40,20 @@ public class NotificationController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/all_notifications")
+    @GetMapping("/all-notifications")
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
     }
 
     @Transactional
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/set_seen")
+    @RequestMapping("/set-seen")
     public void setSeenStatus(@RequestParam long id) {
         notificationRepository.updateSeenStatus(true, id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/user_notifications")
+    @GetMapping("/user-notifications")
     public List<Notification> getNotificationsForUser(@RequestParam long id) {
         return notificationRepository.findByUserId(id);
     }

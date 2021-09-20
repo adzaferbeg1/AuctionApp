@@ -10,10 +10,10 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    @Query(value = "SELECT * FROM category WHERE supercategory_id=id", nativeQuery = true)
+    @Query(value = "SELECT c FROM Category c WHERE c.supercategory=c.id")
     List<Category> getAllSupercategories();
 
-    @Query(value = "SELECT * FROM category WHERE supercategory_id<>id ORDER BY supercategory_id ASC", nativeQuery = true)
+    @Query(value = "SELECT c FROM Category c WHERE c.supercategory<>c.id ORDER BY c.supercategory ASC")
     List<Category> getAllSubcategories();
 
     Optional<Category> findByTitle(String title);

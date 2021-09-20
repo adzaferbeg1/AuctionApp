@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/checkout")
 public class PaymentController {
 
-    @Value("${app.STRIPE_SECRET_KEY}")
+    @Value("${STRIPE_SECRET_KEY}")
     private String stripeSecretKey;
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/card_payment")
+    @PostMapping("/card-payment")
     public ResponseEntity processCardPayment(@RequestBody CardPaymentRequest cardPaymentRequest) {
         Stripe.apiKey = stripeSecretKey;
         try {

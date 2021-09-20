@@ -1,17 +1,24 @@
 import axios from "axios";
+import { SetAuthorisationHeader } from "config/AppConfig";
 
 class BidService {
 	placeBid = async (itemId, bidderId, bid) => {
-		return axios.post("/bid/placebid", {
-			itemId,
-			bidderId,
-			bid,
-		});
+		const auth = SetAuthorisationHeader();
+		return axios.post(
+			"/bid/place-bid",
+			{
+				itemId,
+				bidderId,
+				bid,
+			},
+			auth
+		);
 	};
 
 	getAllBidders = async (id) => {
 		try {
-			const response = await axios.get("bid/bidders?id=" + id);
+			const auth = SetAuthorisationHeader();
+			const response = await axios.get("bid/bidders?id=" + id, auth);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -20,16 +27,16 @@ class BidService {
 
 	getNoOfBids = async (id) => {
 		try {
-			const response = await axios.get("bid/bidsno?id=" + id);
+			const response = await axios.get("bid/bids-no?id=" + id);
 			return response.data;
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
-	getAllClosedBids = async () => {
+	getHighestItemBids = async () => {
 		try {
-			const response = await axios.get("bid/highestbids");
+			const response = await axios.get("bid/highest-bids");
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -38,7 +45,7 @@ class BidService {
 
 	getHighestBidderForItem = async (itemId) => {
 		try {
-			const response = await axios.get("bid/highestbidder?item_id=" + itemId);
+			const response = await axios.get("bid/highest-bidder?item_id=" + itemId);
 			return response.data;
 		} catch (err) {
 			console.error(err);

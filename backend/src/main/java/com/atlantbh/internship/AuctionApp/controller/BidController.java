@@ -2,6 +2,7 @@ package com.atlantbh.internship.AuctionApp.controller;
 
 import com.atlantbh.internship.AuctionApp.model.Bid;
 import com.atlantbh.internship.AuctionApp.projection.BidProjection;
+import com.atlantbh.internship.AuctionApp.projection.HighestItemBidProjection;
 import com.atlantbh.internship.AuctionApp.repository.BidRepository;
 import com.atlantbh.internship.AuctionApp.request.BidRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class BidController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/placebid")
+    @PostMapping("/place-bid")
     public ResponseEntity placeBid(@Valid @RequestBody BidRequest bidRequest) {
 
         Bid bid = new Bid(bidRequest.getItemId(), bidRequest.getBidderId(), bidRequest.getBid());
@@ -45,19 +46,19 @@ public class BidController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/bidsno")
+    @GetMapping("/bids-no")
     public Integer getNumberOfBidsForItem(@RequestParam Long id) {
-        return bidRepository.getNumberOfBids(id);
+        return bidRepository.countByItemId(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/highestbids")
-    public List<Object> getAllHighestBids() {
-        return bidRepository.findAllClosedBids();
+    @GetMapping("/highest-bids")
+    public List<HighestItemBidProjection> getAllHighestBids() {
+        return bidRepository.findHighestPlacedItemBid();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/highestbidder")
+    @GetMapping("/highest-bidder")
     public Bid getHighestBidder(@RequestParam(name = "item_id") long itemId) {
         return bidRepository.findTop1ByItemIdOrderByBidDesc(itemId);
     }

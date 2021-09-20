@@ -1,6 +1,6 @@
 import React from "react";
-import { LabelNavbar } from "../shared/common";
-import { privacyAndTerms } from "../shared/styles/PageStyles";
+import { LabelNavbar } from "shared/common";
+import { privacyAndTerms } from "shared/styles/PageStyles";
 
 export default function Privacy() {
 	window.scrollTo(0, 0);

@@ -1,6 +1,6 @@
-import BidService from "../services/BidService";
-import { isAuctionClosed } from "./DateUtils";
-import NotificationService from "../services/NotificationService";
+import BidService from "services/BidService";
+import { isAuctionClosed } from "utils/DateUtils";
+import NotificationService from "services/NotificationService";
 
 export const generateNotifications = async (allItems, allNotifications) => {
 	let closedAuctionNotifications = [];

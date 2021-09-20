@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import AuthenticationService from "../../services/AuthenticationService";
-import BidService from "../../services/BidService";
-import ItemService from "../../services/ItemService";
-import { isAuctionClosed } from "../../utils/DateUtils";
-import { finishPayment } from "../../utils/PaymentUtil";
+import AuthenticationService from "services/AuthenticationService";
+import BidService from "services/BidService";
+import ItemService from "services/ItemService";
+import { isAuctionClosed } from "utils/DateUtils";
+import { finishPayment } from "utils/PaymentUtil";
 import "./MyAccountTabs.scss";
 
 const Bids = ({ user }) => {
@@ -14,14 +14,14 @@ const Bids = ({ user }) => {
 	const greenText = { color: "rgb(9, 170, 9)" };
 	const blueText = { color: "blue" };
 	const grayText = { color: "gray" };
-	const [closedBids, setClosedBids] = useState();
+	const [highestBids, setHighestBids] = useState([]);
 
 	useEffect(() => {
 		const fecthData = async () => {
 			const userBids = await AuthenticationService.findUserBids(user.id);
 			setUserBids(userBids);
-			let closedBids = await BidService.getAllClosedBids(user.id);
-			setClosedBids(closedBids.filter((bid) => bid[1] === user.id));
+			let highestBids = await BidService.getHighestItemBids(user.id);
+			setHighestBids(highestBids.filter((bid) => bid.bidderId === user.id));
 		};
 
 		fecthData();
@@ -36,10 +36,10 @@ const Bids = ({ user }) => {
 	};
 
 	const displayPayButton = (itemId, highestBid, placedBid, endDate) => {
-		if (closedBids !== undefined) {
-			for (let i = 0; i < closedBids.length; i++) {
-				if (closedBids[i][0] === itemId &&
-					closedBids[i][2] === highestBid &&
+		if (highestBids !== undefined) {
+			for (let i = 0; i < highestBids.length; i++) {
+				if (highestBids[i].itemId === itemId &&
+					highestBids[i].max === highestBid &&
 					highestBid === placedBid &&
 					isAuctionClosed(endDate)
 				) {
@@ -71,7 +71,7 @@ const Bids = ({ user }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{userBids.length !== 0 && closedBids !== undefined ? (
+					{userBids.length !== 0 && highestBids !== undefined ? (
 						userBids.map((bid, index) => (
 							<tr key={index + ": userBid: " + bid[0]}>
 								<td colSpan="2">
