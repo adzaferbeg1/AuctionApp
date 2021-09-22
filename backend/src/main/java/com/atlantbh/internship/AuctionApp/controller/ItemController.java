@@ -154,4 +154,16 @@ public class ItemController {
         return ResponseEntity.ok().body("New item added successfully!");
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/bid-sell-items")
+    public List<Long> getBidSellCategoriesForUser(@RequestParam Long id) {
+        return itemRepository.findBidSellCategoriesForUser(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/recommended-items")
+    public List<Item> getRecommendedItems(@RequestParam("id-list") List<Long> idList) {
+        return itemRepository.findByCategoryIdIn(idList);
+    }
+
 }

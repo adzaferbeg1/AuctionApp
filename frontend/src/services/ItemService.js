@@ -198,6 +198,32 @@ class ItemService {
 				throw err;
 			});
 	};
+
+	getBidSellItems = async (userId) => {
+		try {
+			const auth = SetAuthorisationHeader();
+			const response = await axios.get(
+				"item/bid-sell-items?id=" + userId,
+				auth
+			);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	getRecommendedItems = async (categoryIdList) => {
+		try {
+			const auth = SetAuthorisationHeader();
+			const response = await axios.get(
+				"item/recommended-items?id-list=" + categoryIdList,
+				auth
+			);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	};
 }
 
 export default new ItemService();

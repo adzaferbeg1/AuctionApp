@@ -60,6 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/card/user-information",
             "/item/place-bid",
             "/item/add-item",
+            "/item/bid-sell-items",
+            "/item/recommended-items",
             "/notification/set-seen",
             "/notification/user-notifications",
             "/checkout/card-payment",

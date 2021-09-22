@@ -7,7 +7,7 @@ import ItemService from "services/ItemService";
 import { landingPageButton, purpleColor } from "shared/styles/PageStyles";
 import { GridView } from "shared/common";
 import NotificationService from "services/NotificationService";
-import { useNotificationContext } from "AppContext";
+import { useNotificationContext, useUserContext } from "AppContext";
 import { generateNotifications } from "utils/NotificationUtils";
 import "./LandingPage.scss";
 
@@ -19,6 +19,8 @@ const LandingPage = () => {
 	const [loading, setLoading] = useState(true);
 	const history = useHistory();
 	const { setAllNotifications } = useNotificationContext();
+	const { loggedIn, user } = useUserContext();
+	const [featureItems, setFeatureItems] = useState([]);
 
 	useEffect(() => {
 		const fetchItems = async () => {
@@ -32,12 +34,28 @@ const LandingPage = () => {
 				const allNotifications = await NotificationService.getAll();
 				setAllNotifications(allNotifications);
 				await generateNotifications(newArrival, allNotifications);
+				if (loggedIn) {
+					fetchRecommendedItems();
+				}
 				setLoading(false);
 			} catch (e) {}
 		};
 
 		fetchItems();
-	}, []);
+	}, [loggedIn]);
+
+	const fetchRecommendedItems = async () => {
+		const categoryIdList = await ItemService.getBidSellItems(user.id);
+		if (categoryIdList.length !== 0) {
+			const recommendedItems = await ItemService.getRecommendedItems(
+				categoryIdList
+			);
+			let randomRecommendedItems = recommendedItems
+				.sort(() => 0.5 - Math.random())
+				.slice(0, 3);
+			setFeatureItems(randomRecommendedItems);
+		}
+	};
 
 	if (loading) return <h5 style={{ color: "gray" }}>Loading...</h5>;
 
@@ -98,7 +116,34 @@ const LandingPage = () => {
 					) : null}
 				</div>
 			</div>
-			<div className="row card-container">
+			{loggedIn && featureItems.length !== 0 ? (
+				<>
+					<div className="row card-container label-card">
+						<ul className="nav nav-tabs">
+							<li className="nav-item" key={"feature-1"}>
+								Feature Products
+							</li>
+						</ul>
+					</div>
+					<div className="row card-container">
+						{featureItems.map((item) => (
+							<GridView
+								key={item.id}
+								imgUrl={item.imgUrl}
+								name={item.name}
+								startPrice={item.currentPrice}
+								onClick={() =>
+									history.push({
+										pathname: "/shop",
+										state: { item: item },
+									})
+								}
+							/>
+						))}
+					</div>
+				</>
+			) : null}
+			<div className="row card-container label-card">
 				<ul className="nav nav-tabs">
 					<li className="nav-item" key={"unique-1"}>
 						<button
