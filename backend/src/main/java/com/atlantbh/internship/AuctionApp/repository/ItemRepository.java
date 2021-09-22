@@ -46,4 +46,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findBySellerIdAndEndDateGreaterThanEqual(long sellerId, LocalDateTime endDate);
 
     List<Item> findBySellerIdAndEndDateLessThan(long sellerId, LocalDateTime endDate);
+
+    @Query(value = "SELECT DISTINCT i.categoryId FROM Item i WHERE i.id IN " +
+            "(SELECT b.itemId FROM Bid b WHERE b.bidderId= ?1) or i.sellerId= ?1")
+    List<Long> findBidSellCategoriesForUser(long id);
+
+    List<Item> findByCategoryIdIn(List<Long> categoryIdList );
 }
