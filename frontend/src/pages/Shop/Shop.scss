@@ -17,6 +17,7 @@
 
 		.item-info {
 			text-align: left;
+
 			.bid-container {
 				text-align: left;
 				margin-top: 2.5em;
@@ -57,6 +58,19 @@
 				flex-direction: column;
 				color: black;
 				text-align: left;
+			}
+
+			.wtch-list-btn {
+				background-color: white;
+				border: 3px solid #e3e3e3;
+				height: 40px;
+				width: 120px;
+			}
+
+			.wtch-list-btn:hover,
+			.wtch-list-btn:focus {
+				background-color: #8367d8;
+				color: white;
 			}
 		}
 	}

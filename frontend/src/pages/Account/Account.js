@@ -8,9 +8,10 @@ import {
 	Seller,
 	Settings,
 	Bids,
+	Wishlist,
 } from "components/myAccountTabs/index";
 import { useUserContext } from "AppContext";
-import { FaBell, FaCircle } from "react-icons/fa";
+import { FaBell, FaCircle, FaGift } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import { finishPayment } from "utils/PaymentUtil";
 import NotificationService from "services/NotificationService";
@@ -22,6 +23,7 @@ export default function Account() {
 	const [showSeller, setShowSeller] = useState(false);
 	const [showBids, setShowBids] = useState(false);
 	const [showSettings, setShowSettings] = useState(false);
+	const [showWishlist, setShowWishlist] = useState(false);
 	const { user } = useUserContext();
 	const activeButton = { backgroundColor: "#8367d8", color: "white" };
 	const inactiveButton = { backgroundColor: "#f0efef", color: "black" };
@@ -48,6 +50,8 @@ export default function Account() {
 				return <Bids user={user} />;
 			} else if (showSettings) {
 				return <Settings user={user} />;
+			} else if (showWishlist) {
+				return <Wishlist user={user} />;
 			}
 		}
 	};
@@ -79,6 +83,7 @@ export default function Account() {
 								setShowSeller(false);
 								setShowBids(false);
 								setShowSettings(false);
+								setShowWishlist(false);
 							}}
 							style={showProfile ? activeButton : inactiveButton}
 						>
@@ -91,6 +96,7 @@ export default function Account() {
 								setShowSeller(true);
 								setShowBids(false);
 								setShowSettings(false);
+								setShowWishlist(false);
 							}}
 							style={showSeller ? activeButton : inactiveButton}
 						>
@@ -103,10 +109,24 @@ export default function Account() {
 								setShowSeller(false);
 								setShowBids(true);
 								setShowSettings(false);
+								setShowWishlist(false);
 							}}
 							style={showBids ? activeButton : inactiveButton}
 						>
 							<ImHammer2 /> Bids
+						</button>
+						<button
+							id="btn-wishlist"
+							onClick={() => {
+								setShowProfile(false);
+								setShowSeller(false);
+								setShowBids(false);
+								setShowSettings(false);
+								setShowWishlist(true);
+							}}
+							style={showWishlist ? activeButton : inactiveButton}
+						>
+							<FaGift /> Wishlist
 						</button>
 						<button
 							id="btn-setting"
@@ -115,6 +135,7 @@ export default function Account() {
 								setShowSeller(false);
 								setShowBids(false);
 								setShowSettings(true);
+								setShowWishlist(false);
 							}}
 							style={showSettings ? activeButton : inactiveButton}
 						>

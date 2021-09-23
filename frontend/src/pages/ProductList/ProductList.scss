@@ -141,15 +141,23 @@
 
 				button {
 					border: none;
-					width: 100px;
+					width: 110px;
 					height: 30px;
 					position: relative;
-					bottom: 7em;
+					bottom: 8em;
 					visibility: hidden;
+					margin-bottom: 1em;
 
 					svg {
 						margin-left: 0.5em;
 					}
+				}
+
+				button:hover,
+				button:focus,
+				button:active {
+					background-color: #8367d8;
+					color: white;
 				}
 
 				.card-title {

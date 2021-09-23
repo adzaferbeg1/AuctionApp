@@ -6,12 +6,7 @@ import { BiPlus, BiMinus } from "react-icons/bi";
 
 import CategoryService from "services/CategoryService";
 import ItemService from "services/ItemService";
-import {
-	GridView,
-	ListView,
-	LabelNavbar,
-	FilterTag,
-} from "shared/common";
+import { GridView, ListView, LabelNavbar, FilterTag } from "shared/common";
 import { purpleColor } from "shared/styles/PageStyles";
 import { useSearchContext } from "AppContext";
 import RangeSlider from "shared/common/rangeSlider/RangeSlider";
@@ -164,9 +159,7 @@ const ProductList = (props) => {
 						<GridView
 							key={item.name + "search"}
 							id={item.id}
-							name={item.name}
-							startPrice={item.currentPrice}
-							imgUrl={item.imgUrl}
+							item={item}
 							onClick={() =>
 								history.push({
 									pathname: "/shop",
@@ -180,10 +173,7 @@ const ProductList = (props) => {
 						<ListView
 							key={item.name + "search-list"}
 							id={item.id}
-							name={item.name}
-							startPrice={item.currentPrice}
-							imgUrl={item.imgUrl}
-							description={item.description}
+							item={item}
 							onClick={() =>
 								history.push({
 									pathname: "/shop",
@@ -199,9 +189,7 @@ const ProductList = (props) => {
 						<GridView
 							key={item.id + "grid"}
 							id={item.id}
-							name={item.name}
-							startPrice={item.currentPrice}
-							imgUrl={item.imgUrl}
+							item={item}
 							onClick={() =>
 								history.push({
 									pathname: "/shop",
@@ -215,10 +203,7 @@ const ProductList = (props) => {
 						<ListView
 							key={item.id + "grid"}
 							id={item.id}
-							name={item.name}
-							startPrice={item.currentPrice}
-							imgUrl={item.imgUrl}
-							description={item.description}
+							item={item}
 							onClick={() =>
 								history.push({
 									pathname: "/shop",

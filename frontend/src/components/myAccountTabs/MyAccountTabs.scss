@@ -33,7 +33,8 @@
 }
 
 .bidders,
-.sellers {
+.sellers,
+.wishlist {
 	table {
 		border: 2px solid #ececec;
 		text-align: center;
@@ -53,6 +54,7 @@
 			color: gray;
 			text-align: center;
 			vertical-align: middle;
+			font-weight: 600;
 
 			p {
 				color: #8367d8;
@@ -61,7 +63,7 @@
 			button {
 				border: 2px solid #e3e3e3;
 				background-color: white;
-				width: 65px;
+				width: 80px;
 				height: 50px;
 				font-weight: 600;
 				box-shadow: 2px 2px 3px #e3e3e3;
@@ -71,10 +73,36 @@
 			button:hover {
 				border: 2px solid #8367d8;
 			}
+
+			button:disabled {
+				border: 2px solid #e3e3e3;
+			}
 		}
 
 		.btn-col {
 			text-align: left;
+		}
+	}
+}
+
+.wishlist {
+	.status-cell {
+		margin-top: 1em;
+		background-color: whitesmoke;
+		height: 50px;
+		padding-top: 12px;
+		color: black;
+	}
+
+	.trash-icon-col {
+		svg {
+			font-size: 15pt;
+			color: #cac9c9;
+		}
+
+		svg:hover {
+			cursor: pointer;
+			color: #8367d8;
 		}
 	}
 }

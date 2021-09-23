@@ -32,9 +32,7 @@ export const findMonth = (month) => {
 };
 
 export const isAuctionClosed = (endDate) => {
-	const currentDate = new Date(Date.now()).toISOString();
-	const itemDate = new Date(endDate).toISOString();
-	return currentDate >= itemDate;
+	return Date.now() >= new Date(endDate);
 };
 
 export const isTokenValid = (token) => {
