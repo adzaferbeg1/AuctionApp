@@ -1,0 +1,29 @@
+.pg-not-found {
+	width: 70%;
+	margin: auto;
+	margin-top: 2em;
+	margin-bottom: 10em;
+
+	img {
+		width: 150px;
+	}
+
+	.error-code {
+		font-size: 120pt;
+		color: #8367d8;
+		text-shadow: 5px 5px #e3e3e3;
+	}
+
+	p {
+		font-size: 20pt;
+	}
+
+	button {
+		background-color: white;
+		border: 2px solid #8367d8;
+		text-transform: uppercase;
+		font-weight: 600;
+		height: 40px;
+		width: 130px;
+	}
+}

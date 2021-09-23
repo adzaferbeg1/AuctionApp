@@ -4,9 +4,11 @@ import com.atlantbh.internship.AuctionApp.model.Person;
 import com.atlantbh.internship.AuctionApp.repository.PersonRepository;
 import com.atlantbh.internship.AuctionApp.request.LogInRequest;
 import com.atlantbh.internship.AuctionApp.request.RegisterRequest;
+import com.atlantbh.internship.AuctionApp.request.ResetPasswordRequest;
 import com.atlantbh.internship.AuctionApp.request.UpdateInfoRequest;
 import com.atlantbh.internship.AuctionApp.response.JwtResponse;
 import com.atlantbh.internship.AuctionApp.security.jwt.JwtProvider;
+import com.atlantbh.internship.AuctionApp.service.EmailService;
 import com.atlantbh.internship.AuctionApp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,12 +45,8 @@ public class PersonController {
     @Autowired
     private JwtProvider jwtProvider;
 
-    public PersonController(PersonRepository personRepository, PersonService personService, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
-        this.personRepository = personRepository;
-        this.personService = personService;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtProvider = jwtProvider;
-    }
+    @Autowired
+    private EmailService emailService;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/sign-in")
@@ -130,5 +129,32 @@ public class PersonController {
             return person.get().getAddress();
         }
         return "";
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/reset-password")
+    public ResponseEntity resetPasswordEmail(@RequestParam String email) throws MessagingException {
+        final Optional<Person> person = personRepository.findByEmail(email);
+        if (person.isPresent()) {
+            final String jwt = jwtProvider.generateJwtToken(email);
+            emailService.sendEmail(person.get().getEmail(), "Password Reset", jwt);
+            return ResponseEntity.ok(new JwtResponse(jwt, person.get().getId()));
+        }
+        return ResponseEntity.status(400).body("No user with this email can be found");
+    }
+
+    @Transactional
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/save-new-password")
+    public ResponseEntity saveNewPassword(@RequestBody ResetPasswordRequest request) {
+        try {
+            personRepository.resetPassword(
+                    passwordEncoder.encode(request.getPassword()),
+                    request.getEmail()
+            );
+            return ResponseEntity.ok().body("Password has been updated");
+        } catch (Error e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
     }
 }

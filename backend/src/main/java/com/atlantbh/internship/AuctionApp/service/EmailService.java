@@ -1,9 +1,6 @@
 package com.atlantbh.internship.AuctionApp.service;
 
-import com.atlantbh.internship.AuctionApp.model.EmailSender;
-import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -13,28 +10,28 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
-@AllArgsConstructor
-public class EmailService implements EmailSender {
+public class EmailService {
+    @Autowired
+    private JavaMailSender javaMailSender;
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
-    private final JavaMailSender javaMailSender;
-
-    @Override
     @Async
-    public void send(String to, String email) {
-        try {
-            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-            helper.setText(email, true);
-            helper.setTo(to);
-            helper.setSubject("Confirm your e-mail address");
-            helper.setFrom("not-useable@auction.com");
-            javaMailSender.send(mimeMessage);
+    public void sendEmail(String to, String subject, String token) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
 
-        } catch (MessagingException e) {
-            LOGGER.error("Failed to send email", e);
-            throw new IllegalStateException("Failed to send");
-        }
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
+        helper.setFrom("reset-password@auctionapp.com");
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(generateEmailBody(to, token), true);
+        javaMailSender.send(message);
+    }
+
+    private String generateEmailBody(String email, String token) {
+        String url = "localhost:3000/verify-password?email=" + email + "&token=" + token;
+        return "<div> <h3>Hello from Auction App</h3> " +
+                "<p> Follow this link to reset your password, please note " +
+                "that the link expires in 15 minutes.</p> " +
+                "<a href=\"" + url + "\">" + url + "</a> </div>";
     }
 }
