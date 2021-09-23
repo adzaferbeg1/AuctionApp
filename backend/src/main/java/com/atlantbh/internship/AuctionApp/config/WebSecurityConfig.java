@@ -70,6 +70,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/auth/user-bids",
             "/auth/user-address",
             "/auth/save-new-password",
+            "/wishlist/add",
+            "/wishlist/get-items",
+            "/wishlist/remove-item"
     };
 
     @Autowired
