@@ -1,7 +1,6 @@
 package com.atlantbh.internship.AuctionApp.controller;
 
 import com.atlantbh.internship.AuctionApp.model.Wishlist;
-import com.atlantbh.internship.AuctionApp.repository.WishlistRepository;
 import com.atlantbh.internship.AuctionApp.request.WishlistRequest;
 import com.atlantbh.internship.AuctionApp.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +22,9 @@ public class WishlistController {
     @Autowired
     private WishlistService wishlistService;
 
-    @Autowired
-    private WishlistRepository wishlistRepository;
-
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/add")
-    public ResponseEntity<String> add(@RequestBody WishlistRequest wishlistRequest) throws Exception {
+    public ResponseEntity<String> addItem(@RequestBody WishlistRequest wishlistRequest) throws Exception {
         wishlistService.add(wishlistRequest);
         return ResponseEntity.ok("Product added to wishlist");
     }

@@ -3,7 +3,6 @@ package com.atlantbh.internship.AuctionApp.service;
 import com.atlantbh.internship.AuctionApp.model.Item;
 import com.atlantbh.internship.AuctionApp.model.Person;
 import com.atlantbh.internship.AuctionApp.model.Wishlist;
-import com.atlantbh.internship.AuctionApp.repository.ItemRepository;
 import com.atlantbh.internship.AuctionApp.repository.PersonRepository;
 import com.atlantbh.internship.AuctionApp.repository.WishlistRepository;
 import com.atlantbh.internship.AuctionApp.request.WishlistRequest;
@@ -19,14 +18,12 @@ public class WishlistService {
     private final WishlistRepository wishlistRepository;
 
     @Autowired
-    private final ItemRepository itemRepository;
-
-    @Autowired
     private final PersonRepository personRepository;
 
-    public WishlistService(WishlistRepository wishlistRepository, ItemRepository itemRepository, PersonRepository personRepository) {
+    public WishlistService(WishlistRepository wishlistRepository,
+                           PersonRepository personRepository
+    ) {
         this.wishlistRepository = wishlistRepository;
-        this.itemRepository = itemRepository;
         this.personRepository = personRepository;
     }
 
