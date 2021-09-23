@@ -6,17 +6,30 @@
 	margin-bottom: 0.7em;
 	text-align: left;
 
-	button {
-		border: 2px solid #e3e3e3;
-		background-color: white;
-		width: 100px;
-		height: 35px;
-		float: right;
+	.button-row {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		button {
+			border: 2px solid #e3e3e3;
+			background-color: white;
+			width: 120px;
+			height: 35px;
+			margin-right: 1.2em;
+			margin-bottom: 1em;
 
-		svg {
-			margin-left: 0.5em;
-			color: #e3e3e3;
-			font-size: 15pt;
+			svg {
+				margin-left: 0.5em;
+				color: #e3e3e3;
+				font-size: 15pt;
+			}
+		}
+
+		button:hover,
+		button:active,
+		button:focus {
+			background-color: #8367d8;
+			color: white;
 		}
 	}
 

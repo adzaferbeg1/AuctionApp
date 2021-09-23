@@ -1,17 +1,35 @@
 import React from "react";
 import { ImHammer2 } from "react-icons/im";
+import { FiHeart } from "react-icons/fi";
+import { useUserContext } from "AppContext";
+import { addItemToWishlist } from "utils/WishlistUtil";
 
-const GridView = ({ name, startPrice, onClick, imgUrl }) => {
+const GridView = ({ item, onClick }) => {
+	const { loggedIn, user } = useUserContext();
+
+	const addItem = () => {
+		addItemToWishlist(loggedIn, user, item);
+	};
+
 	return (
 		<>
-			<div className="single-card card" onClick={onClick}>
+			<div className="single-card card">
 				<div className="card-body">
-					<img className="grid-item-img" src={imgUrl} alt={name}></img>
-					<h5 className="card-title">{name}</h5>
-					<p className="card-text">Start From ${startPrice}</p>
-					<button>
-						Bid <ImHammer2 />
-					</button>
+					<img
+						className="grid-item-img"
+						src={item.imgUrl}
+						alt={item.name}
+					></img>
+					<h5 className="card-title">{item.name}</h5>
+					<p className="card-text">Start From ${item.startPrice}</p>
+					<div>
+						<button onClick={addItem}>
+							Watchlist <FiHeart />
+						</button>
+						<button onClick={onClick}>
+							Bid <ImHammer2 />
+						</button>
+					</div>
 				</div>
 			</div>
 		</>

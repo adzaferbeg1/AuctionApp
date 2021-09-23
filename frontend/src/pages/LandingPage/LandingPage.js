@@ -129,9 +129,7 @@ const LandingPage = () => {
 						{featureItems.map((item) => (
 							<GridView
 								key={item.id}
-								imgUrl={item.imgUrl}
-								name={item.name}
-								startPrice={item.currentPrice}
+								item={item}
 								onClick={() =>
 									history.push({
 										pathname: "/shop",
@@ -178,9 +176,7 @@ const LandingPage = () => {
 					? newLastItems[clicked].map((item) => (
 							<GridView
 								key={item.id}
-								imgUrl={item.imgUrl}
-								name={item.name}
-								startPrice={item.currentPrice}
+								item={item}
 								onClick={() =>
 									history.push({
 										pathname: "/shop",

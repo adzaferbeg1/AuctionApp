@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { FiHeart } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 import { useUserContext } from "AppContext";
 import Pagination from "components/Pagination";
@@ -13,6 +14,7 @@ import RelatedItemView from "shared/common/RelatedItemView";
 import { purpleColor, landingPageButton } from "shared/styles/PageStyles";
 import { isAuctionClosed } from "utils/DateUtils";
 import { notifyHighestBidder } from "utils/NotificationUtils";
+import { addItemToWishlist } from "utils/WishlistUtil";
 import "pages/shop/Shop.scss";
 
 export default function Shop(props) {
@@ -79,13 +81,13 @@ export default function Shop(props) {
 
 	const placeItemBid = async () => {
 		if (selectedItem.currentPrice < bid ||
-			(selectedItem.currentPrice === bid && noOfBids < 1)
-		) {
+			(selectedItem.currentPrice === bid && noOfBids < 1)) {
 			alertSuccess("flex");
 			alertWarning("none");
 			setCurrentPrice(bid);
 			await notifyHighestBidder(user.id, itemId, selectedItem.name);
-			await BidService.placeBid(selectedItem.id,
+			await BidService.placeBid(
+				selectedItem.id,
 				AuthenticationService.getCurrentUser().personId,
 				bid
 			);
@@ -117,6 +119,10 @@ export default function Shop(props) {
 		} else {
 			return true;
 		}
+	};
+
+	const addItem = () => {
+		addItemToWishlist(userLoggedIn, user, selectedItem);
 	};
 
 	return (
@@ -170,6 +176,9 @@ export default function Shop(props) {
 					<h5 className="details-heading">Details</h5>
 					<div className="thin-line"></div>
 					<p className="item-desc">{selectedItem.description}</p>
+					<button onClick={addItem} className="wtch-list-btn">
+						Watchlist <FiHeart />
+					</button>
 				</div>
 			</div>
 			{user === undefined ||
