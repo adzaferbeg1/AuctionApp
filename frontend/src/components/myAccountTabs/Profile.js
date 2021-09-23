@@ -97,7 +97,7 @@ function Profile({ user }) {
 	const saveChanges = async () => {
 		if (userName === "" ||
 			userSurname === "" ||
-			userPhone === null ||
+			userPhone === "" ||
 			userPhone === undefined ||
 			userEmail === ""
 		) {

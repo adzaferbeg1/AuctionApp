@@ -121,7 +121,7 @@ const LandingPage = () => {
 					<div className="row card-container label-card">
 						<ul className="nav nav-tabs">
 							<li className="nav-item" key={"feature-1"}>
-								Feature Products
+								Featured Products
 							</li>
 						</ul>
 					</div>

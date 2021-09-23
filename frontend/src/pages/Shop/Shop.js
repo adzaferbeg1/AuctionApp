@@ -224,10 +224,19 @@ export default function Shop(props) {
 								currentBiddersPage.map((bidder, index) => (
 									<tr key={bidder.bid + index}>
 										<td colSpan="2">
+											<img alt="user" src="images/avatar.png" />
 											{bidder.name} {bidder.surname}
 										</td>
 										<td>{bidder.date.substring(0, 10)}</td>
-										<td>${bidder.bid}</td>
+										<td
+											style={
+												currentPrice === bidder.bid
+													? { color: "green" }
+													: { color: "black" }
+											}
+										>
+											${bidder.bid}
+										</td>
 									</tr>
 								))
 							) : (

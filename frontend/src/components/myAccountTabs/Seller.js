@@ -47,7 +47,6 @@ const Seller = ({ user }) => {
 							<th colSpan="2">Name</th>
 							<th>Time Left</th>
 							<th>Your Price</th>
-							<th>No. bids</th>
 							<th>Highest Bid</th>
 							<th></th>
 						</tr>
@@ -69,7 +68,6 @@ const Seller = ({ user }) => {
 								>
 									${item.startPrice}
 								</td>
-								<td>Bids no.</td>
 								<td
 									style={
 										item.startPrice === item.currentPrice ? greenText : blueText

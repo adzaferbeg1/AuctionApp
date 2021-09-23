@@ -19,6 +19,7 @@ const GridView = ({ item, onClick }) => {
 						className="grid-item-img"
 						src={item.imgUrl}
 						alt={item.name}
+						onClick={onClick}
 					></img>
 					<h5 className="card-title">{item.name}</h5>
 					<p className="card-text">Start From ${item.startPrice}</p>
