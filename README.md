@@ -59,6 +59,10 @@ Removes this tool and copies build dependencies, configuration files and scripts
 
 ### Third month
 
-
-
-
+- Payment method
+- Notification center
+- Refactoring
+- Wishlist functionality
+- Admin panel
+- Seller review
+- Social Media integration
