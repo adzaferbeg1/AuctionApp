@@ -5,6 +5,7 @@ import AuthenticationService from "../../services/AuthenticationService";
 import BidService from "../../services/BidService";
 import ItemService from "../../services/ItemService";
 import { isAuctionClosed } from "../../utils/DateUtils";
+import { finishPayment } from "../../utils/PaymentUtil";
 import "./MyAccountTabs.scss";
 
 const Bids = ({ user }) => {
@@ -34,14 +35,6 @@ const Bids = ({ user }) => {
 		});
 	};
 
-	const finishPayment = async (itemId) => {
-		const item = await ItemService.getItemById(itemId);
-		history.push({
-			pathname: "/payment",
-			state: { item: item },
-		});
-	};
-
 	const displayPayButton = (itemId, highestBid, placedBid, endDate) => {
 		if (closedBids !== undefined) {
 			for (let i = 0; i < closedBids.length; i++) {
@@ -51,7 +44,10 @@ const Bids = ({ user }) => {
 					isAuctionClosed(endDate)
 				) {
 					return (
-						<button className="pay-btn" onClick={() => finishPayment(itemId)}>
+						<button
+							className="pay-btn"
+							onClick={() => finishPayment(itemId, history)}
+						>
 							Pay
 						</button>
 					);

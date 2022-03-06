@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaSearch, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { TiSocialInstagram, TiSocialGooglePlus } from "react-icons/ti";
 import { useHistory } from "react-router-dom";
-
 import AuthenticationService from "../../../services/AuthenticationService";
 import {
 	headerSocialIcon,
@@ -115,7 +113,7 @@ export default function Header() {
 					</div>
 				</div>
 				<div className="col">
-					<section className="row">
+					<section className="row white-nav">
 						<Link
 							className="nav-link links"
 							to={{ pathname: "/" }}
@@ -143,14 +141,16 @@ export default function Header() {
 							MY ACCOUNT
 						</Link>
 						{loggedIn ? (
-							<a
-								id="log-out-btn"
-								className="nav-link links"
-								href="/login"
-								onClick={singOut}
-							>
-								LOG OUT
-							</a>
+							<>
+								<a
+									id="log-out-btn"
+									className="nav-link links"
+									href="/login"
+									onClick={singOut}
+								>
+									LOG OUT
+								</a>
+							</>
 						) : null}
 					</section>
 				</div>

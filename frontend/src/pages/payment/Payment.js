@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
 import {
 	IoIosArrowBack,
@@ -11,7 +12,6 @@ import { useUserContext } from "../../AppContext";
 import { LabelNavbar } from "../../shared/common/index";
 import StripeService from "../../services/StripeService";
 import "./Payment.scss";
-import { Link } from "react-router-dom";
 
 export default function Payment({ closedItem }) {
 	const [showCardInfo, setShowCardInfo] = useState(false);
@@ -88,9 +88,26 @@ export default function Payment({ closedItem }) {
 								</label>
 							</div>
 							<div className="card-inputs">
-								<h5 style={{ color: "#8367d8", marginBottom: "2em" }}>
-									You are the highest bidder, {user.name}! Congrats!
-								</h5>
+								<div
+									style={{
+										display: "flex",
+										flexDirection: "row",
+									}}
+								>
+									<img
+										alt="closed-item"
+										src={closedItem.imgUrl}
+										style={{
+											width: "70px",
+											height: "70px",
+											marginRight: "1em",
+										}}
+									/>
+									<h5 style={{ color: "#8367d8", marginBottom: "2em" }}>
+										Congrats, {user.name}! You are the highest bidder for{" "}
+										{closedItem.name}
+									</h5>
+								</div>
 								<label>Street</label>
 								<input
 									type="text"
